@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: database
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: Tien@123456
+      MSSQL_PID: Express
+    ports:
+      - "1444:1433"  # Thay đổi cổng bên ngoài thành 1434, vẫn map đến cổng 1433 bên trong container
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    restart: unless-stopped
+
+volumes:
+  sqlserver_data:
