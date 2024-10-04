@@ -5,6 +5,7 @@ using ProductDataAccess.Entities;
 using ProductServices.Implementation;
 using ProductServices.Interface;
 using ProductViewModel;
+using ProductViewModels;
 
 namespace ProductAPI.Controllers
 {
@@ -19,22 +20,38 @@ namespace ProductAPI.Controllers
             this.productService = productService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> Get() {
-            var response = await productService.GetAll();
-            return Ok(response);
+        [HttpGet("GetAllProduct")]
+        public async Task<ActionResult> GetAll() {
+            List<Product> result = await productService.GetAll();
+            return Ok(result);
         }
-        [HttpGet("{id}")]
-        public async Task<ActionResult> Get(int id)
+
+        [HttpGet("GetProductBy{id}")]
+        public async Task<ActionResult> GetProductById(int id)
         {
-            var response = await productService.GetById(id);
-            return Ok(response);
+            Product result = await productService.GetById(id);
+            return Ok(result);
         }
-        [HttpPost]
-        public async Task<ActionResult> CreateProduct([FromBody] ProductCreateViewModel product)
+
+        [HttpPost("CreateNewProduct")]
+        public async Task<ActionResult> CreateNewProduct([FromBody] ProductCreateViewModel product)
         {
-            var newProduct = await productService.Create(product);
-            return Ok(newProduct);
+            int result = await productService.Create(product);
+            return Ok(result);
+        }
+
+        [HttpPut("EditProduct")]
+        public async Task<IActionResult> EditProduct([FromBody] ProductEditViewModel product)
+        {
+            int result = await productService.Update(product);
+            return Ok(result);
+        }
+
+        [HttpDelete("DeleteProductBy{id}")]
+        public async Task<IActionResult> DeleteProductById(int id)
+        {
+            int result = await productService.DeleteById(id);
+            return Ok(result);
         }
     }
 }

@@ -4,6 +4,7 @@ using ProductDataAccess;
 using ProductDataAccess.Entities;
 using ProductServices.Interface;
 using ProductViewModel;
+using ProductViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +23,8 @@ namespace ProductServices.Implementation
 
         public async Task<int> Create(ProductCreateViewModel product)
         {
-           
 
-
-            var p = new Product()
+            Product p = new Product()
             {
                 ProductName = product.ProductName,
                 Description = product.Description,
@@ -43,14 +42,19 @@ namespace ProductServices.Implementation
             return Convert.ToInt32(p.ProductId);
         }
 
-        public Task<int> DeleteById(int id)
+        public async Task<int> DeleteById(int id)
         {
-            throw new NotImplementedException();
+            Product product = await _context.Products.FindAsync(id);
+            if (product == null) {
+                return -1;
+            }
+            _context.Products.Remove(product);
+            return await _context.SaveChangesAsync();
         }
 
         public async Task<List<Product>> GetAll()
         {
-            var response = await _context.Set<Product>().ToListAsync();
+            List<Product> response = await _context.Set<Product>().ToListAsync();
             return response;
         }
 
@@ -63,7 +67,6 @@ namespace ProductServices.Implementation
                     select new Product
                     {
                         ProductId = pr.ProductId,
-
                         Brand = pc,
                         Category = px,
                     };
@@ -71,9 +74,21 @@ namespace ProductServices.Implementation
             return a.FirstOrDefaultAsync();
         }
 
-        public Task<Product> Update(Product product)
+        public async Task<int> Update(ProductEditViewModel request)
         {
-            throw new NotImplementedException();
+            Product product = await _context.Products.FindAsync(request.ProductId);
+            if (product == null) return 0;
+            product.ProductName = request.ProductName;
+            product.Description = request.Description;
+            product.Price = request.Price;
+            product.Quantity = request.Quantity;
+            product.ProductImage = request.ProductImage;
+            product.UpdateAt = request.UpdateAt;
+            product.IsDeleted = request.IsDeleted;
+            product.CategoryId = request.Category.CategoryId;
+            product.BrandId = request.Brand.BrandId;
+            _context.Products.Update(product);
+            return await _context.SaveChangesAsync();
         }
     }
 }

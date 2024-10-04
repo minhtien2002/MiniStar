@@ -8,6 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddCors(o => o.AddPolicy("CorsPolicy", b =>
+{
+    b.AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowAnyOrigin();
+}));
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddHttpClient();
 builder.Services.AddControllers();
 builder.Services.AddDbContext<PMDbContext>(options =>
                 options.UseSqlServer("Data Source=localhost,1444;Database=MiniSa;User ID=sa;Password=Tien@123456;TrustServerCertificate=True")
@@ -25,6 +33,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("CorsPolicy");
 
 app.UseHttpsRedirection();
 

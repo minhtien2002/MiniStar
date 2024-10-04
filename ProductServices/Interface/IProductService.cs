@@ -1,5 +1,6 @@
 ﻿using ProductDataAccess.Entities;
 using ProductViewModel;
+using ProductViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace ProductServices.Interface
         Task<List<Product>> GetAll();
         Task<Product> GetById(int id);
         Task<int> Create(ProductCreateViewModel product);
-        Task<Product> Update(Product product);
         Task<int> DeleteById(int id);
+        Task<int> Update(ProductEditViewModel product);
     }
 }
