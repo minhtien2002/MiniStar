@@ -13,5 +13,18 @@ services:
       - sqlserver_data:/var/opt/mssql
     restart: unless-stopped
 
+  fontend: 
+    image: fontend
+    build: 
+      context: .
+      dockerfile: ./Shop/Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/project
+      - /project/node_modules
+    environment:
+      - NODE_ENV=production
+
 volumes:
   sqlserver_data:
