@@ -13,7 +13,11 @@ export function RouteConfig() {
                 <Route index element={<Home/>}/>
                 <Route path="product-all" element={<PageProduct/>}/>
                 <Route path="login" element={<Login/>}/>
+                <Route path="product" element={<Login/>}/>
+                
             </Route>
         </Routes>
+
+
     )
 }
