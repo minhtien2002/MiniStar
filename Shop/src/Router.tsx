@@ -11,7 +11,11 @@ export function RouteConfig() {
             <Route path="/" element={<MainLayout/>}>
                 <Route index element={<Home/>}/>
                 <Route path="login" element={<Login/>}/>
+                <Route path="product" element={<Login/>}/>
+                
             </Route>
         </Routes>
+
+
     )
 }
