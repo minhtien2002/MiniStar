@@ -4,7 +4,7 @@ import React from "react";
 const Home: React.FC = () => {
   return (
     
-      <div className="container w-10/12 mx-auto mb-[5rem]">
+      <div className="container">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut rerum
         pariatur nemo id sapiente laudantium magnam cumque distinctio, ab odit
         architecto ipsum eligendi deserunt fugit culpa suscipit sequi ut,

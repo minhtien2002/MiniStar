@@ -5,7 +5,7 @@ const Login: React.FC = () => {
 
     return (
         <div className='w-full flex flex-row justify-center gap-32'>
-            <div className="shadow-lg p-10 w-4/10">
+            <div className="shadow-xl p-10 w-4/10">
                 <div className="flex flex-col justify-center items-center mb-4">
                     <h1 className="font-bold text-3xl">Log In</h1>
                     <img src="./src/assets/images/vector-line.png" alt="vector-line" />

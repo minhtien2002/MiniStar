@@ -20,13 +20,13 @@ namespace ProductAPI.Controllers
             this.productService = productService;
         }
 
-        [HttpGet("GetAllProduct")]
+        [HttpGet("AllProduct")]
         public async Task<ActionResult> GetAll() {
             List<Product> result = await productService.GetAll();
             return Ok(result);
         }
 
-        [HttpGet("GetProductBy{id}")]
+        [HttpGet("Product={id}")]
         public async Task<ActionResult> GetProductById(int id)
         {
             Product result = await productService.GetById(id);

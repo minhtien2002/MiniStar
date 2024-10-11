@@ -67,6 +67,7 @@ namespace ProductServices.Implementation
                     select new Product
                     {
                         ProductId = pr.ProductId,
+                        ProductName = pr.ProductName,
                         Brand = pc,
                         Category = px,
                     };
