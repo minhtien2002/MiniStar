@@ -3,12 +3,12 @@ import { Outlet } from "react-router-dom";
 
 const MainLayout: React.FC = () => {
   return (
-    <div id="wrapper" className="bg-white">
+    <div id="wrapper" className="bg-white ">
       <div>
         {/* header */}
 
         <header>
-          <div className="top-header  bg-[#f5faf5]">
+          <div className="top-header   bg-[#f5faf5]">
             <div className="flex w-10/12 m-auto justify-between">
               <ul className="flex gap-3 p-4 ">
                 <li className="cursor-pointer  hover:text-red-600">
@@ -52,36 +52,13 @@ const MainLayout: React.FC = () => {
           </div>
 
           <div id="mid-header" className=" w-10/12 m-auto flex justify-between">
-            <img
+           <a href="home"> <img 
               className="py-6 cursor-pointer"
               src="https://quomodosoft.com/html/ecoshop/assets/images/logos/logo.webp"
               alt=""
-            />
+            /></a>
 
             <form action="" className="flex  items-center">
-              {/* <div className="rounded-md border-solid border border-black w-auto">
-              <input
-                className="m-3 w-2/5"
-                type="text"
-                placeholder="Search Product..."
-              />
-              <span>|</span>
-              <select name="" id="" className="px-3 w-2/5">
-                <option value="Vegetable">Vegetable</option>
-                <option value="Fruit">Fruits</option>
-                <option value="Juice">Juice</option>
-                <option value="Meet">Meet</option>
-                <option value="Other" selected>
-                  Other
-                </option>
-              </select>
-            </div>{" "}
-            <input
-              type="submit"
-              value="Search"
-              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-r-md  "
-            /> */}
-
               <div className="flex items-center border border-gray-300 rounded-md">
                 <input
                   type="text"
@@ -165,7 +142,7 @@ const MainLayout: React.FC = () => {
                     id=""
                     className="h-10 w-52 rounded-md px-3 cursor-pointer"
                   >
-                    <option disabled hidden selected>
+                    <option value="" disabled hidden selected>
                       All Categorie
                     </option>
                     <option value="">
@@ -201,14 +178,15 @@ const MainLayout: React.FC = () => {
                   </select>
                 </div>
                 <div className="hidden md:flex space-x-8">
-                  <a href="/" className="hover:text-gray-200 font-semibold">
+                  <a href="home" className="hover:text-gray-200 font-semibold">
                     Home
                   </a>
                   <a
-                    href="product-all"
+                    href="#"
                     className="hover:text-gray-200 font-semibold relative group"
                   >
-                    Shop+
+                    Shop+{" "}
+                   
                   </a>
                   <a
                     href="#"
@@ -249,20 +227,23 @@ const MainLayout: React.FC = () => {
                     Contact
                   </a>
                 </div>
-                <a href="login" className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-10 rounded">
-                  Login
-                </a>
+                <button className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-5 rounded">
+                  Seller Login
+                </button>
               </nav>
             </div>
           </div>
         </header>
         {/* end header */}
-        <div className="w-10/12 mx-auto mb-[5rem] mt-6">
+
+        <div className=" w-10/12 m-auto mb-[5rem] pt-5">
+          {" "}
           <Outlet />
         </div>
+
         {/* footer */}
         <footer className=" h-auto py-10 bg-[#212529]">
-          <div className=" bg-[url('./src/assets/images/footer-top-bg.webp')] bg-center bg-cover w-full h-96 z-30 -translate-y-28">
+          <div className=" bg-[url('./src/assets/images/footer-top-bg.webp')]  bg-center  bg-cover w-full  h-96 z-30 -translate-y-28 ">
             <div className=" text-white py-12 ">
               <div className="container mx-auto text-center translate-y-14 translate-x-1/2 w-1/3">
                 <h2 className="text-3xl font-bold mb-4">
@@ -316,10 +297,12 @@ const MainLayout: React.FC = () => {
               </div>
               <div className="w-1/4 pt-3">
                 <div className="flex flex-col">
-                  <h2 className="py-4 font-bold text-xl text-white">About Us</h2>
+                  <h2 className="py-4 font-bold text-xl text-white">
+                    About Us
+                  </h2>
                   <div className="py-4">
                     <a className=" hover:text-green-500 " href="">
-                      Rave’s Story
+                      Rave's Story
                     </a>
                   </div>
                   <div className="py-4">
@@ -403,7 +386,9 @@ const MainLayout: React.FC = () => {
                       <path d="M795-120q-116 0-236.5-56T335-335Q232-438 176-558.5T120-795q0-19.29 12.86-32.14Q145.71-840 165-840h140q14 0 24 10t14 25l26.93 125.64Q372-665 369.5-653.5t-10.73 19.73L259-533q26 44 55 82t64 72q37 38 78 69.5t86 55.5l95-98q10-11 23.15-15 13.15-4 25.85-2l119 26q15 4 25 16.04 10 12.05 10 26.96v135q0 19.29-12.86 32.14Q814.29-120 795-120ZM229-588l81-82-23-110H180q2 42 13.5 88.5T229-588Zm369 363q41 19 89 31t93 14v-107l-103-21-79 83ZM229-588Zm369 363Z" />
                     </svg>
                     <div className="px-3">
-                      <p className="font-bold text-xl text-white pb-3 ">Phone:</p>
+                      <p className="font-bold text-xl text-white pb-3 ">
+                        Phone:
+                      </p>
                       <p>+880171889547</p>
                     </div>
                   </div>
@@ -419,7 +404,9 @@ const MainLayout: React.FC = () => {
                       <path d="M140-160q-24 0-42-18t-18-42v-520q0-24 18-42t42-18h680q24 0 42 18t18 42v520q0 24-18 42t-42 18H140Zm340-302L140-685v465h680v-465L480-462Zm0-60 336-218H145l335 218ZM140-685v-55 520-465Z" />
                     </svg>
                     <div className="px-3">
-                      <p className="font-bold text-xl text-white pb-3 ">Email:</p>
+                      <p className="font-bold text-xl text-white pb-3 ">
+                        Email:
+                      </p>
                       <p>Demo@gmail.com</p>
                     </div>
                   </div>
@@ -468,12 +455,19 @@ const MainLayout: React.FC = () => {
                   </svg>
                 </a>
               </div>
-              <div className=" text-[#c6c6c6] text-lg font-bold">
+              <div className=" text-[#c6c6c6] text-lg font-bold w-full">
                 &copy; 2024{" "}
                 <a className="text-green-500" href="">
                   TunaHari.
                 </a>{" "}
                 All rights reserved.
+              </div>
+              <div className="h-6 w-full flex justify-end px-4">
+                <img
+                  
+                  src="https://quomodosoft.com/html/ecoshop/assets/images/homepage-one/payment-img.png"
+                  alt=""
+                />
               </div>
             </div>
           </div>
