@@ -1,6 +1,4 @@
 import React, { useEffect, useReducer } from 'react'
-import PropTypes from 'prop-types'
-import { url } from 'inspector';
 
 interface props {
     urlOfApi: string; // URL của API    

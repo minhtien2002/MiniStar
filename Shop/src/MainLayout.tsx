@@ -52,7 +52,7 @@ const MainLayout: React.FC = () => {
           </div>
 
           <div id="mid-header" className=" w-10/12 m-auto flex justify-between">
-           <a href="home"> <img 
+            <a href="/"> <img
               className="py-6 cursor-pointer"
               src="https://quomodosoft.com/html/ecoshop/assets/images/logos/logo.webp"
               alt=""
@@ -178,16 +178,13 @@ const MainLayout: React.FC = () => {
                   </select>
                 </div>
                 <div className="hidden md:flex space-x-8">
-                  <a href="home" className="hover:text-gray-200 font-semibold">
+                  <a href="/" className="hover:text-gray-200 font-semibold">
                     Home
                   </a>
                   <a
-                    href="#"
+                    href="product-all"
                     className="hover:text-gray-200 font-semibold relative group"
-                  >
-                    Shop+{" "}
-                   
-                  </a>
+                  >Shop+</a>
                   <a
                     href="#"
                     className="hover:text-gray-200 font-semibold group relative"
@@ -227,9 +224,9 @@ const MainLayout: React.FC = () => {
                     Contact
                   </a>
                 </div>
-                <button className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-5 rounded">
-                  Seller Login
-                </button>
+                <a href="login" className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-9 rounded">
+                  Login
+                </a>
               </nav>
             </div>
           </div>
@@ -237,7 +234,6 @@ const MainLayout: React.FC = () => {
         {/* end header */}
 
         <div className=" w-10/12 m-auto mb-[5rem] pt-5">
-          {" "}
           <Outlet />
         </div>
 
@@ -455,18 +451,17 @@ const MainLayout: React.FC = () => {
                   </svg>
                 </a>
               </div>
-              <div className=" text-[#c6c6c6] text-lg font-bold w-full">
-                &copy; 2024{" "}
-                <a className="text-green-500" href="">
+              <div className="text-[#c6c6c6] text-lg font-bold w-full">
+                &copy; 2024
+                <a className="text-green-500 px-1" href="https://www.facebook.com/hai.tuan.f11">
                   TunaHari.
-                </a>{" "}
+                </a>
                 All rights reserved.
               </div>
               <div className="h-6 w-full flex justify-end px-4">
                 <img
-                  
                   src="https://quomodosoft.com/html/ecoshop/assets/images/homepage-one/payment-img.png"
-                  alt=""
+                  alt="logo"
                 />
               </div>
             </div>

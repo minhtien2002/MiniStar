@@ -17,8 +17,6 @@ export function RouteConfig() {
                 <Route path="login" element={<Login/>}/>
                 <Route path="cart" element={<Cart/>}/>
                 <Route path="checkout" element={<Checkout/>}/>
-                <Route path="home" element={<Home/>}/>
-                
             </Route>
         </Routes>
 

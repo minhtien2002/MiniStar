@@ -156,12 +156,13 @@ const Checkout = () => {
           <div className="flex items-center">
             <input 
               type="checkbox" 
-              name="createAccount"
+              name="confirmInformation"
+              id='confirmInformation'
               checked={isChecked}
               onChange={handleCheckboxChange}
               className="mr-2"
             />
-            <label>Confirm information ?</label>
+            <label htmlFor='confirmInformation'>Confirm information ?</label>
           </div>
         </form>
       </div>
@@ -205,36 +206,39 @@ const Checkout = () => {
           <div>
             <input 
               type="radio" 
-              name="paymentMethod" 
+              name="paymentMethod"
+              id='bankTransfer'
               value="bankTransfer"
               onChange={handleInputChange}
               className="mr-2"
             />
-            <label>Direct Bank Transfer</label>
+            <label htmlFor='bankTransfer'>Direct Bank Transfer</label>
           </div>
           <div>
             <input 
               type="radio" 
               name="paymentMethod" 
+              id='cashOnDelivery'
               value="cashOnDelivery"
               onChange={handleInputChange}
               className="mr-2"
             />
-            <label>Cash on Delivery</label>
+            <label htmlFor='cashOnDelivery'>Cash on Delivery</label>
           </div>
           <div>
             <input 
               type="radio" 
               name="paymentMethod" 
+              id='creditCard'
               value="creditCard"
               onChange={handleInputChange}
               className="mr-2"
             />
-            <label >Credit/Debit Cards or Paypal</label>
+            <label htmlFor='creditCard'>Credit/Debit Cards or Paypal</label>
           </div>
         </div>
 
-        <a  href="home"><button onClick={showAlert} disabled={!isChecked} className="mt-6 w-full bg-green-500 text-white py-2 rounded  hover:bg-green-700">Place Order Now</button></a>
+        <a  href="/"><button onClick={showAlert} disabled={!isChecked} className="mt-6 w-full bg-green-500 text-white py-2 rounded  hover:bg-green-700">Place Order Now</button></a>
       </div>
     </div>
   );
