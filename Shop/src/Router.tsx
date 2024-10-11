@@ -3,6 +3,8 @@ import MainLayout from "./MainLayout";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import PageProduct from "./components/PageProduct";
+import Cart from "./components/Cart";
+import Checkout  from "./components/Checkout";
 
 
 export function RouteConfig() {
@@ -13,7 +15,9 @@ export function RouteConfig() {
                 <Route index element={<Home/>}/>
                 <Route path="product-all" element={<PageProduct/>}/>
                 <Route path="login" element={<Login/>}/>
-                <Route path="product" element={<Login/>}/>
+                <Route path="cart" element={<Cart/>}/>
+                <Route path="checkout" element={<Checkout/>}/>
+                <Route path="home" element={<Home/>}/>
                 
             </Route>
         </Routes>
