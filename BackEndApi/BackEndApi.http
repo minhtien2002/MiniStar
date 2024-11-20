@@ -1,0 +1,26 @@
+@BackEndApi_HostAddress = http://localhost:5179
+
+GET {{BackEndApi_HostAddress}}/api/Product/AllProduct
+Accept: application/json
+###
+
+GET {{BackEndApi_HostAddress}}/api/Product/Product=1
+Accept: application/json
+###
+
+POST {{BackEndApi_HostAddress}}/api/Product/CreateNewProduct
+Content-Type: application/json
+Accept: application/json
+{
+  "productName": "tuong ot",
+  "description": "chai tuong ot chinsu 300ml",
+  "price": 2,
+  "quantity": 15,
+  "productImage": "string",
+  "createAt": "2024-11-18T17:10:35.902Z",
+  "updateAt": "2024-11-18T17:10:35.902Z",
+  "isDeleted": false,
+  "category": 1,
+  "brand": 1
+}
+###

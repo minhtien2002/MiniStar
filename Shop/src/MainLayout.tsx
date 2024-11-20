@@ -233,7 +233,7 @@ const MainLayout: React.FC = () => {
         </header>
         {/* end header */}
 
-        <div className=" w-10/12 m-auto mb-[5rem] pt-5">
+        <div className=" w-10/12 m-auto mb-[5rem] mt-10 pt-5">
           <Outlet />
         </div>
 

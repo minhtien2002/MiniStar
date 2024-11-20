@@ -1,23 +1,12 @@
 import React from "react";
+import Login from "./Login";
 <link rel="stylesheet" href="./public/CSS/reset.css" />;
 
 const Home: React.FC = () => {
   return (
     
       <div className="container">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut rerum
-        pariatur nemo id sapiente laudantium magnam cumque distinctio, ab odit
-        architecto ipsum eligendi deserunt fugit culpa suscipit sequi ut,
-        recusandae eaque nesciunt minus. Quibusdam fugit qui doloremque impedit
-        quia, esse vitae cumque? Hic libero eveniet eos amet nemo distinctio
-        aliquid, sit corrupti quos eius, ex, deserunt porro illo. Quisquam
-        doloremque earum corrupti rerum, atque placeat consequuntur id odio
-        nobis repudiandae, ratione, culpa optio! Quasi consequuntur ullam in!
-        Est sapiente ea labore quaerat numquam harum illum, perspiciatis
-        delectus voluptate, natus dolorum aut quod! Libero harum tenetur
-        incidunt minima eius? Numquam, fuga. Lorem ipsum dolor sit, amet
-        consectetur adipisicing elit. Quaerat excepturi error dignissimos!
-        Dolore enim cum ratione? Corrupti amet voluptates nihil quaerat at.
+        
         Necessitatibus, deleniti. Sit cum sunt iusto maiores suscipit eaque
         ratione voluptates est. Qui deleniti veniam architecto voluptas
         laboriosam delectus ea quos, excepturi nostrum est repudiandae eligendi
