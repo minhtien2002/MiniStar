@@ -30,7 +30,7 @@ const Login: React.FC = () => {
                         <input type="submit" value="Log In" className='py-3 mb-5 text-white bg-[#34A853] rounded-md font-medium cursor-pointer' />
                         <div className="flex flex-row justify-center text-[14px]">
                             <p className='text-[#797979] mr-1'>Don't have an account?</p>
-                            <a href="">Sign Up Free</a>
+                            <a href="Regiter">Sign Up Free</a>
                         </div>
                     </div>
                 </form>
