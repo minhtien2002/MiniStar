@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 const MainLayout: React.FC = () => {
   return (
-    <div id="wrapper" className="bg-white ">
+    <div id="wrapper" className="bg-white font-myfont">
       <div>
         {/* header */}
 
@@ -12,13 +12,13 @@ const MainLayout: React.FC = () => {
             <div className="flex w-10/12 m-auto justify-between">
               <ul className="flex gap-3 p-4 ">
                 <li className="cursor-pointer  hover:text-red-600">
-                  <a href="#"></a>Account
+                  <a href="#">Account</a>
                 </li>
                 <li className="cursor-pointer  hover:text-red-600">
-                  <a href="#"></a>Track Order
+                  <a href="checkorder">Track Order</a>
                 </li>
                 <li className="cursor-pointer  hover:text-red-600">
-                  <a href="#"></a>Support
+                  <a href="#">Support</a>
                 </li>
               </ul>
               <ul className="flex gap-3 p-4">
@@ -177,7 +177,7 @@ const MainLayout: React.FC = () => {
                     </option>
                   </select>
                 </div>
-                <div className="hidden md:flex space-x-8">
+                <div className="hidden md:flex space-x-8 z-50">
                   <a href="/" className="hover:text-gray-200 font-semibold">
                     Home
                   </a>
@@ -190,9 +190,9 @@ const MainLayout: React.FC = () => {
                     className="hover:text-gray-200 font-semibold group relative"
                   >
                     Pages+
-                    <ul className=" hidden bg-white absolute w-64  shadow-xl rounded-lg p-5 text-black group-hover:block   ">
+                    <ul className=" hidden bg-white absolute w-64  shadow-xl rounded-lg p-5 text-black group-focus:block group-hover:block   ">
                       <li className="pb-4 hover:text-green-500">
-                        <a href="">Product-details</a>
+                        <a href="product-detail">Product-details</a>
                       </li>
                       <li className="pb-4 hover:text-green-500">
                         <a href="">Privacy Policy</a>
@@ -267,11 +267,11 @@ const MainLayout: React.FC = () => {
           <div className=" w-10/12 m-auto">
             <div className=" text-[#c8c8c8]  -translate-y-20 flex flex-row border-b-0">
               <div className="w-1/4 ">
-                <img
+                <a href="/"><img
                   className="py-6 cursor-pointer"
                   src="https://quomodosoft.com/html/ecoshop/assets/images/logos/footer-logo.webp"
                   alt=""
-                />
+                /></a>
                 <div className="flex flex-col">
                   <div className="py-4">
                     <a className=" hover:text-green-500 " href="">

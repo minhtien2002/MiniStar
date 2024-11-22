@@ -1,6 +1,4 @@
-
-import React, { useState } from 'react';
-
+import { useState } from 'react';
 const Checkout = () => {
 
   const [isChecked, setIsChecked] = useState(false);
@@ -25,9 +23,12 @@ const Checkout = () => {
     paymentMethod: ''
   });
 
-  const handleInputChange = (e: { target: { name: any; value: any; type: any; checked: any; }; }) => {
-    const { name, value, type, checked } = e.target;
-    setForm({ ...form, [name]: type === 'checkbox' ? checked : value });
+  const handleInputChange = (event: { target: { name: any; value: any; type: any; checked: any; }; })  => {
+    const { name, value } = event.target;
+    setForm((prevForm) => ({
+      ...prevForm,
+      [name]: value,
+    }));
   };
 
   return (
@@ -41,7 +42,7 @@ const Checkout = () => {
               <label className="block font-semibold">Full Name*</label>
               <input 
                 type="text" 
-                name="firstName"
+                name="fullName"
                 value={form.fullName}
                 onChange={handleInputChange}
                 className="w-full p-2 border border-gray-300 rounded" 
@@ -90,11 +91,11 @@ const Checkout = () => {
             <label className="block font-semibold">City*</label>
             <select 
               name="city"
-              value={form.city}
+              // value={form.city}
               
               className="w-full p-2 border border-gray-300 rounded"
             >
-              <option value="">Choose...</option>
+              <option disabled selected hidden value="">Choose...</option>
               <option value="HCM">Hồ Chí Minh City</option>
               <option value="HN">Hà Nội</option>
               <option value="DN">Đà Nẵng</option>
@@ -114,12 +115,11 @@ const Checkout = () => {
                 placeholder="Gò Vấp"
               /> */}
               <select 
-              name="city"
-              value={form.city}
-              
+              name="district"
+              // value={form.district}
               className="w-full p-2 border border-gray-300 rounded"
             >
-              <option value="">Choose...</option>
+              <option disabled selected hidden value="">Choose...</option>
               <option value="">Đống Đa</option>
               <option value="">Cầu Giấy</option>
               <option value="">Mỹ Đình</option>
@@ -140,11 +140,11 @@ const Checkout = () => {
               /> */}
               <select 
               name="ward"
-              value={form.ward}
+              // value={form.ward}
               
               className="w-full p-2 border border-gray-300 rounded"
             >
-              <option value="">Choose...</option>
+              <option disabled selected hidden value="">Choose...</option>
               <option value="">P. Tân Hưng</option>
               <option value="">Phường 13</option>
               <option value="">P. Nguyễn Thái Bình</option>
@@ -156,13 +156,13 @@ const Checkout = () => {
           <div className="flex items-center">
             <input 
               type="checkbox" 
-              name="confirmInformation"
+              name="confirmInformatinon"
               id='confirmInformation'
               checked={isChecked}
               onChange={handleCheckboxChange}
               className="mr-2"
             />
-            <label htmlFor='confirmInformation'>Confirm information ?</label>
+            <label  htmlFor='confirmInformation'>Confirm information ?</label>
           </div>
         </form>
       </div>

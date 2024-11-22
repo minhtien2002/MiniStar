@@ -4,10 +4,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import PageProduct from "./components/ProductPage";
 import Cart from "./components/Cart";
-import Checkout from "./components/Checkout";
-import Error from "./components/Error";
-import DashBoard from "./components/admin/DashBoard";
-import AdminPage from "./components/admin/AdminPage";
+import Checkout  from "./components/Checkout";
 
 
 export function RouteConfig() {
@@ -24,7 +21,10 @@ export function RouteConfig() {
             </Route>
             <Route path="admin" element={<AdminPage />}>
                     <Route index element={<DashBoard />} />
-                </Route>
+                    <Route path="product-detail" element={<ProductDetail/>}/>
+                <Route path="checkorder" element={<Checkorder/>}/>
+            </Route>
+            
         </Routes>
 
 
