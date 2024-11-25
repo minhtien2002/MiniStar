@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 const MainLayout: React.FC = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        // Kiểm tra cookie để xác định trạng thái đăng nhập
+        const token = Cookies.get('token');
+        if (token) {
+            setIsLoggedIn(true);
+        }
+    }, []);
+
+    const handleLogout = () => {
+        // Xóa cookie và cập nhật trạng thái
+        Cookies.remove('token');
+        setIsLoggedIn(false);
+        alert('Logged out successfully!');
+    };
+
   return (
     <div id="wrapper" className="bg-white font-myfont">
       <div>
@@ -224,9 +242,15 @@ const MainLayout: React.FC = () => {
                     Contact
                   </a>
                 </div>
-                <a href="login" className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-9 rounded">
-                  Login
+                {isLoggedIn ? (
+                <button onClick={handleLogout} className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-9 rounded">
+                    Logout
+                </button>
+            ) : (
+                <a href="/login" className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-9 rounded">
+                    Login
                 </a>
+            )}
               </nav>
             </div>
           </div>

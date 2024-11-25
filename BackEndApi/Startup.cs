@@ -1,9 +1,11 @@
 ﻿using Domain.Entities;
+using Interface;
 using Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Persistence;
 using Repositories;
+using UserServices.Implementation;
 
 namespace BackEndApi
 {
@@ -32,6 +34,9 @@ namespace BackEndApi
             services.AddScoped<IGenericRepository<Brand>, GenericRepository<Brand>>();
             services.AddScoped<IGenericRepository<Category>, GenericRepository<Category>>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<ICartService, CartService>();
 
             services.AddHttpContextAccessor();
             services.AddHttpClient();

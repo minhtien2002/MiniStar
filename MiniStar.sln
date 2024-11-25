@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositorie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModel", "ViewModel\ViewModel.csproj", "{2649200F-6743-4726-BFF2-0928200FF630}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackEndApi", "BackEndApi\BackEndApi.csproj", "{CBA83475-8479-45F4-AE47-B3B064E190CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackEndApi", "BackEndApi\BackEndApi.csproj", "{CBA83475-8479-45F4-AE47-B3B064E190CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

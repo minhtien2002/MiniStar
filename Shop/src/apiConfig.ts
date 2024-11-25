@@ -7,6 +7,8 @@ const API_ENDPOINTS = {
   getProductById: (id:number) => `${API_BASE_URL}/Product/GetById=${id}`,
   // getProductByCategory: (id:number) => `${API_BASE_URL}/Product/Category=${id}`,
   quantityAllProduct: `${API_BASE_URL}/Product/GetCount`, 
+  login: `${API_BASE_URL}/User/login`,
+  register: `${API_BASE_URL}/User/register`,
 };
 
 export default API_ENDPOINTS;
