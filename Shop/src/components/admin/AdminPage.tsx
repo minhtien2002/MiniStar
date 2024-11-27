@@ -1,4 +1,5 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 
 const AdminPage: React.FC = () => {
   return (
@@ -18,7 +19,7 @@ const AdminPage: React.FC = () => {
             </li>
             <li className="flex px-4 py-2">Task</li>
             <li className="rounded-lg hover:bg-[rgb(245,204,255)] text-[#8a1faa]">
-              <a className="flex px-3 py-2" href="/admin">
+              <a className="flex px-3 py-2" href="/admin/product-manage">
                 Quản lý sản phẩm
               </a>
             </li>
@@ -40,10 +41,12 @@ const AdminPage: React.FC = () => {
           </ul>
         </div>
       </div>
-      <div className="w-auto bg-blue-400 col-span-3">
+      <div className="w-auto  col-span-3">
         <div className="w-full border-solid border-[.5px] border-[#969696]">
           <div className="h-20"></div>
         </div>
+
+        <Outlet />
       </div>
     </div>
   );

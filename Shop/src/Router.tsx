@@ -11,6 +11,7 @@ import ProductDetail from "./components/ProductDetail";
 import { Checkorder } from "./components/Checkorder";
 import Login from "./components/Login";
 import { Register } from "./components/Register";
+import ProductManage from "./components/admin/Management/ProductManage";
 
 
 export function RouteConfig() {
@@ -30,6 +31,7 @@ export function RouteConfig() {
             </Route>
             <Route path="admin" element={<AdminPage />}>
                     <Route index element={<DashBoard />} />
+                    <Route path="product-manage" element={<ProductManage/>} />
             </Route>
             
         </Routes>
