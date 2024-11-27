@@ -1,52 +1,94 @@
-import React from "react";
+import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
+import { FloatButton } from "antd";
+import { Switch } from "antd";
 
-const AdminPage: React.FC = () => {
+function AdminPanel() {
+  const [mode, setMode] = useState("text-[#26303e] bg-white");
+  const handelSetmodeDask = () => {
+    setMode("bg-[#26303e] text-white");
+  };
+  const handelSetmodeLight = () => {
+    setMode("text-[#26303e] bg-white");
+  };
+  const onChange = (checked: boolean) => {
+    console.log(`switch to ${checked}`);
+    if (checked == false) {
+      handelSetmodeDask();
+    }else handelSetmodeLight()
+  };
   return (
-    <div className="grid grid-cols-4">
-      <div className="">
-        <div className="w-1/4 border-solid border-[.5px] border-[#969696] fixed top-0 left-0 z-10 bg-white">
-          <div className="h-20 flex justify-center items-center">
-            <h2>ADMIN</h2>
+    <div className="flex h-screen ">
+      {/* Thanh bên trái */}
+      <div className="bg-gray-800 w-64 text-white  p-4 fixed top-0 left-0 h-screen z-40">
+        <a href="/admin/Dashboard">
+          <div className="px-6 py-4 text-2xl font-bold">Admin Panel</div>
+        </a>
+        <nav>
+          <ul>
+            <a href="/admin/Dashboard">
+              <li className="py-3 px-6 hover:bg-gray-700">
+                <span className="block">Dashboard</span>
+              </li>
+            </a>
+            <a href="/admin/Management/Product/Index">
+              <li className="py-3 px-6 hover:bg-gray-700">
+                <span className="block">Quản lý sản phẩm</span>
+              </li>
+            </a>
+            <a href="">
+              <li className="py-3 px-6 hover:bg-gray-700">
+                <span className="block">Quản lý đơn hàng</span>
+              </li>
+            </a>
+
+            <a href="">
+              <li className="py-3 px-6 hover:bg-gray-700">
+                <span className="block">Quản lý khách hàng</span>
+              </li>
+            </a>
+            <a href="">
+              <li className="py-3 px-6 hover:bg-gray-700">
+                <span className="block">Thống kê</span>
+              </li>
+            </a>
+          </ul>
+        </nav>
+      </div>
+
+      {/* Nội dung chính */}
+      <div className="flex-1 p-4 overflow-y-auto">
+        <div className="bg-gray-100 p-4 rounded-md">
+          <h2 className="text-2xl font-bold ">Dashboard</h2>
+          <div className="ml-60 mt-3">
+            <div className={mode}>
+              <Outlet />
+            </div>
           </div>
         </div>
-        <div className="h-screen w-1/4 fixed left-0 top-0 overflow-y-scroll custom-scroll mt-20 border">
-          <ul className="p-4">
-            <li className="rounded-lg hover:bg-[rgb(245,204,255)] text-[#8a1faa]">
-              <a className="flex px-3 py-2" href="/admin">
-                Dashboard
-              </a>
-            </li>
-            <li className="flex px-4 py-2">Task</li>
-            <li className="rounded-lg hover:bg-[rgb(245,204,255)] text-[#8a1faa]">
-              <a className="flex px-3 py-2" href="/admin">
-                Quản lý sản phẩm
-              </a>
-            </li>
-            <li className="rounded-lg hover:bg-[rgb(245,204,255)] text-[#8a1faa]">
-              <a className="flex px-3 py-2" href="/admin">
-                Quản lý khách hàng
-              </a>
-            </li>
-            <li className="rounded-lg hover:bg-[rgb(245,204,255)] text-[#8a1faa]">
-              <a className="flex px-3 py-2" href="/admin">
-                Quản lý đơn hàng
-              </a>
-            </li>
-            <li className="rounded-lg hover:bg-[rgb(245,204,255)] text-[#8a1faa]">
-              <a className="flex px-3 py-2" href="/admin">
-                Thống kê
-              </a>
-            </li>
-          </ul>
-        </div>
       </div>
-      <div className="w-auto bg-blue-400 col-span-3">
-        <div className="w-full border-solid border-[.5px] border-[#969696]">
-          <div className="h-20"></div>
+      <a href="/" title="Go Home">
+        <FloatButton onClick={() => console.log("onClick")} />
+      </a>
+      {/* Thanh trên */}
+      <div className="bg-gray-200 p-4 fixed top-0 right-0 w-full">
+        <div className="flex justify-end">
+          <div className="p-1">
+            <label htmlFor="">Thanos Búng Tay </label>
+            <Switch defaultChecked onChange={onChange} />
+          </div>
+          <input
+            type="text"
+            placeholder="Search"
+            className="border border-gray-300 rounded-md px-2 py-1"
+          />
+          <button className="ml-2 px-2 py-1 bg-blue-500 text-white rounded-md">
+            Tìm kiếm
+          </button>
         </div>
       </div>
     </div>
   );
-};
+}
 
-export default AdminPage;
+export default AdminPanel;

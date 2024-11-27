@@ -3,19 +3,7 @@ import React from 'react';
 const DashBoard: React.FC = () => {
     return (
         <div className="xl:col-span-2">
-            <div className="card">
-                <div className="card-header">
-                    <h5 className="text-base">Revenue</h5>
-                </div>
-                <div className="card-body relative">
-                    <div id="revenue-chart" className="apex-charts min-h-[328px]"><div id="apexchartsuozhaqbuf" className="apexcharts-canvas apexchartsuozhaqbuf apexcharts-theme-light w-[783px] h-[313px]">
-
-                        <div className="resize-triggers"><div className="expand-trigger"><div className='w-[824px] h-[354px]'></div></div><div className="contract-trigger"></div></div></div>
-                    </div>
-                </div>
-
-
-            </div>
+            
 
             <div className="grid xl:grid-cols-2 gap-6">
 
