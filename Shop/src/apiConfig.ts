@@ -9,6 +9,17 @@ const API_ENDPOINTS = {
   quantityAllProduct: `${API_BASE_URL}/Product/GetCount`, 
   login: `${API_BASE_URL}/User/login`,
   register: `${API_BASE_URL}/User/register`,
+  getCartByUserId: (userId: number) => `${API_BASE_URL}/cart/${userId}`,
+  updateCartItemQuantity: (cartItemId: number) => `${API_BASE_URL}/CartItem/${cartItemId}/quantity`,
+  removeCartItem: (userId: number, cartItemId: number) =>`${API_BASE_URL}/cart/remove/${userId}/${cartItemId}`,
+  clearCart: (userId: number) => `${API_BASE_URL}/Cart/clear/${userId}`,
+  addToCart: (userId: number, productId: number, quantity: number) => `${API_BASE_URL}/Cart/add?userId=${userId}&productId=${productId}&quantity=${quantity}`,
+  createOrder: () => `${API_BASE_URL}/Order`,
+  getOrdersByBuyerId: (buyerId: number) => `/api/Order/${buyerId}`, 
+  updateOrderStatus: (orderId: number) => `/api/Order/${orderId}/status`, 
+
+
+
 };
 
 export default API_ENDPOINTS;

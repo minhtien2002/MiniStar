@@ -1,6 +1,8 @@
 import { Card } from "antd";
 import Item from "antd/es/list/Item";
 import { useState } from "react";
+import { addToCart } from './authUtils';
+
 const ProductDetail = () => {
   const [count, setCount] = useState(1);
   const handleSetcountUp = () => {

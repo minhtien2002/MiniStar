@@ -25,7 +25,7 @@ namespace CartAPI.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddToCart(int userId, int productId, int quantity)
+        public async Task<IActionResult> AddToCart([FromQuery] int userId, [FromQuery] int productId, [FromQuery] int quantity)
         {
             var success = await _cartService.AddToCartAsync(userId, productId, quantity);
             if (!success) return BadRequest("Could not add to cart.");
@@ -35,6 +35,7 @@ namespace CartAPI.Controllers
         [HttpDelete("remove/{userId}/{cartItemId}")]
         public async Task<IActionResult> RemoveFromCart(int userId, int cartItemId)
         {
+
             var success = await _cartService.RemoveFromCartAsync(userId, cartItemId);
             if (!success) return NotFound("Cart item not found.");
             return Ok("Removed from cart.");
@@ -44,7 +45,7 @@ namespace CartAPI.Controllers
         public async Task<IActionResult> ClearCart(int userId)
         {
             var success = await _cartService.ClearCartAsync(userId);
-            if (!success) return NotFound("Cart not found.");
+            if (!success) return BadRequest("Failed to clear cart");
             return Ok("Cart cleared.");
         }
     }

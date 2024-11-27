@@ -2,6 +2,8 @@ import Product from '../share/Product';
 import API_ENDPOINTS from '../apiConfig'; // Import API URL từ file cấu hình
 import CallApi from '../share/CallApi';
 import React from 'react';
+import { addToCart } from './authUtils'; // onClick={() => addToCart(productId, 1)} 
+
 
 const pathAllProduct = API_ENDPOINTS.getAllProduct;  // Lấy URL API từ file cấu hình
 const pathQuantityAllProduct = API_ENDPOINTS.quantityAllProduct;

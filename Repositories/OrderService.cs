@@ -34,22 +34,41 @@ namespace Repositories
 
         public async Task<OrderViewModel> CreateOrderAsync(OrderCreateViewModel model)
         {
+            // Lấy danh sách các CartItem của người dùng
+            var cartItems = await _context.CartItems
+                .Where(ci => ci.Cart.UserId == model.BuyerId && ci.IsActive)
+                .ToListAsync();
+
+            if (cartItems == null || !cartItems.Any())
+            {
+                throw new InvalidOperationException("No active cart items found for this user.");
+            }
+
+            // Tạo đơn hàng
             var order = new Order
             {
                 BuyerId = model.BuyerId,
                 OrderStatus = "pending",
-                TotalAmount = model.TotalAmount,
+                TotalAmount = cartItems.Sum(ci => ci.Price * ci.Quantity), // Tổng tiền từ giỏ hàng
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
-                OrderItems = model.OrderItems.Select(oi => new OrderItem
+                OrderItems = cartItems.Select(ci => new OrderItem
                 {
-                    ProductId = oi.ProductId,
-                    Quantity = oi.Quantity,
-                    Price = oi.Price
+                    ProductId = ci.ProductId,
+                    Quantity = ci.Quantity,
+                    Price = ci.Price
                 }).ToList()
             };
 
             _context.Orders.Add(order);
+
+            // Đánh dấu các mục trong giỏ hàng là không hoạt động
+            foreach (var cartItem in cartItems)
+            {
+                cartItem.IsActive = false;
+            }
+
+            // Lưu thay đổi
             await _context.SaveChangesAsync();
 
             return new OrderViewModel
@@ -62,6 +81,7 @@ namespace Repositories
                 UpdatedAt = order.UpdatedAt
             };
         }
+
 
         public async Task<bool> UpdateOrderStatusAsync(int orderId, string status)
         {

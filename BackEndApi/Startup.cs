@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using CartServices.Implementation;
+using Domain.Entities;
 using Interface;
 using Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +38,8 @@ namespace BackEndApi
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<ICartService, CartService>();
+            services.AddScoped<ICartItemService, CartItemService>();
+
 
             services.AddHttpContextAccessor();
             services.AddHttpClient();

@@ -1,4 +1,4 @@
-using Interface;
+﻿using Interface;
 using Microsoft.AspNetCore.Mvc;
 using ViewModel;
 
@@ -25,9 +25,17 @@ namespace BackEndApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateOrder(OrderCreateViewModel model)
         {
-            var order = await _orderService.CreateOrderAsync(model);
-            return CreatedAtAction(nameof(GetOrdersByBuyerId), new { buyerId = order.BuyerId }, order);
+            try
+            {
+                var order = await _orderService.CreateOrderAsync(model);
+                return CreatedAtAction(nameof(GetOrdersByBuyerId), new { buyerId = order.BuyerId }, order);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message); 
+            }
         }
+
 
         [HttpPut("{orderId}/status")]
         public async Task<IActionResult> UpdateOrderStatus(int orderId, [FromBody] string status)
