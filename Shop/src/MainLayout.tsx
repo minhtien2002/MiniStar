@@ -120,7 +120,7 @@ const MainLayout: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="cart" className="relative ">
+                <a href="/cart" className="relative ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="26px"
@@ -136,7 +136,7 @@ const MainLayout: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="">
+                <a href="/UserManagerment">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="26px"
@@ -257,7 +257,7 @@ const MainLayout: React.FC = () => {
         </header>
         {/* end header */}
 
-        <div className=" w-10/12 m-auto mb-[5rem] mt-10 pt-5">
+        <div className=" w-11/12 m-auto mb-[5rem] mt-10 pt-5">
           <Outlet />
         </div>
 

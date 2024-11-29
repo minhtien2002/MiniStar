@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tùy chỉnh thanh cuộn dọc */
+::-webkit-scrollbar {
+  width: 5px; /* Độ rộng của thanh cuộn */
+}
+
+/* Màu nền của thanh cuộn */
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+/* Màu và kiểu thanh cuộn */
+::-webkit-scrollbar-thumb {
+  background-color: #d1d1d1; /* Màu thanh cuộn */
+  border-radius: 10px; /* Bo tròn thanh cuộn */
+  border: 2px solid #f1f1f; /* Khoảng trống xung quanh */
+}
+
+/* Khi người dùng hover lên thanh cuộn */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #b1b1b1;
+}
