@@ -23,7 +23,6 @@ interface Categories {
   updateAt: Date;
   isDelete: boolean;
 }
-
 interface Brands {
   brandId: number;
   brandName: string;

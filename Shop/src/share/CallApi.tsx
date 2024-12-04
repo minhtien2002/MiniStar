@@ -37,7 +37,7 @@ const CallApi: React.FC<props> = ({ urlOfApi, onDataReceive }) => {
     // Gọi useReducer với reducer và state ban đầu
     const [state, dispatch] = useReducer(apiReducer, initialState);
 
-    // Hàm async để gọi API
+    // Hàm async để gọi API 
     const fetchData = async () => {
         try {
             const response = await fetch(urlOfApi); // Sử dụng URL từ apiConfig.js

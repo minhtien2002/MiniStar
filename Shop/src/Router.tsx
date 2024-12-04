@@ -19,7 +19,9 @@ import { Information } from "./components/UserManagerment/InforUser/Information"
 import { Address } from "./components/UserManagerment/InforUser/Address";
 import ChangePassword from "./components/UserManagerment/InforUser/ChangePassword";
 import { UserOrder } from "./components/UserManagerment/InforUser/UserOrder";
-
+import { Contact } from "./components/Contact";
+import AboutUs from "./components/AboutUs";
+import Blog from "./components/Blog";
 export function RouteConfig() {
   return (
     <Routes>
@@ -33,6 +35,10 @@ export function RouteConfig() {
         <Route path="product-detail" element={<ProductDetail />} />
         <Route path="checkorder" element={<Checkorder />} />
         <Route path="register" element={<Register />} />
+        <Route path="Contact" element={<Contact />} />
+        <Route path="AboutUs" element={<AboutUs />} />
+        <Route path="Bloger" element={<Blog />} />
+
         <Route path="UserManagerment" element={<UserLayout />}>
           <Route index element={<DashBoardUser />} />
           <Route path="InfoUser" element={<DashBoardUser />} />
