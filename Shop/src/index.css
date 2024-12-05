@@ -16,7 +16,7 @@
 ::-webkit-scrollbar-thumb {
   background-color: #d1d1d1; /* Màu thanh cuộn */
   border-radius: 10px; /* Bo tròn thanh cuộn */
-  border: 2px solid #f1f1f; /* Khoảng trống xung quanh */
+  border: 2px solid #f1f1f1; /* Khoảng trống xung quanh */
 }
 
 /* Khi người dùng hover lên thanh cuộn */

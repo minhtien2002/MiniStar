@@ -120,7 +120,7 @@ const MainLayout: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="cart" className="relative ">
+                <a href="/cart" className="relative ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="26px"
@@ -136,7 +136,7 @@ const MainLayout: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="">
+                <a href="/UserManagerment">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="26px"
@@ -229,16 +229,16 @@ const MainLayout: React.FC = () => {
                       </li>
                     </ul>
                   </a>
-                  <a href="#" className="hover:text-gray-200 font-semibold">
+                  <a href="AboutUs" className="hover:text-gray-200 font-semibold">
                     About
                   </a>
-                  <a href="#" className="hover:text-gray-200 font-semibold">
+                  <a href="Bloger" className="hover:text-gray-200 font-semibold">
                     Blog
                   </a>
                   <a href="#" className="hover:text-gray-200 font-semibold">
                     User Dashboard
                   </a>
-                  <a href="#" className="hover:text-gray-200 font-semibold">
+                  <a href="Contact" className="hover:text-gray-200 font-semibold">
                     Contact
                   </a>
                 </div>

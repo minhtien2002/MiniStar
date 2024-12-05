@@ -4,13 +4,122 @@ import Login from "./Login";
 
 const Home: React.FC = () => {
   return (
+    <div className="container w-11/12  pl-20 ">
+      <section className="flex ">
+        <div className="pt-14">
+          <p className="text-3xl font-bold text-green-600 mb-4">
+            FRESH GROCERY
+          </p>
+          <p className="text-7xl font-bold mb-8">
+            There's you can Buy your all of Grocery Products.
+          </p>
+          <a
+            href="product-all"
+            className="bg-yellow-500 hover:bg-black text-black hover:text-white font-bold  p-4 rounded"
+          >
+            Shop Now
+          </a>
+        </div>
+        <img
+          src="https://quomodosoft.com/html/ecoshop/assets/images/homepage-one/hero-img-1.webp"
+          alt="Fresh Vegetables"
+          className="mx-auto w-3/5 mb-8"
+        />
+      </section>
+      {/* 222222222 */}
+      <section className="flex ">
+        <img
+          src="https://quomodosoft.com/html/ecoshop/assets/images/homepage-one/hero-img-2.webp"
+          alt="Fresh Vegetables"
+          className="mx-auto w-2/5 mb-8 pr-11"
+        />
+        <div className="pt-14">
+          <p className="text-3xl font-bold text-green-600 mb-4">
+            FRESH GROCERY
+          </p>
+          <p className="text-7xl font-bold mb-8  pb-6">
+          We Provide Fresh and Organic Fruits To Your Door.
+          </p>
+          <a
+            href="product-all"
+            className="bg-yellow-500 hover:bg-black text-black hover:text-white font-bold  p-4 rounded"
+          >
+            Shop Now
+          </a>
+        </div>
+      </section>
+      {/* 333333333 */}
+      <section className="flex ">
+        <div className="pt-14">
+          <p className="text-3xl font-bold text-green-600 mb-4">
+            FRESH GROCERY
+          </p>
+          <p className="text-7xl font-bold mb-8 pb-6">
+          You Can Buy All 
+          <br />the Grocery Items Hasslefree
+          </p>
+          <a
+            href="product-all"
+            className="bg-yellow-500 hover:bg-black text-black hover:text-white font-bold  p-4 rounded"
+          >
+            Shop Now
+          </a>
+        </div>
+        <img
+          src="https://quomodosoft.com/html/ecoshop/assets/images/homepage-one/hero-img-3.webp"
+          alt="Fresh Vegetables"
+          className="mx-auto w-3/5 mb-8"
+        />
+      </section>
 
-      <div className="container">
-       Lorem ipsum dolor sit amet consectetur adipisicing elit. In magnam provident vel! Impedit, assumenda suscipit culpa ducimus saepe ratione dolores rem distinctio neque laborum voluptate eum. Maiores enim ducimus nesciunt! Rerum possimus voluptatum natus doloribus quod voluptates deserunt dolorum in est et, voluptatem aspernatur explicabo numquam aliquid, soluta, corrupti ducimus nisi porro. Atque excepturi soluta iusto praesentium corporis modi commodi reprehenderit dignissimos dolore incidunt. Quisquam eveniet atque reiciendis repudiandae cumque recusandae perferendis. Labore temporibus ex, dignissimos laborum tempora a voluptates quas exercitationem voluptate pariatur qui adipisci facere assumenda molestias aliquid. Iusto, commodi laborum aperiam atque explicabo incidunt accusamus est aut veniam reiciendis cupiditate sint quod voluptatibus eius possimus beatae quam ad quia? In modi ipsam nam molestias similique. Neque perferendis placeat temporibus aut dolore debitis exercitationem porro blanditiis nostrum, cupiditate corporis asperiores, dolorem architecto accusantium aspernatur iusto. Quasi praesentium, illo corporis ut assumenda voluptate consequatur modi architecto deserunt, quae labore reprehenderit tenetur sunt? Dolorum obcaecati odit necessitatibus veniam beatae quas? Vitae, voluptatem. Molestiae sint quos aliquam eveniet nobis blanditiis, sequi iste deleniti magnam debitis odio obcaecati fugit quo incidunt ea atque non reiciendis dolor, quod ad! Nam voluptate molestiae quisquam quidem pariatur non doloribus, laboriosam maiores illum placeat aliquam nemo nulla temporibus reiciendis repellat tempora. Quaerat sequi rerum libero asperiores nihil. Officiis debitis tempore deleniti, nesciunt aut autem nobis quaerat voluptatibus suscipit, ullam sunt, repellendus ut perferendis vel! Earum quas quaerat consectetur doloremque placeat voluptatum rem assumenda iure maiores omnis iusto obcaecati repudiandae aliquid, incidunt veniam. Dolore consectetur debitis, saepe quod eveniet reprehenderit ipsam tempora. Eveniet facere, enim iste consectetur rerum placeat quos natus aperiam optio explicabo autem eligendi perferendis similique maxime, nam officia voluptates inventore labore quis error, tempora fuga amet ea fugit! Error fuga nesciunt ducimus vitae! Quibusdam ad quidem ipsum, quasi aliquam, sequi deserunt minus et corrupti reiciendis consequuntur officia voluptate voluptatibus autem dicta. Quisquam, dolore maxime! Praesentium deleniti rerum provident id itaque alias nam velit sint commodi a consequuntur cum quos sapiente, qui laborum sit maxime iusto maiores quae repudiandae ad doloribus tempore! Quaerat aliquam dolor placeat. Ipsum nisi maiores assumenda suscipit minima. Quibusdam nostrum error, repudiandae rem maiores quisquam voluptatem tenetur ducimus, dolorum placeat iste sint culpa non provident. Consectetur aperiam eum nisi laborum, asperiores repellendus nihil, saepe voluptas facilis similique fugiat temporibus ipsum culpa enim iusto doloremque aliquam optio quisquam totam. Sunt id consequatur ipsa nemo eos repellat adipisci voluptates soluta in possimus tempore autem repudiandae modi perferendis sequi, magnam dolores quasi! Nesciunt numquam labore dolores dolorum amet veritatis quasi error molestiae cumque modi dicta eaque tenetur, nihil ea itaque quidem autem alias magni est repellat provident voluptas dolore ipsum velit? Repellendus facere ipsam, perferendis hic excepturi soluta delectus alias tempore quisquam reprehenderit ratione amet maiores provident magnam iure iusto! Quod ipsa, nihil vero commodi obcaecati eos odio adipisci, sint non, totam vel officia! Perspiciatis iste molestiae repudiandae labore quisquam reiciendis minima iusto est, temporibus dolorem sunt ipsum neque optio. Consequatur magni error distinctio accusantium dignissimos? Eaque delectus sit tenetur amet perferendis odit repellendus.
+      {/* 44444444 */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
+      {/* Card 1 */}
+      <div className="bg-green-100 rounded-lg shadow-md p-6 flex flex-col ">
+        <div className="text-sm text-green-600 font-bold">FRUITS</div>
+        <h2 className="text-4xl font-bold text-gray-800 pb-4 my-2">Healthy & Goods Fruits</h2>
+        <a  href="Product-all" className="bg-green-500 w-2/5  text-white px-4 py-2 rounded-lg hover:bg-green-600">
+          Shop Now →
+        </a>
+        <img
+          src="https://quomodosoft.com/html/ecoshop/assets/images/homepage-one/category-img/c-shop-img-1.webp"
+          alt="Fruits"
+          className="w-full h-auto mb-4"
+        />
         
       </div>
 
-      
+      {/* Card 2 */}
+      <div className="bg-pink-100 rounded-lg shadow-md p-6 flex flex-col">
+        
+        <img
+          src="https://quomodosoft.com/html/ecoshop/assets/images/homepage-one/category-img/c-shop-img-2.webp"
+          alt="Vegetable"
+          className="w-full h-auto mb-4"
+        />
+        <div className="text-sm text-red-600 font-bold">VEGETABLE</div>
+        <h2 className="text-4xl font-bold text-gray-800 my-2 pb-4">Frash & Goods Vegetable</h2>
+        <a href="Product-all" className="bg-red-500 w-2/5  text-white px-4 py-2 rounded-lg hover:bg-red-600">
+          Shop Now →
+        </a>
+      </div>
+
+      {/* Card 3 */}
+      <div className="bg-purple-100 rounded-lg shadow-md p-6 flex flex-col ">
+        <div className="text-sm text-purple-600 font-bold">JUICES</div>
+        <h2 className="text-2xl font-bold text-gray-800 pb-4 my-2">Best Fruits Juices</h2>
+        <a  href="Product-all" className="bg-purple-500 w-2/5  text-white px-4 py-2 rounded-lg hover:bg-purple-600">
+          Shop Now →
+        </a>  
+        <img
+          src="https://quomodosoft.com/html/ecoshop/assets/images/homepage-one/category-img/c-shop-img-3.webp"
+          alt="Juices"
+          className="w-full h-auto mb-4"
+        />
+        
+      </div>
+    </div>
+    </div>
   );
 };
 

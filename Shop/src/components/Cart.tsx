@@ -94,7 +94,7 @@ const Cart: React.FC = () => {
                 </div>
               </td>
               <td className="p-3  font-semibold w-40">
-                ${(item.price * item.quantity).toFixed(2)}
+                ${(item.price * item.quantity).toFixed(0)}
               </td>
               <td className="p-6 ">
                 <button

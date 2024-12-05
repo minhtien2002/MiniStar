@@ -216,6 +216,7 @@ export const Index = () => {
           <tbody className="bg-white divide-y divide-gray-200">
             {products.map((product) => (
               <tr key={product.productId}>
+              <tr key={product.productId}>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <img
                     src={"/src/assets/images/" + product.productImage}

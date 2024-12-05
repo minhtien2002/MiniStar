@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { FloatButton } from "antd";
 import { Switch } from "antd";
 import DashBoard from "./DashBoard";
+import DashBoard from "./DashBoard";
 
 function AdminPanel() {
+  const [title, setTitle] = useState("");
+  const onChangeTitle = (value: string) => {
+    setTitle(value);
+  };
+  console.log(title);
+
   const [title, setTitle] = useState("");
   const onChangeTitle = (value: string) => {
     setTitle(value);
@@ -23,10 +31,14 @@ function AdminPanel() {
     if (checked == false) {
       handelSetmodeDask();
     } else handelSetmodeLight();
+    } else handelSetmodeLight();
   };
   return (
     <div className="flex h-screen relative">
+    <div className="flex h-screen relative">
       {/* Thanh bên trái */}
+      <div className="bg-gray-800 w-1/5 text-white  p-4 fixed top-0 left-0 h-screen z-40">
+        <a href="/admin">
       <div className="bg-gray-800 w-1/5 text-white  p-4 fixed top-0 left-0 h-screen z-40">
         <a href="/admin">
           <div className="px-6 py-4 text-2xl font-bold">Admin Panel</div>
@@ -34,9 +46,15 @@ function AdminPanel() {
         <nav>
           <ul>
             <NavLink to="/admin" onClick={() => onChangeTitle("Dashboard")}>
+            <NavLink to="/admin" onClick={() => onChangeTitle("Dashboard")}>
               <li className="py-3 px-6 hover:bg-gray-700">
                 <span className="block">Dashboard</span>
               </li>
+            </NavLink>
+            <NavLink
+              to="/admin/Management/Product/Index"
+              onClick={() => onChangeTitle("Quản lý sản phẩm")}
+            >
             </NavLink>
             <NavLink
               to="/admin/Management/Product/Index"
@@ -51,10 +69,22 @@ function AdminPanel() {
                 className="py-3 px-6 hover:bg-gray-700"
                 onClick={() => onChangeTitle("Quản lý đơn hàng")}
               >
+            </NavLink>
+            <NavLink to="">
+              <li
+                className="py-3 px-6 hover:bg-gray-700"
+                onClick={() => onChangeTitle("Quản lý đơn hàng")}
+              >
                 <span className="block">Quản lý đơn hàng</span>
               </li>
             </NavLink>
+            </NavLink>
 
+            <NavLink to="">
+              <li
+                className="py-3 px-6 hover:bg-gray-700"
+                onClick={() => onChangeTitle("Quản lý khách hàng")}
+              >
             <NavLink to="">
               <li
                 className="py-3 px-6 hover:bg-gray-700"
@@ -68,8 +98,15 @@ function AdminPanel() {
                 className="py-3 px-6 hover:bg-gray-700"
                 onClick={() => onChangeTitle("Thống kê")}
               >
+            </NavLink>
+            <NavLink to="">
+              <li
+                className="py-3 px-6 hover:bg-gray-700"
+                onClick={() => onChangeTitle("Thống kê")}
+              >
                 <span className="block">Thống kê</span>
               </li>
+            </NavLink>
             </NavLink>
           </ul>
         </nav>
@@ -80,9 +117,14 @@ function AdminPanel() {
         <div className="bg-gray-100 rounded-md">
           <div className={mode}>
             <Outlet />
+      <div className="w-4/5 absolute right-0 top-14">
+        <div className="bg-gray-100 rounded-md">
+          <div className={mode}>
+            <Outlet />
           </div>
         </div>
       </div>
+
 
       <a href="/" title="Go Home">
         <FloatButton onClick={() => console.log("onClick")} />
