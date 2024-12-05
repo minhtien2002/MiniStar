@@ -14,9 +14,11 @@ const API_ENDPOINTS = {
   removeCartItem: (userId: number, cartItemId: number) =>`${API_BASE_URL}/cart/remove/${userId}/${cartItemId}`,
   clearCart: (userId: number) => `${API_BASE_URL}/Cart/clear/${userId}`,
   addToCart: (userId: number, productId: number, quantity: number) => `${API_BASE_URL}/Cart/add?userId=${userId}&productId=${productId}&quantity=${quantity}`,
-  createOrder: () => `${API_BASE_URL}/Order`,
-  getOrdersByBuyerId: (buyerId: number) => `/api/Order/${buyerId}`, 
-  updateOrderStatus: (orderId: number) => `/api/Order/${orderId}/status`, 
+  createOrder: `${API_BASE_URL}/Order`,
+  getOrdersByBuyerId: (buyerId) => `${API_BASE_URL}/Order/orders/${buyerId}`,
+  getOrderDetails: (orderId) => `${API_BASE_URL}/Order/${orderId}`,
+  checkout: (userId: number) => `${API_BASE_URL}/Order/checkout/${userId}`,
+
 
 
 

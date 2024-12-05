@@ -1,15 +1,21 @@
 // authUtils.ts
 import Cookies from 'js-cookie';
+import API_ENDPOINTS from "../apiConfig";
+
 
 // Hàm lấy userId từ cookie
 export const getUserId = (): string | null => {
-  const userId = Cookies.get('userId');  // Lấy userId từ cookie
-  if (!userId) {
-    throw new Error('UserId is not available in cookies');
-  }
-  return userId;
+  const userId = Cookies.get('userId'); 
+  return userId || null; 
 };
-const addToCart = async (productId: number, quantity: number) => {
+export const fetchCheckoutData = async (userId: string) => {
+  const response = await fetch(API_ENDPOINTS.checkout(userId));
+  if (!response.ok) {
+    throw new Error('Failed to fetch checkout data');
+  }
+  return await response.json();
+};
+export const addToCart = async (productId: number, quantity: number) => {
   try {
     const userId = getUserId(); // Lấy userId từ token hoặc context
     if (!userId) {
@@ -33,7 +39,7 @@ const addToCart = async (productId: number, quantity: number) => {
     console.error("Error adding product to cart:", error);
   }
 };
-const fetchOrders = async () => {
+export const fetchOrders = async () => {
     try {
         const userId = getUserId(); // Lấy userId từ token
         if (!userId) {

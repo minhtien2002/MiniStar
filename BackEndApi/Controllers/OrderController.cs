@@ -15,13 +15,25 @@ namespace BackEndApi.Controllers
             _orderService = orderService;
         }
 
-        [HttpGet("{buyerId}")]
+        [HttpGet("orders/{buyerId}")]
         public async Task<IActionResult> GetOrdersByBuyerId(int buyerId)
         {
             var orders = await _orderService.GetOrdersByBuyerIdAsync(buyerId);
             return Ok(orders);
         }
-
+        [HttpGet("{orderId}")]
+        public async Task<IActionResult> GetOrderDetails(int orderId)
+        {
+            try
+            {
+                var orderDetails = await _orderService.GetOrderDetailsByIdAsync(orderId);
+                return Ok(orderDetails);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(new { Message = ex.Message });
+            }
+        }
         [HttpPost]
         public async Task<IActionResult> CreateOrder(OrderCreateViewModel model)
         {
@@ -34,6 +46,14 @@ namespace BackEndApi.Controllers
             {
                 return BadRequest(ex.Message); 
             }
+        }
+        [HttpGet("checkout/{userId}")]
+        public async Task<IActionResult> GetCheckoutByUserId(int userId)
+        {
+            var checkoutData = await _orderService.GetCheckoutByUserIdAsync(userId);
+            if (checkoutData == null) return NotFound();
+
+            return Ok(checkoutData);
         }
 
 

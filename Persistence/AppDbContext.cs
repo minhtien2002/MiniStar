@@ -12,6 +12,11 @@ namespace Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Order>()
+       .HasOne(o => o.User) 
+       .WithMany() 
+       .HasForeignKey(o => o.BuyerId)
+       .OnDelete(DeleteBehavior.Restrict);
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new BrandConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());

@@ -11,6 +11,14 @@ import ProductDetail from "./components/ProductDetail";
 import { Checkorder } from "./components/Checkorder";
 import Login from "./components/Login";
 import { Register } from "./components/Register";
+import ProductManage from "./components/admin/Management/ProductManage";
+import { Index } from "./components/admin/Management/Product/Index";
+import { UserLayout } from "./components/UserManagerment/UserLayout";
+import { DashBoardUser } from "./components/UserManagerment/InforUser/DashBoardUser";
+import { Information } from "./components/UserManagerment/InforUser/Information";
+import { Address } from "./components/UserManagerment/InforUser/Address";
+import ChangePassword from "./components/UserManagerment/InforUser/ChangePassword";
+import { UserOrder } from "./components/UserManagerment/InforUser/UserOrder";
 
 
 export function RouteConfig() {
@@ -25,9 +33,20 @@ export function RouteConfig() {
                 <Route path="cart" element={<Cart />} />
                 <Route path="checkout" element={<Checkout />} />
                 <Route path="product-detail" element={<ProductDetail/>}/>
-                <Route path="checkorder" element={<Checkorder/>}/>
+                <Route path="checkorder/:orderId" element={<Checkorder/>}/>
                 <Route path="register" element={<Register/>}/>
+                <Route path="UserManagerment" element={<UserLayout />}>
+          <Route index element={<DashBoardUser />} />
+          <Route path="InfoUser" element={<DashBoardUser />} />
+          <Route path="Information" element={<Information />} /> 
+          <Route path="Address" element={<Address />} /> 
+          <Route path="ChangePassword" element={<ChangePassword />} /> 
+          <Route path="UserOrder" element={<UserOrder />} /> 
+         
+        </Route>
+        <Route index element={<DashBoardUser />} />
             </Route>
+
             <Route path="admin" element={<AdminPage />}>
                     <Route index element={<DashBoard />} />
             </Route>

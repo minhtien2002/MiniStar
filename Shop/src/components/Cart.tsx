@@ -142,34 +142,6 @@ const clearCart = async () => {
     console.error('Error clearing cart:', error);
   }
 };
-const createOrder = async () => {
-    try {
-        const userId = getUserId(); // Lấy userId từ token
-        if (!userId) {
-            console.error("User not logged in");
-            return;
-        }
-
-        const response = await fetch(API_ENDPOINTS.createOrder(), {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ buyerId: userId }),
-        });
-
-        if (response.ok) {
-            const result = await response.json();
-            console.log("Order created successfully:", result);
-        } else {
-            const errorText = await response.text();
-            console.error("Failed to create order:", response.status, errorText);
-        }
-    } catch (error) {
-        console.error("Error creating order:", error);
-    }
-};
-
   return (
   <div className="p-4 m-6">
     <table className="w-full text-left">
@@ -261,8 +233,7 @@ const createOrder = async () => {
         Clear Cart
       </button>
       <div className="flex space-x-4">
-        <button className="px-4 py-2 bg-gray-300 rounded">Update Cart</button>
-        <button onClick={createOrder}  className="px-4 py-2 bg-green-500 text-white rounded">Proceed to Checkout</button>
+        <a href="/Checkout" className="px-4 py-2 bg-green-500 text-white rounded">Proceed to Checkout</a>
 
         
       </div>

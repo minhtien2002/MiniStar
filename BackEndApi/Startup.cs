@@ -29,7 +29,7 @@ namespace BackEndApi
                 .AllowAnyOrigin();
             }));
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection2")));
 
             services.AddScoped<IGenericRepository<Product>, GenericRepository<Product>>();
             services.AddScoped<IGenericRepository<Brand>, GenericRepository<Brand>>();
