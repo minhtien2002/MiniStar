@@ -1,37 +1,69 @@
-import { useState } from "react";
-const Checkout = () => {
-  const [isChecked, setIsChecked] = useState(false);
+import React, { useState, useEffect } from 'react';
+import { fetchCheckoutData } from './authUtils';
+import { getUserId } from './authUtils'
+import API_ENDPOINTS from "../apiConfig";
 
+const Checkout = () => {
+  const [selectedAddressId, setSelectedAddressId] = useState(null);
+  const [checkoutData, setCheckoutData] = useState(null);
+  const userId = getUserId();
+  const [isChecked, setIsChecked] = useState(false);
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked); // Cập nhật state
   };
 
+ useEffect(() => {
+    const loadCheckoutData = async () => {
+      try {
+        const data = await fetchCheckoutData(userId);
+        setCheckoutData(data);
+      } catch (error) {
+        console.error('Failed to load checkout data:', error);
+      }
+    };
+
+    loadCheckoutData();
+  }, [userId]);
   const showAlert = () => {
     alert('Order Success... Press "OK" to return home   ');
   };
+ if (!checkoutData) {
+    return <div>Loading...</div>;
+  }
+ const handleCreateOrder = async () => {
+    if (!selectedAddressId) {
+      alert('Please select an address for delivery!');
+      return;
+    }
 
-  const [form, setForm] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    address: "",
-    city: "",
-    district: "",
-    ward: "",
-    // confirmInformatinon: false,
-    paymentMethod: "",
-  });
+    try {
+      const response = await fetch(API_ENDPOINTS.createOrder, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          buyerId: userId,
+          addressId: selectedAddressId,
+        }),
+      });
 
-  const handleInputChange = (event: {
-    target: { name: any; value: any; type: any; checked: any };
-  }) => {
-    const { name, value } = event.target;
-    setForm((prevForm) => ({
-      ...prevForm,
-      [name]: value,
-    }));
+      if (!response.ok) {
+        console.log(userId);
+        console.log(selectedAddressId);
+        throw new Error('Failed to create order');
+      }
+
+      const data = await response.json();
+      alert('Order created successfully!');
+      console.log('Order details:', data);
+
+      // Optionally, redirect to order confirmation page or reset the cart
+    } catch (error) {
+      console.error('Error creating order:', error);
+      alert('Failed to create order. Please try again.');
+    }
   };
-
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6 py-9">
       {/* Billing Details Form */}
@@ -40,13 +72,13 @@ const Checkout = () => {
         <form className="space-y-4">
           <div className=" gap-4 pb-4">
             <div>
-              <label className="block font-semibold">Full Name*</label>
+              <label className="block font-semibold">Full Name</label>
               <input disabled
                 type="text"
                 name="fullName"
                 value=
-                "Lê Khắc Vượng"
-                onChange={handleInputChange}
+                {checkoutData.fullName}
+                
                 className="w-full p-2 border border-gray-300 rounded"
 
               />
@@ -54,55 +86,47 @@ const Checkout = () => {
           </div>
           <div className="grid grid-cols-2 pb-4 gap-4">
             <div>
-              <label className="block font-semibold">Email*</label>
+              <label className="block font-semibold">Email</label>
               <input
               disabled
                 type="email"
                 name="email"
-                value="YourEmail@mail.com"
-                onChange={handleInputChange}
+                value={checkoutData.email}
+                
                 className="w-full p-2 border border-gray-300 rounded"
                
               />
             </div>
             <div>
-              <label className="block font-semibold">Phone*</label>
+              <label className="block font-semibold">Phone Number</label>
               <input
               disabled
                 type="text"
                 name="phone"
-                value="03776669999"
-                onChange={handleInputChange}
+                value={checkoutData.phoneNumber}
+                
                 className="w-full p-2 border border-gray-300 rounded"
                 placeholder="+880388**0899"
               />
             </div>
-          </div>
+          </div> 
           <div className="pb-4">
             <label className="block font-semibold">Address*</label>
-            {/* <input
-              type="text"
-              name="address"
-              value={form.address}
-              onChange={handleInputChange}
-              className="w-full p-2 border border-gray-300 rounded"
-              placeholder="Enter your Address"
-            /> */}
               <select
-                name="Address"
-                // value={form.ward}
-
-                className="w-full p-2 border border-gray-300 rounded"
-              >
-                <option disabled selected hidden value="">
-                  Choose...
-                </option>
-                <option value="">P. Tân Hưng</option>
-                <option value="">Phường 13</option>
-                <option value="">P. Nguyễn Thái Bình</option>
-                {/* Add more  District*/}
-              </select>
-          </div>
+  name="Address"
+  className="w-full p-2 border border-gray-300 rounded"
+  onChange={(e) => setSelectedAddressId(e.target.value)} // Thêm onChange tại đây
+>
+  <option disabled selected hidden value="">
+    Choose...
+  </option>
+  {checkoutData.addresses.map((address) => (
+    <option value={address.addressId} key={address.addressId}>
+      {address.street}, {address.city}, {address.state} ({address.addressType})
+    </option>
+  ))}
+</select>
+          </div> 
           <div className="grid grid-cols-3 gap-4">
             
 
@@ -129,30 +153,21 @@ const Checkout = () => {
       <div className="bg-white p-6 rounded shadow">
         <h2 className="text-xl font-bold mb-4">Order Summary</h2>
         <div className="space-y-2">
+          
+           {checkoutData.cartItems.map((item) => (
           <div className="flex justify-between">
-            <div className="">
-              Apple Watch <span className="font-bold text-red-500">x1</span>
+            <div className=""key={item.cartItemId}>
+              {item.productName}
+              <span className="font-bold text-red-500"> x{item.quantity}</span>
             </div>
-            <span>$38</span>
+            <span>{(item.price*item.quantity).toFixed(3)}</span>
           </div>
-          <div className="flex justify-between">
-            <div className="">
-              Beats Wireless <span className="font-bold text-red-500">x1</span>{" "}
-            </div>
-            <span>$48</span>
-          </div>
-          <div className="flex justify-between">
-            <div className="">
-              Samsung Galaxy S10{" "}
-              <span className="font-bold text-red-500">x2</span>
-            </div>
-            <span>$279</span>
-          </div>
+            ))}
         </div>
         <div className="border-t mt-4 pt-4 space-y-2">
           <div className="flex justify-between">
             <span className="font-bold">Subtotal</span>
-            <span className="font-bold">$365</span>
+            <span className="font-bold">{(checkoutData.totalAmount).toFixed(3)}</span>
           </div>
           <div className="flex justify-between">
             <span>Shipping</span>
@@ -162,7 +177,7 @@ const Checkout = () => {
         <div className="border-t mt-4 pt-4">
           <div className="flex justify-between text-lg font-bold">
             <span>Total</span>
-            <span>$365</span>
+            <span>{(checkoutData.totalAmount).toFixed(3)}</span>
           </div>
         </div>
 
@@ -174,7 +189,7 @@ const Checkout = () => {
               name="paymentMethod"
               id="bankTransfer"
               value="bankTransfer"
-              onChange={handleInputChange}
+              
               className="mr-2"
             />
             <label htmlFor="bankTransfer">Direct Bank Transfer</label>
@@ -185,7 +200,7 @@ const Checkout = () => {
               name="paymentMethod"
               id="cashOnDelivery"
               value="cashOnDelivery"
-              onChange={handleInputChange}
+              
               className="mr-2"
             />
             <label htmlFor="cashOnDelivery">Cash on Delivery</label>
@@ -196,17 +211,16 @@ const Checkout = () => {
               name="paymentMethod"
               id="creditCard"
               value="creditCard"
-              onChange={handleInputChange}
+              
               className="mr-2"
             />
             <label htmlFor="creditCard">Credit/Debit Cards or Paypal</label>
           </div>
         </div>
 
-        <a href="/">
+        <a>
           <button
-            onClick={showAlert}
-            disabled={!isChecked}
+          onClick={handleCreateOrder}
             className="mt-6 w-full bg-green-500 text-white py-2 rounded  hover:bg-green-700"
           >
             Place Order Now

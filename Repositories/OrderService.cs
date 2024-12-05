@@ -31,37 +31,155 @@ namespace Repositories
                 })
                 .ToListAsync();
         }
+        public async Task<OrderDetailsViewModel> GetOrderDetailsByIdAsync(int orderId)
+        {
+            var order = await _context.Orders
+         .Include(o => o.OrderItems)
+         .ThenInclude(oi => oi.Product)  
+         .Include(o => o.Address)
+         .Include(o => o.User)
+         .FirstOrDefaultAsync(o => o.OrderId == orderId);
+
+            if (order == null)
+            {
+                throw new InvalidOperationException("Order not found.");
+            }
+
+            return new OrderDetailsViewModel
+            {
+                OrderId = order.OrderId,
+                BuyerName = $"{order.User.FullName}",
+                PhoneNumber = order.User.PhoneNumber,
+                ShippingAddress = $"{order.Address.Street}, {order.Address.City}, {order.Address.State}",
+                TotalAmount = order.TotalAmount,
+                PaymentMethod = "Cash On Delivery (COD)",
+                CreatedAt = order.CreatedAt,
+                OrderStatus = order.OrderStatus,
+                OrderItems = order.OrderItems.Select(oi => new OrderItemDetailsViewModel
+                {
+                    ProductName = oi.Product.ProductName,  
+                    Quantity = oi.Quantity,
+                    Price = oi.Price
+                }).ToList()
+            
+
+        };
+        }
+        public async Task<CheckoutViewModel> GetCheckoutByUserIdAsync(int userId)
+        {
+            // Lấy thông tin người dùng
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.UserId == userId);
+
+            if (user == null) return null;
+
+            // Lấy danh sách địa chỉ của người dùng
+            var addresses = await _context.Addresses
+                .Where(a => a.UserId == userId)
+                .ToListAsync();
+
+            // Lấy thông tin giỏ hàng
+            var cart = await _context.Carts
+                .Include(c => c.CartItems)
+                    .ThenInclude(ci => ci.Product)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if (cart == null) return null;
+
+            // Tính tổng giá tiền
+            var totalAmount = cart.CartItems
+                .Where(item => item.IsActive)
+                .Sum(item => item.Quantity * item.Price);
+
+            return new CheckoutViewModel
+            {
+                UserId = user.UserId,
+                FullName = user.FullName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                Addresses = addresses.Select(addr => new AddressViewModel
+                {
+                    AddressId = addr.AddressId,
+                    Street = addr.Street,
+                    City = addr.City,
+                    State = addr.State,
+                    AddressType = addr.AddressType
+                }).ToList(),
+                CartItems = cart.CartItems
+                    .Where(item => item.IsActive)
+                    .Select(item => new CartItemViewModel
+                    {
+                        Price = item.Price,
+                        CartItemId = item.CartItemId,
+                        ProductId = item.ProductId,
+                        Quantity = item.Quantity,
+                        ProductName = item.Product.ProductName,
+                        ProductImage = item.Product.ProductImage
+                    }).ToList(),
+                TotalAmount = totalAmount
+            };
+        }
 
         public async Task<OrderViewModel> CreateOrderAsync(OrderCreateViewModel model)
         {
+            // Kiểm tra xem địa chỉ có tồn tại không
+            var address = await _context.Addresses.FirstOrDefaultAsync(a => a.AddressId == model.AddressId && a.UserId == model.BuyerId);
+            if (address == null)
+            {
+                throw new InvalidOperationException("Invalid address for the user.");
+            }
+
+            // Lấy danh sách các CartItem của người dùng
+            var cartItems = await _context.CartItems
+                .Where(ci => ci.Cart.UserId == model.BuyerId && ci.IsActive)
+                .ToListAsync();
+
+            if (cartItems == null || !cartItems.Any())
+            {
+                throw new InvalidOperationException("No active cart items found for this user.");
+            }
+
+            // Tạo đơn hàng
             var order = new Order
             {
                 BuyerId = model.BuyerId,
+                AddressId = model.AddressId, // Gắn AddressId vào đơn hàng
                 OrderStatus = "pending",
-                TotalAmount = model.TotalAmount,
+                TotalAmount = cartItems.Sum(ci => ci.Price * ci.Quantity), // Tổng tiền từ giỏ hàng
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
-                OrderItems = model.OrderItems.Select(oi => new OrderItem
+                OrderItems = cartItems.Select(ci => new OrderItem
                 {
-                    ProductId = oi.ProductId,
-                    Quantity = oi.Quantity,
-                    Price = oi.Price
+                    ProductId = ci.ProductId,
+                    Quantity = ci.Quantity,
+                    Price = ci.Price
                 }).ToList()
             };
 
             _context.Orders.Add(order);
+
+            // Đánh dấu các mục trong giỏ hàng là không hoạt động
+            foreach (var cartItem in cartItems)
+            {
+                cartItem.IsActive = false;
+            }
+
+            // Lưu thay đổi
             await _context.SaveChangesAsync();
 
             return new OrderViewModel
             {
                 OrderId = order.OrderId,
                 BuyerId = order.BuyerId,
+                AddressId = order.AddressId, // Trả về AddressId
                 OrderStatus = order.OrderStatus,
                 TotalAmount = order.TotalAmount,
                 CreatedAt = order.CreatedAt,
                 UpdatedAt = order.UpdatedAt
             };
         }
+
+
 
         public async Task<bool> UpdateOrderStatusAsync(int orderId, string status)
         {

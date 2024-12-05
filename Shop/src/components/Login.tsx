@@ -35,7 +35,9 @@ const Login: React.FC = () => {
             setError(''); // Xóa thông báo lỗi nếu đăng nhập thành công
 
             // Lưu token vào cookie
-            Cookies.set('token', data.token, { expires: 7, secure: true }); // Lưu cookie có thời hạn 7 ngày
+            Cookies.set('token', data.token, { expires: 7, secure: true });
+            Cookies.set('userId', data.userId, { expires: 7, secure: true });
+             // Lưu cookie có thời hạn 7 ngày
 
             // Chuyển hướng về trang chủ sau khi đăng nhập thành công
             window.location.href = '/'; // Hoặc sử dụng React Router để chuyển hướng

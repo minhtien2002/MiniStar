@@ -1,79 +1,166 @@
-import React, { useState } from "react";
+import { Button, Drawer } from "antd";
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import  API_ENDPOINTS  from '../apiConfig';
 
 export const Checkorder = () => {
-  const [isModalOpen, setIsModalOpen] = useState("hidden");
-  const handleOnModal = () => {
-    setIsModalOpen("block absolute w-full top-3 bg-gray-50");
-  };
-  const handleOffModal = () => {
-    setIsModalOpen("hidden");
+  const [open, setOpen] = useState(false);
+  const { orderId } = useParams();
+  const [orderDetails, setOrderDetails] = useState(null);
+
+  const showDrawer = () => {
+    setOpen(true);
   };
 
-  const orderInfo = {
-    orderId: "123456789",
-    customerName: "Hoàng Tuấn Anh",
-    phoneNumber: "03366676757",
-    address: "169 Đường số 15, Tân quy, Quận 7, TP. HCM",
-    totalPrice: "$157",
-    paymentMethod: "Cash On Delivery (COD)",
+  const onClose = () => {
+    setOpen(false);
   };
-  const timeline = [
-    { time: "07:12", date: "12/10/2024", status: "Đặt hàng thành công" },
-    { time: "17:12", date: "12/10/2024", status: "Đang giao hàng" },
-    { time: "21:50", date: "13/10/2024", status: "Giao hàng thành công" },
-  ];
+
+   useEffect(() => {
+    const fetchOrderDetails = async () => {
+      try {
+        const response = await fetch(API_ENDPOINTS.getOrderDetails(orderId));
+        if (!response.ok) throw new Error('Failed to fetch order details');
+        const data = await response.json();
+        setOrderDetails(data);
+      } catch (error) {
+        console.error('Error fetching order details:', error);
+      }
+    };
+
+    fetchOrderDetails();
+  }, [orderId]);
+
+  if (!orderDetails) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className=" bg-gray-50 w-10/12 m-auto relative ">
-      <div className=" px-8 pt-5 flex  flex-col">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">
-          Track Your Order
-        </h1>
-        <p className="text-gray-500 mb-5">
-          Enter your order tracking number and your secret id.
-        </p>
-      </div>
-
-      <div className="  w-full mx-auto flex  px-8 pb-8">
+    <div className=" bg-gray-50 w-10/12 m-auto relative pb-60">
+     <div>
+    
+     <div className="  w-full mx-auto flex  px-8 pb-8">
         {/* Left Section: Title and Form */}
         <div className="w-full flex bg-white p-8 rounded-lg shadow-lg  ">
-          <div className="w-2/3 ">
-            <div className="mb-6">
-              <label
-                htmlFor="orderNumber"
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
-                Order Tracking Number**
-              </label>
-              <input
-                type="number"
-                id="orderNumber"
-                placeholder="Order Number"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
-              />
-            </div>
 
-            <div className="mb-6">
-              <label
-                htmlFor="deliveryDate"
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
-                Delivery Date*
-              </label>
-              <div className="relative">
-                <input
-                  type="date"
-                  id="deliveryDate"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
-                />
-                <div className="absolute right-3 top-3"></div>
+        </div>
+
+        {/* Right Section: Image */}
+      </div>
+      {/* //Detailorder */}
+      <div className="block absolute w-full top-3 bg-gray-50">
+        <div className="flex p-10 border  w-full  border-gray-300 rounded-md ">
+          {/* Order Info */}
+          <div>
+            <div className="w-2/3">
+              <p>
+                <strong>Id đơn hàng:</strong> {orderDetails.orderId}              </p>
+              <p>
+                <strong>Tên khách hàng:</strong> {orderDetails.buyerName}
+              </p>
+              <p>
+                <strong>Phone Number:</strong> {orderDetails.phoneNumber}
+              </p>
+              <p>
+                <strong>Địa chỉ nhận hàng:</strong> {orderDetails.shippingAddress}
+              </p>
+              <p>
+                <strong>Tổng Tiền:</strong> {orderDetails.totalAmount.toFixed(3)}
+              </p>
+              <p>
+                <strong>Phương thức thanh toán:</strong>{" "}
+                {orderDetails.paymentMethod}
+              </p>
+            </div>
+            <br />{" "}
+            <div>
+              <Button className="" type="primary" onClick={showDrawer}>
+                Xem đơn hàng đã đặt
+              </Button>
+              <div>
+                <Drawer
+                  width={600}
+                  title="Đơn hàng đã đặt"
+                  onClose={onClose}
+                  open={open}
+                >
+                  <table className="min-w-full mt-4">
+                    <thead>
+                      <tr>
+                        <th className="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                          Tên sản phẩm
+                        </th>
+                        <th className="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                          Số Lượng
+                        </th>
+                        <th className="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                          Đơn Giá
+                        </th>
+                      </tr>
+                    </thead>
+<tbody className="bg-white divide-y divide-gray-200">
+{orderDetails.orderItems.map((item, index) => (
+                      <tr  key={index}>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          {item.productName}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          {item.quantity}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          {item.price.toFixed(3)}
+                        </td>
+                      </tr>
+                       ))}
+                    </tbody>
+
+                  </table>
+                </Drawer>
               </div>
             </div>
-
-            <button onClick={handleOnModal} className="w-full p-6  bg-green-500 hover:bg-green-600 text-white py-2 rounded-md font-semibold ">
-              Track Now
-            </button>
           </div>
-          <div className=" flex justify-center items-center pb-5 ">
+
+          {/* Timeline */}
+          <div className="w-1/2 border-l-2 border-gray-300 pl-6">
+           {/* Status: Pending */}
+  <div className={`flex items-center mb-6 ${orderDetails.orderStatus === "pending" || orderDetails.orderStatus === "completed" || orderDetails.orderStatus === "shipped" ? '' : 'opacity-50'}`}>
+    <div className="ml-4">
+      <p className="text-sm font-semibold">Pending</p>
+      <p className="text-sm">{new Date(orderDetails.createdAt).toLocaleTimeString()} Ngày {new Date(orderDetails.createdAt).toLocaleDateString()}</p>
+      <p className="text-sm">Status: Pending</p>
+    </div>
+  </div>
+                <div className={`flex items-center mb-6 ${["completed", "shipped"].includes(orderDetails.orderStatus) ? '' : 'opacity-50'}`}>
+    <div className="ml-4">
+      <p className="text-sm font-semibold">Completed</p>
+      <p className="text-sm">
+        {orderDetails.orderStatus === "completed" || orderDetails.orderStatus === "shipped" 
+          ? (orderDetails.updatedAt 
+              ? `${new Date(orderDetails.updatedAt).toLocaleTimeString()} Ngày ${new Date(orderDetails.updatedAt).toLocaleDateString()}`
+              : "Date not available") 
+          : "Date pending..."}
+      </p>
+      <p className="text-sm">Status: {orderDetails.orderStatus === "completed" || orderDetails.orderStatus === "shipped" ? "Completed" : "Not yet completed"}</p>
+    </div>
+  </div>
+                 {/* Status: Shipped */}
+  <div className={`flex items-center mb-6 ${orderDetails.orderStatus === "shipped" ? '' : 'opacity-50'}`}>
+    <div className="ml-4">
+      <p className="text-sm font-semibold">Shipped</p>
+      <p className="text-sm">
+        {orderDetails.orderStatus === "shipped" 
+          ? (orderDetails.updatedAt 
+              ? `${new Date(orderDetails.updatedAt).toLocaleTimeString()} Ngày ${new Date(orderDetails.updatedAt).toLocaleDateString()}`
+              : "Date not available") 
+          : "Date pending..."}
+      </p>
+      <p className="text-sm">Status: {orderDetails.orderStatus === "shipped" ? "Shipped" : "Not yet shipped"}</p>
+    </div>
+  </div>
+
+           
+          </div>
+          <div className=" flex justify-center items-center pb-5 border-l-0 ">
             <img
               src="https://quomodosoft.com/html/ecoshop/assets/images/homepage-one/order.png"
               alt="Delivery Truck"
@@ -81,61 +168,9 @@ export const Checkorder = () => {
             />
           </div>
         </div>
-
-        {/* Right Section: Image */}
       </div>
-      {/* //Detailorder */}
-      <div className={isModalOpen}>
-     
-        <div className="flex p-10 border  w-full  border-gray-300 rounded-md ">
-          {/* Order Info */}
-          <div className="w-2/3">
-            <p>
-              <strong>Id đơn hàng:</strong> {orderInfo.orderId}
-            </p>
-            <p>
-              <strong>Tên khách hàng:</strong> {orderInfo.customerName}
-            </p>
-            <p>
-              <strong>Phone Number:</strong> {orderInfo.phoneNumber}
-            </p>
-            <p>
-              <strong>Địa chỉ nhận hàng:</strong> {orderInfo.address}
-            </p>
-            <p>
-              <strong>Tổng Tiền:</strong> {orderInfo.totalPrice}
-            </p>
-            <p>
-              <strong>Phương thức thanh toán:</strong> {orderInfo.paymentMethod}
-            </p>
-          </div>
-
-          {/* Timeline */}
-          <div className="w-1/2 border-l-2 border-gray-300 pl-6">
-            {timeline.map((event, index) => (
-              <div key={index} className="flex items-center mb-6">
-                <div className="w-6 h-6 border-2 border-gray-400 rounded-full flex items-center justify-center">
-                  <div
-                    className={`w-3 h-3 ${
-                      index === timeline.length - 1
-                        ? "bg-green-500"
-                        : "bg-gray-400"
-                    } rounded-full`}
-                  ></div>
-                </div>
-                <div className="ml-4">
-                  <p className="text-sm font-semibold">{event.time}</p>
-                  <p className="text-sm">{event.date}</p>
-                  <p className="text-sm">{event.status}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <button onClick={handleOffModal}  className="w-full p-6  bg-red-500 hover:bg-red-400 text-white py-2 rounded-md font-semibold ">
-              Close 
-            </button>
-      </div>
+     </div>
+      
       {/* enddetail */}
     </div>
   );

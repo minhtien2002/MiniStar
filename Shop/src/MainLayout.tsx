@@ -16,12 +16,15 @@ const MainLayout: React.FC = () => {
     const handleLogout = () => {
         // Xóa cookie và cập nhật trạng thái
         Cookies.remove('token');
+        Cookies.remove('userId');
         setIsLoggedIn(false);
         alert('Logged out successfully!');
+        window.location.reload();
+
     };
 
   return (
-    <div id="wrapper" className="bg-white font-myfont">
+    <div id="wrapper" className="bg-white font-myfont ">
       <div>
         {/* header */}
 
@@ -33,7 +36,7 @@ const MainLayout: React.FC = () => {
                   <a href="#">Account</a>
                 </li>
                 <li className="cursor-pointer  hover:text-red-600">
-                  <a href="checkorder">Track Order</a>
+                  <a href="/checkorder">Track Order</a>
                 </li>
                 <li className="cursor-pointer  hover:text-red-600">
                   <a href="#">Support</a>
@@ -135,8 +138,8 @@ const MainLayout: React.FC = () => {
                   </span>
                 </a>
               </li>
-              <li>
-                <a href="/UserManagerment">
+               <li>
+                <a href="/UserManagerment/UserManagerment">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="26px"
@@ -229,6 +232,7 @@ const MainLayout: React.FC = () => {
                       </li>
                     </ul>
                   </a>
+                  <a href="/Checkout" className="hover:text-gray-200 font-semibold">
                   <a href="AboutUs" className="hover:text-gray-200 font-semibold">
                     About
                   </a>

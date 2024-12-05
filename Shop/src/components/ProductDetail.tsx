@@ -1,6 +1,7 @@
 import { Card } from "antd";
 import Item from "antd/es/list/Item";
 import { useState } from "react";
+
 const ProductDetail = () => {
   const [count, setCount] = useState(1);
   const handleSetcountUp = () => {
@@ -143,14 +144,14 @@ const ProductDetail = () => {
             </div>
 
             {/* Add to Cart */}
-            <button className="bg-green-500 text-white px-6 py-3 rounded-md flex items-center hover:bg-green-700">
-              + Add to Cart
-            </button>
+              <button className="bg-green-500 text-white px-6 py-3 rounded-md flex items-center hover:bg-green-700">
+                + Add to Cart
+              </button>
 
-            {/* Wishlist Button */}
-            <button className="bg-gray-200 text-xl text-gray-500 px-4 py-2 rounded-md hover:bg-gray-500 hover:text-gray-200">
-              ♥
-            </button>
+              {/* Wishlist Button */}
+              <button className="bg-gray-200 text-xl text-gray-500 px-4 py-2 rounded-md hover:bg-gray-500 hover:text-gray-200">
+                ♥
+              </button>
           </div>
 
           {/* Category and Tags */}
