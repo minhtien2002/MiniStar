@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class initdataBase : Migration
+    public partial class initdata : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,8 +20,8 @@ namespace Persistence.Migrations
                     BrandId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BrandName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 12, 5, 21, 40, 45, 726, DateTimeKind.Local).AddTicks(6309)),
-                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 12, 5, 21, 40, 45, 726, DateTimeKind.Local).AddTicks(6618)),
+                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 12, 5, 21, 55, 31, 664, DateTimeKind.Local).AddTicks(2412)),
+                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 12, 5, 21, 55, 31, 664, DateTimeKind.Local).AddTicks(2725)),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
@@ -49,8 +49,8 @@ namespace Persistence.Migrations
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CategoryName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 12, 5, 21, 40, 45, 726, DateTimeKind.Local).AddTicks(8429)),
-                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 12, 5, 21, 40, 45, 726, DateTimeKind.Local).AddTicks(9219)),
+                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 12, 5, 21, 55, 31, 664, DateTimeKind.Local).AddTicks(3829)),
+                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 12, 5, 21, 55, 31, 664, DateTimeKind.Local).AddTicks(4111)),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
@@ -82,8 +82,8 @@ namespace Persistence.Migrations
                     Price = table.Column<decimal>(type: "decimal(18,2)", maxLength: 20, nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     ProductImage = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 12, 5, 21, 40, 45, 726, DateTimeKind.Local).AddTicks(1866)),
-                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 12, 5, 21, 40, 45, 726, DateTimeKind.Local).AddTicks(2198)),
+                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 12, 5, 21, 55, 31, 663, DateTimeKind.Local).AddTicks(7548)),
+                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 12, 5, 21, 55, 31, 663, DateTimeKind.Local).AddTicks(7881)),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     BrandId = table.Column<int>(type: "int", nullable: true)
@@ -251,11 +251,11 @@ namespace Persistence.Migrations
                 columns: new[] { "BrandId", "BrandName", "CreateAt", "IsDeleted", "UpdateAt" },
                 values: new object[,]
                 {
-                    { 1, "Vượng CP", new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1800), true, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1801) },
-                    { 2, "TONY Fruit", new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1812), true, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1813) },
-                    { 3, "NYTO Fresh", new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1814), true, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1814) },
-                    { 4, "Lavie", new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1815), true, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1816) },
-                    { 5, "OneOne", new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1817), true, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1817) }
+                    { 1, "Vượng CP", new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5818), true, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5819) },
+                    { 2, "TONY Fruit", new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5821), true, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5821) },
+                    { 3, "NYTO Fresh", new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5822), true, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5823) },
+                    { 4, "Lavie", new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5824), true, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5824) },
+                    { 5, "OneOne", new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5825), true, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5826) }
                 });
 
             migrationBuilder.InsertData(
@@ -263,11 +263,11 @@ namespace Persistence.Migrations
                 columns: new[] { "CategoryId", "CategoryName", "CreateAt", "IsDeleted", "UpdateAt" },
                 values: new object[,]
                 {
-                    { 1, "Thịt heo", new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1647), true, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1650) },
-                    { 2, "Hoa quả", new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1651), true, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1652) },
-                    { 3, "Rau củ", new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1653), true, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1654) },
-                    { 4, "Nước giải khát", new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1655), true, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1655) },
-                    { 5, "Đồ ăn vặt", new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1656), true, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1657) }
+                    { 1, "Thịt heo", new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5671), true, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5674) },
+                    { 2, "Hoa quả", new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5676), true, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5676) },
+                    { 3, "Rau củ", new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5677), true, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5678) },
+                    { 4, "Nước giải khát", new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5679), true, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5679) },
+                    { 5, "Đồ ăn vặt", new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5680), true, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5681) }
                 });
 
             migrationBuilder.InsertData(
@@ -285,11 +285,11 @@ namespace Persistence.Migrations
                 columns: new[] { "ProductId", "BrandId", "CategoryId", "CreateAt", "Description", "IsDeleted", "Price", "ProductImage", "ProductName", "Quantity", "UpdateAt" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1843), "null", false, 39m, "xuongheo", "Xương heo có thịt", 100, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1844) },
-                    { 2, 2, 2, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1847), "null", false, 31m, "camsanh", "Cam sành", 300, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1848) },
-                    { 3, 3, 3, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1850), "null", false, 8m, "rauden", "Rau dền", 50, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1850) },
-                    { 4, 4, 4, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1852), "null", false, 6m, "lavie", "Nước khoáng Lavie", 200, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1853) },
-                    { 5, 5, 5, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1855), "null", false, 10m, "banhgao", "Bánh gạo OneOne", 70, new DateTime(2024, 12, 5, 21, 40, 45, 728, DateTimeKind.Local).AddTicks(1855) }
+                    { 1, 1, 1, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5852), "null", false, 39m, "xuongheo.png", "Xương heo có thịt", 100, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5852) },
+                    { 2, 2, 2, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5859), "null", false, 31m, "camsanh.png", "Cam sành", 300, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5859) },
+                    { 3, 3, 3, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5861), "null", false, 8m, "rauden.png", "Rau dền", 50, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5862) },
+                    { 4, 4, 4, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5864), "null", false, 6m, "lavie.png", "Nước khoáng Lavie", 200, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5864) },
+                    { 5, 5, 5, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5866), "null", false, 10m, "banhgao.png", "Bánh gạo OneOne", 70, new DateTime(2024, 12, 5, 21, 55, 31, 665, DateTimeKind.Local).AddTicks(5867) }
                 });
 
             migrationBuilder.CreateIndex(

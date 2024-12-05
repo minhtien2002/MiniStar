@@ -139,7 +139,7 @@ const MainLayout: React.FC = () => {
                 </a>
               </li>
                <li>
-                <a href="/UserManagerment/UserManagerment">
+                <a href="/UserManagerment">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="26px"
@@ -203,7 +203,7 @@ const MainLayout: React.FC = () => {
                     Home
                   </a>
                   <a
-                    href="product-all"
+                    href="/product-all"
                     className="hover:text-gray-200 font-semibold relative group"
                   >Shop+</a>
                   <a
