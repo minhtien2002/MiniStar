@@ -32,24 +32,20 @@ export function RouteConfig() {
         <Route path="cart" element={<Cart />} />
         <Route path="checkout" element={<Checkout />} />
         <Route path="product-detail" element={<ProductDetail />} />
-        <Route path="checkorder" element={<Checkorder />} />
+        <Route path="checkorder/:orderId" element={<Checkorder />} />
         <Route path="register" element={<Register />} />
         <Route path="Contact" element={<Contact />} />
         <Route path="AboutUs" element={<AboutUs />} />
         <Route path="Bloger" element={<Blog />} />
-
         <Route path="UserManagerment" element={<UserLayout />}>
           <Route index element={<DashBoardUser />} />
           <Route path="InfoUser" element={<DashBoardUser />} />
-          <Route path="Information" element={<Information />} /> 
-          <Route path="Address" element={<Address />} /> 
-          <Route path="ChangePassword" element={<ChangePassword />} /> 
-          <Route path="UserOrder" element={<UserOrder />} /> 
-         
+          <Route path="Information" element={<Information />} />
+          <Route path="Address" element={<Address />} />
+          <Route path="ChangePassword" element={<ChangePassword />} />
+          <Route path="UserOrder" element={<UserOrder />} />
         </Route>
-        <Route index element={<DashBoardUser />} />
       </Route>
-
       <Route path="admin" element={<AdminPage />}>
         <Route index element={<DashBoard />} />
         <Route path="Management/Product/Index" element={<Index />} />

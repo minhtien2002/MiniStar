@@ -5,31 +5,31 @@ interface props {
     onDataReceive?: (data: any) => void; // Hàm callback nhận dữ liệu
 }
 
-// Khởi tạo state ban đầu
+// Trạng thái ban đầu
 const initialState = {
-    data: null,
-    loading: true,
-    error: null,
+  data: null,
+  loading: true,
+  error: null,
 };
 
-// Reducer để quản lý các hành động
+// Reducer để quản lý trạng thái API
 function apiReducer(state: any, action: any) {
-    switch (action.type) {
-        case 'FETCH_SUCCESS':
-            return {
-                ...state,
-                data: action.payload,
-                loading: false,
-            };
-        case 'FETCH_ERROR':
-            return {
-                ...state,
-                error: action.payload,
-                loading: false,
-            };
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case "FETCH_SUCCESS":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
+    case "FETCH_ERROR":
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
+    default:
+      return state;
+  }
 }
 
 const CallApi: React.FC<props> = ({ urlOfApi, onDataReceive}) => {
@@ -61,14 +61,16 @@ const CallApi: React.FC<props> = ({ urlOfApi, onDataReceive}) => {
         fetchData();
     }, [urlOfApi]); // Gọi lại API nếu urlOfApi thay đổi
 
-    // Hiển thị loading, error, hoặc data tùy vào trạng thái
-    if (state.loading) {
-        return <div>Loading...</div>;
-    }
+  // Hiển thị loading, error, hoặc không render gì (dữ liệu được trả về qua callback)
+  if (state.loading) {
+    return <div>Loading...</div>;
+  }
 
-    if (state.error) {
-        return <div>Error: {state.error}</div>;
-    }
-}
+  if (state.error) {
+    return <div>Error: {state.error}</div>;
+  }
 
-export default CallApi
+  return null; // Không hiển thị gì trong component này
+};
+
+export default CallApi;

@@ -232,7 +232,6 @@ const MainLayout: React.FC = () => {
                       </li>
                     </ul>
                   </a>
-                  <a href="/Checkout" className="hover:text-gray-200 font-semibold">
                   <a href="AboutUs" className="hover:text-gray-200 font-semibold">
                     About
                   </a>

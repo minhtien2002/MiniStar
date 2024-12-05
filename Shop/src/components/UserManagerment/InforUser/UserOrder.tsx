@@ -1,8 +1,16 @@
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-import API_ENDPOINTS from '/src/apiConfig';
+import API_ENDPOINTS from '../../../apiConfig';
+
+interface Order {
+  orderId: number;
+  totalAmount: number;
+  orderStatus: string;
+  createdAt: string;
+}
+
 export const UserOrder  = () => {
-   const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState([] as Order[]);
   const userId = Cookies.get('userId');
 
   useEffect(() => {
@@ -40,7 +48,7 @@ export const UserOrder  = () => {
             <tbody>
               {orders.map((order) => (
                 <tr
-                  key={order.id}
+                  key={order.orderId}
                   className=" border border-solid rounded h-20 hover:bg-[#f5faf5]"
                 >
                   <td className="p-3  font-semibold">
