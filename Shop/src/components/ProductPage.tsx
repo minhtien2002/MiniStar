@@ -5,7 +5,6 @@ import React from "react";
 import { Breadcrumb, Pagination, Select, Slider } from "antd";
 
 const pathProduct = API_ENDPOINTS.getAllProduct; // Lấy URL API từ file cấu hình
-const pathProduct = API_ENDPOINTS.getAllProduct; // Lấy URL API từ file cấu hình
 const pathQuantityAllProduct = API_ENDPOINTS.quantityAllProduct;
 const pathCategory = API_ENDPOINTS.getAllCategory;
 const pathBrand = API_ENDPOINTS.getAllBrand;

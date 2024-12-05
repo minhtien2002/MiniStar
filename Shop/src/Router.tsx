@@ -11,7 +11,6 @@ import Login from "./components/Login";
 import ProductDetail from "./components/ProductDetail";
 import { Checkorder } from "./components/Checkorder";
 import { Register } from "./components/Register";
-import ProductManage from "./components/admin/Management/ProductManage";
 import { Index } from "./components/admin/Management/Product/Index";
 import { UserLayout } from "./components/UserManagerment/UserLayout";
 import { DashBoardUser } from "./components/UserManagerment/InforUser/DashBoardUser";
@@ -53,7 +52,6 @@ export function RouteConfig() {
 
       <Route path="admin" element={<AdminPage />}>
         <Route index element={<DashBoard />} />
-        <Route path="product-manage" element={<ProductManage />} />
         <Route path="Management/Product/Index" element={<Index />} />
       </Route>
     </Routes>
