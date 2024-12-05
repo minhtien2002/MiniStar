@@ -23,7 +23,6 @@ namespace Persistence.Configuration
             builder.Property(x => x.ProductImage).HasMaxLength(200);
             builder.Property(x => x.CreateAt).HasDefaultValue(DateTime.Now);
             builder.Property(x => x.UpdateAt).HasDefaultValue(DateTime.Now);
-            builder.Property(x => x.IsDeleted).HasDefaultValue(bool.FalseString);
             builder.HasOne(x => x.Brand).WithMany(x => x.Products).HasForeignKey(x => x.BrandId);
             builder.HasOne(x => x.Category).WithMany(x => x.Products).HasForeignKey(x => x.CategoryId);
         }

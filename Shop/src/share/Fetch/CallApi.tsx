@@ -2,7 +2,7 @@ import React, { useEffect, useReducer } from 'react'
 
 interface props {
     urlOfApi: string; // URL của API    
-    onDataReceive: (data: any) => void; // Hàm callback nhận dữ liệu
+    onDataReceive?: (data: any) => void; // Hàm callback nhận dữ liệu
 }
 
 // Khởi tạo state ban đầu
@@ -32,7 +32,7 @@ function apiReducer(state: any, action: any) {
     }
 }
 
-const CallApi: React.FC<props> = ({ urlOfApi, onDataReceive }) => {
+const CallApi: React.FC<props> = ({ urlOfApi, onDataReceive}) => {
 
     // Gọi useReducer với reducer và state ban đầu
     const [state, dispatch] = useReducer(apiReducer, initialState);
@@ -48,7 +48,9 @@ const CallApi: React.FC<props> = ({ urlOfApi, onDataReceive }) => {
             // Dispatch action khi fetch thành công
             dispatch({ type: 'FETCH_SUCCESS', payload: data });
             // Gọi hàm callback nhận dữ liệu từ component cha
-            onDataReceive(data);
+            if (onDataReceive) {
+                onDataReceive(data);
+            }
         } catch (error: any) {
             // Dispatch action khi có lỗi xảy ra
             dispatch({ type: 'FETCH_ERROR', payload: error.message });

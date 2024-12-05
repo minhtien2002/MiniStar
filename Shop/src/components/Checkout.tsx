@@ -238,7 +238,7 @@ const Checkout = () => {
           </div>
         </div>
 
-        <a  href="/"><button onClick={showAlert} disabled={!isChecked} className="mt-6 w-full bg-green-500 text-white py-2 rounded  hover:bg-green-700">Place Order Now</button></a>
+        <a  href="/"><button onClick={showAlert}  disabled={!isChecked} className="mt-6 w-full bg-green-500 text-white py-2 rounded  hover:bg-green-700">Place Order Now</button></a>
       </div>
     </div>
   );

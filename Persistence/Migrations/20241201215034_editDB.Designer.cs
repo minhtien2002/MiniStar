@@ -12,8 +12,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241125111922_initialCreate")]
-    partial class initialCreate
+    [Migration("20241201215034_editDB")]
+    partial class editDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -79,7 +79,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 11, 25, 18, 19, 22, 665, DateTimeKind.Local).AddTicks(289));
+                        .HasDefaultValue(new DateTime(2024, 12, 2, 4, 50, 34, 542, DateTimeKind.Local).AddTicks(5557));
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
@@ -89,7 +89,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("UpdateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 11, 25, 18, 19, 22, 665, DateTimeKind.Local).AddTicks(558));
+                        .HasDefaultValue(new DateTime(2024, 12, 2, 4, 50, 34, 542, DateTimeKind.Local).AddTicks(6209));
 
                     b.HasKey("BrandId");
 
@@ -100,41 +100,41 @@ namespace Persistence.Migrations
                         {
                             BrandId = 1,
                             BrandName = "Vượng CP",
-                            CreateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1942),
+                            CreateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9725),
                             IsDeleted = true,
-                            UpdateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1943)
+                            UpdateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9727)
                         },
                         new
                         {
                             BrandId = 2,
                             BrandName = "TONY Fruit",
-                            CreateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1944),
+                            CreateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9730),
                             IsDeleted = true,
-                            UpdateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1945)
+                            UpdateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9731)
                         },
                         new
                         {
                             BrandId = 3,
                             BrandName = "NYTO Fresh",
-                            CreateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1946),
+                            CreateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9733),
                             IsDeleted = true,
-                            UpdateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1946)
+                            UpdateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9734)
                         },
                         new
                         {
                             BrandId = 4,
                             BrandName = "Lavie",
-                            CreateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1947),
+                            CreateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9736),
                             IsDeleted = true,
-                            UpdateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1948)
+                            UpdateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9737)
                         },
                         new
                         {
                             BrandId = 5,
                             BrandName = "OneOne",
-                            CreateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1949),
+                            CreateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9739),
                             IsDeleted = true,
-                            UpdateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1949)
+                            UpdateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9740)
                         });
                 });
 
@@ -205,7 +205,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 11, 25, 18, 19, 22, 665, DateTimeKind.Local).AddTicks(1625));
+                        .HasDefaultValue(new DateTime(2024, 12, 2, 4, 50, 34, 542, DateTimeKind.Local).AddTicks(8777));
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
@@ -215,7 +215,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("UpdateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 11, 25, 18, 19, 22, 665, DateTimeKind.Local).AddTicks(2047));
+                        .HasDefaultValue(new DateTime(2024, 12, 2, 4, 50, 34, 542, DateTimeKind.Local).AddTicks(9404));
 
                     b.HasKey("CategoryId");
 
@@ -226,41 +226,41 @@ namespace Persistence.Migrations
                         {
                             CategoryId = 1,
                             CategoryName = "Thịt heo",
-                            CreateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1816),
+                            CreateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9345),
                             IsDeleted = true,
-                            UpdateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1820)
+                            UpdateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9361)
                         },
                         new
                         {
                             CategoryId = 2,
                             CategoryName = "Hoa quả",
-                            CreateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1821),
+                            CreateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9365),
                             IsDeleted = true,
-                            UpdateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1822)
+                            UpdateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9366)
                         },
                         new
                         {
                             CategoryId = 3,
                             CategoryName = "Rau củ",
-                            CreateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1823),
+                            CreateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9368),
                             IsDeleted = true,
-                            UpdateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1823)
+                            UpdateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9369)
                         },
                         new
                         {
                             CategoryId = 4,
                             CategoryName = "Nước giải khát",
-                            CreateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1824),
+                            CreateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9371),
                             IsDeleted = true,
-                            UpdateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1824)
+                            UpdateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9372)
                         },
                         new
                         {
                             CategoryId = 5,
                             CategoryName = "Đồ ăn vặt",
-                            CreateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1825),
+                            CreateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9375),
                             IsDeleted = true,
-                            UpdateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1826)
+                            UpdateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9376)
                         });
                 });
 
@@ -339,7 +339,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 11, 25, 18, 19, 22, 664, DateTimeKind.Local).AddTicks(5709));
+                        .HasDefaultValue(new DateTime(2024, 12, 2, 4, 50, 34, 541, DateTimeKind.Local).AddTicks(5727));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -349,7 +349,7 @@ namespace Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(true);
 
                     b.Property<decimal>("Price")
                         .HasMaxLength(20)
@@ -373,7 +373,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("UpdateAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 11, 25, 18, 19, 22, 664, DateTimeKind.Local).AddTicks(6099));
+                        .HasDefaultValue(new DateTime(2024, 12, 2, 4, 50, 34, 541, DateTimeKind.Local).AddTicks(6462));
 
                     b.HasKey("ProductId");
 
@@ -389,70 +389,70 @@ namespace Persistence.Migrations
                             ProductId = 1,
                             BrandId = 1,
                             CategoryId = 1,
-                            CreateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1972),
+                            CreateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9799),
                             Description = "null",
                             IsDeleted = false,
                             Price = 39m,
                             ProductImage = "xuongheo",
                             ProductName = "Xương heo có thịt",
                             Quantity = 100,
-                            UpdateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1972)
+                            UpdateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9800)
                         },
                         new
                         {
                             ProductId = 2,
                             BrandId = 2,
                             CategoryId = 2,
-                            CreateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1975),
+                            CreateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9806),
                             Description = "null",
                             IsDeleted = false,
                             Price = 31m,
                             ProductImage = "camsanh",
                             ProductName = "Cam sành",
                             Quantity = 300,
-                            UpdateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1976)
+                            UpdateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9807)
                         },
                         new
                         {
                             ProductId = 3,
                             BrandId = 3,
                             CategoryId = 3,
-                            CreateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1978),
+                            CreateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9811),
                             Description = "null",
                             IsDeleted = false,
                             Price = 8m,
                             ProductImage = "rauden",
                             ProductName = "Rau dền",
                             Quantity = 50,
-                            UpdateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1979)
+                            UpdateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9811)
                         },
                         new
                         {
                             ProductId = 4,
                             BrandId = 4,
                             CategoryId = 4,
-                            CreateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1981),
+                            CreateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9815),
                             Description = "null",
                             IsDeleted = false,
                             Price = 6m,
                             ProductImage = "lavie",
                             ProductName = "Nước khoáng Lavie",
                             Quantity = 200,
-                            UpdateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1981)
+                            UpdateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9816)
                         },
                         new
                         {
                             ProductId = 5,
                             BrandId = 5,
                             CategoryId = 5,
-                            CreateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1983),
+                            CreateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9820),
                             Description = "null",
                             IsDeleted = false,
                             Price = 10m,
                             ProductImage = "banhgao",
                             ProductName = "Bánh gạo OneOne",
                             Quantity = 70,
-                            UpdateAt = new DateTime(2024, 11, 25, 18, 19, 22, 666, DateTimeKind.Local).AddTicks(1983)
+                            UpdateAt = new DateTime(2024, 12, 2, 4, 50, 34, 545, DateTimeKind.Local).AddTicks(9821)
                         });
                 });
 

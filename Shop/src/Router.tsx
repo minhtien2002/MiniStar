@@ -5,9 +5,13 @@ import PageProduct from "./components/ProductPage";
 import Cart from "./components/Cart";
 import Checkout  from "./components/Checkout";
 import Error from "./components/Error";
-import AdminPage from "./components/admin/AdminPage";
 import DashBoard from "./components/admin/DashBoard";
 import AdminPage from "./components/admin/AdminPage";
+import Login from "./components/Login";
+import ProductDetail from "./components/ProductDetail";
+import { Checkorder } from "./components/Checkorder";
+import { Register } from "./components/Register";
+import { Index } from "./components/admin/Management/Product/Index";
 
 
 export function RouteConfig() {
@@ -27,7 +31,6 @@ export function RouteConfig() {
             </Route>
             <Route path="admin" element={<AdminPage />}>
                     <Route index element={<DashBoard />} />
-                    <Route path="product-manage" element={<ProductManage/>} />
                     <Route path="Management/Product/Index" element={<Index />} />
                 </Route>
         </Routes>

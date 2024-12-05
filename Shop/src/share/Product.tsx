@@ -10,7 +10,7 @@ interface ProductProps {
 const Product: React.FC<ProductProps> = ({ productId, productName, price, productImage }) => {
   return (
     <a href="111"><div className={"flex flex-col justify-center items-center border border-[#dadada] my-2 p-6 rounded-md shadow-lg cursor-pointer group/item hover:border-solid hover:border hover:border-[#34A853]"}>
-    <img src={"./src/assets/images/" + productImage + ".png"} alt={productName} className=' w-40 h-40  group-hover/item:scale-110' />
+    <img src={"./src/assets/images/" + productImage} alt={productName} className=' w-40 h-40  group-hover/item:scale-110' />
     <div className=" w-full flex flex-col gap-2 justify-center items-center">
       <div className="flex flex-col items-center">
         <p className='font-bold text-2xl pt-2'>{productName}</p>

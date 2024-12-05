@@ -11,6 +11,9 @@ const API_ENDPOINTS = {
   register: `${API_BASE_URL}/User/register`,
   getAllCategory: `${API_BASE_URL}/Category/GetAll`,
   getAllBrand: `${API_BASE_URL}/Brand/GetAll`,
+  CreateProduct: `${API_BASE_URL}/Product/Create`,
+  UpdateProduct: `${API_BASE_URL}/Product/Edit`,
+  DeleteProduct: (id:number) => `${API_BASE_URL}/Product/DeleteById=${id}`,
 };
 
 export default API_ENDPOINTS;

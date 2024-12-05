@@ -14,15 +14,19 @@ namespace BackEndApi.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IUnitOfWork unitOfWork;
+        private readonly IProductService productService;
 
-        public ProductController(IUnitOfWork unitOfWork)
+        public ProductController(IUnitOfWork unitOfWork, IProductService productService)
         {
             this.unitOfWork = unitOfWork;
+            this.productService = productService;
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult> GetAll() {
-            List<Product> result = await unitOfWork.Products.GetAllAsync();
+        public ActionResult GetAll() 
+        {
+            List<ProductViewModel> result = productService.getProductAllFK();
+            //List<Product> result = await unitOfWork.Products.GetAllAsync();
             return Ok(result);
         }
 
@@ -34,10 +38,15 @@ namespace BackEndApi.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<ActionResult> Create([FromBody] ProductViewModel product)
+        public async Task<ActionResult> Create([FromBody] ProductCreateViewModel product)
         {
-            try
-            {
+            var cate = await unitOfWork.Categories.GetByIdAsync(product.CategoryId);
+            if (cate == null) return BadRequest("Not Found category");
+
+            var b = await unitOfWork.Brands.GetByIdAsync(product.BrandId);
+            if (b == null) return BadRequest("Not Found brand");
+
+            
                 Product p = new Product()
                 {
                     ProductName = product.ProductName,
@@ -45,24 +54,20 @@ namespace BackEndApi.Controllers
                     Price = product.Price,
                     Quantity = product.Quantity,
                     ProductImage = product.ProductImage,
-                    CreateAt = product.CreateAt,
+                    CreateAt = DateTime.Now,
                     UpdateAt = DateTime.Now,
-                    IsDeleted = product.IsDeleted,
-                    CategoryId = product.Categories.CategoryId,
-                    BrandId = product.Brands.BrandId,
+                    IsDeleted = true,
+                    CategoryId = cate.CategoryId,
+                    BrandId = b.BrandId,
                 };
-                await unitOfWork.Products.AddAsync(p);
-                await unitOfWork.CompleteAsync();
-            }
-            catch (Exception ex) {
-                return BadRequest(ex.Message);
-            }
-
-            return Ok();
+            await unitOfWork.Products.AddAsync(p);
+            int response = await unitOfWork.CompleteAsync();
+                
+            return Ok(response);
         }
 
         [HttpPut("Edit")]
-        public async Task<IActionResult> Edit([FromBody] ProductViewModel request)
+        public async Task<IActionResult> Edit([FromBody] ProductEditViewModel request)
         {
             Product product = await unitOfWork.Products.GetByIdAsync(request.ProductId);
             if (product == null) return BadRequest("NOT FOUND!");
@@ -71,20 +76,20 @@ namespace BackEndApi.Controllers
             product.Price = request.Price;
             product.Quantity = request.Quantity;
             product.ProductImage = request.ProductImage;
-            product.UpdateAt = request.UpdateAt;
+            product.UpdateAt = DateTime.Now;
             product.IsDeleted = request.IsDeleted;
-            product.CategoryId = request.Categories.CategoryId;
-            product.BrandId = request.Brands.BrandId;
+            product.CategoryId = request.CategoryId;
+            product.BrandId = request.BrandId;
             unitOfWork.Products.Update(product);
-            await unitOfWork.CompleteAsync();
-            return Ok("Edit Success!");
+            int response = await unitOfWork.CompleteAsync();
+            return Ok(response);
         }
 
         [HttpDelete("DeleteById={id}")]
         public async Task<IActionResult> Delete(int id)
         {
             Product result = await unitOfWork.Products.GetByIdAsync(id);
-            if (result != null) {
+            if (result == null) {
                 return BadRequest("NOT FOUND!");    
             }
             unitOfWork.Products.Remove(result);
