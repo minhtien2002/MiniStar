@@ -22,10 +22,9 @@ import {
   UploadProps,
 } from "antd";
 import React, { useState } from "react";
-import CallApi from "../../../../share/Fetch/CallApi";
-import API_ENDPOINTS from "../../../../apiConfig";
-import Product from "../../../../share/Product";
-import MakeRequest from "../../../../share/Fetch/MakeRequest";
+import CallApi from "../../../../services/Fetch/CallApi";
+import API_ENDPOINTS from "../../../../services/apiConfig";
+import MakeRequest from "../../../../services/Fetch/MakeRequest";
 
 
 

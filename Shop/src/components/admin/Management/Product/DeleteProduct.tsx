@@ -1,8 +1,8 @@
 import React from "react";
 import type { PopconfirmProps } from "antd";
 import { Button, message, Popconfirm } from "antd";
-import API_ENDPOINTS from "../../../../apiConfig";
-import MakeRequest from "../../../../share/Fetch/MakeRequest";
+import API_ENDPOINTS from "../../../../services/apiConfig";
+import MakeRequest from "../../../../services/Fetch/MakeRequest";
 
 const pathDeleteProduct = (id: number) => API_ENDPOINTS.DeleteProduct(id);
 

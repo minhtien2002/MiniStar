@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Cookies from 'js-cookie';
-import API_ENDPOINTS from '../../../apiConfig';
+import API_ENDPOINTS from '../../../services/apiConfig';
 
 
 

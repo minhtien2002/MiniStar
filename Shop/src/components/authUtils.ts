@@ -1,6 +1,6 @@
 // authUtils.ts
 import Cookies from 'js-cookie';
-import API_ENDPOINTS from "../apiConfig";
+import API_ENDPOINTS from "../services/apiConfig";
 
 
 // Hàm lấy userId từ cookie
@@ -9,7 +9,7 @@ export const getUserId = (): string | null => {
   return userId || null; 
 };
 export const fetchCheckoutData = async (userId: string) => {
-  const response = await fetch(API_ENDPOINTS.checkout(userId));
+  const response = await fetch(API_ENDPOINTS.checkout(Number(userId)));
   if (!response.ok) {
     throw new Error('Failed to fetch checkout data');
   }
@@ -23,7 +23,7 @@ export const addToCart = async (productId: number, quantity: number) => {
       return;
     }
 
-    const url = API_ENDPOINTS.addToCart(userId, productId, quantity);
+    const url = API_ENDPOINTS.addToCart(Number(userId), productId, quantity);
 
     const response = await fetch(url, {
       method: 'POST',

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Cookies from 'js-cookie';
-import API_ENDPOINTS from "./apiConfig";
+import API_ENDPOINTS from "../services/apiConfig";
+import { message } from "antd";
 
 
 const MainLayout: React.FC = () => {
@@ -58,8 +59,10 @@ const MainLayout: React.FC = () => {
         Cookies.remove('userId');
         Cookies.remove('RoleId');
         setIsLoggedIn(false);
-        alert('Logged out successfully!');
-        window.location.reload();
+        message.success('Logged out successfully!');
+        setTimeout(() => {
+          window.location.reload();
+        }, 700);
 
     };
 

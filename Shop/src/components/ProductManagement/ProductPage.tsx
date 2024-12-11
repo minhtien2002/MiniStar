@@ -1,18 +1,14 @@
-import Product from "../share/Product";
-import API_ENDPOINTS from "../apiConfig"; // Import API URL từ file cấu hình
-import CallApi from "../share/Fetch/CallApi";
 import React, { useEffect, useRef, useState } from "react";
 import {
-  Breadcrumb,
   Button,
   Form,
   message,
-  Pagination,
   Select,
   Slider,
 } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
-import MakeRequest from "../share/Fetch/MakeRequest";
+import API_ENDPOINTS from "../../services/apiConfig";
+import MakeRequest from "../../services/Fetch/MakeRequest";
 import PaginationComponent from "./PaginationComponent";
 
 const pathProduct = API_ENDPOINTS.getAllProduct; // Lấy URL API từ file cấu hình

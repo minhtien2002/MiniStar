@@ -1,15 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import MainLayout from "./MainLayout";
 import Home from "./components/Home";
-import PageProduct from "./components/ProductPage";
-import Cart from "./components/Cart";
-import Checkout from "./components/Checkout";
 import Error from "./components/Error";
 import DashBoard from "./components/admin/DashBoard";
-import AdminPage from "./components/admin/AdminPage";
+import AdminPage from "./pages/AdminPage";
 import Login from "./components/Login";
-import ProductDetail from "./components/ProductDetail";
-import { Checkorder } from "./components/Checkorder";
+import ProductDetail from "./components/ProductManagement/ProductDetail";
 import { Register } from "./components/Register";
 import { Index } from "./components/admin/Management/Product/Index";
 import { UserLayout } from "./components/UserManagerment/UserLayout";
@@ -24,6 +19,11 @@ import { IndexUser } from "./components/admin/Management/User/IndexUser";
 import { IndexOrder } from "./components/admin/Management/Order/IndexOrder";
 import AboutUs from "./components/AboutUs";
 import Blog from "./components/Blog";
+import MainLayout from "./pages/MainLayout";
+import PageProduct from "./components/ProductManagement/ProductPage";
+import Cart from "./components/CartManagement/Cart";
+import Checkout from "./components/CartManagement/Checkout";
+import { Checkorder } from "./components/CartManagement/Checkorder";
 export function RouteConfig() {
   return (
     <Routes>

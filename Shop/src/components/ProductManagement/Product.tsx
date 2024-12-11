@@ -1,7 +1,7 @@
 import React from "react";
 import Cookies from "js-cookie";
-import API_ENDPOINTS from "../apiConfig";
 import { Button, message, Popconfirm } from "antd";
+import API_ENDPOINTS from "../../services/apiConfig";
 
 interface ProductProps {
   productId: number;
@@ -40,7 +40,7 @@ const Product: React.FC<ProductProps> = ({
         return;
       }
 
-      const url = API_ENDPOINTS.addToCart(userId, productId, quantity);
+      const url = API_ENDPOINTS.addToCart(Number(userId), productId, quantity);
 
       const response = await fetch(url, {
         method: "POST",

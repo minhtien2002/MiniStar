@@ -1,5 +1,5 @@
 import React, { FormEvent, useEffect, useState } from "react";
-import API_ENDPOINTS from "../../../../apiConfig";
+import API_ENDPOINTS from "../../../../services/apiConfig";
 
 import {
   Drawer,

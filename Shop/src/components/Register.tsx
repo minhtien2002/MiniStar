@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import API_ENDPOINTS from '../apiConfig'; // Chứa URL endpoint của API
+import API_ENDPOINTS from '../services/apiConfig'; // Chứa URL endpoint của API
 import Cookies from 'js-cookie'; // Sử dụng để lưu cookie nếu cần thiết
 
 export const Register = () => {

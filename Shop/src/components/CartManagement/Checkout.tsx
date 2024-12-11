@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { fetchCheckoutData } from './authUtils';
-import { getUserId } from './authUtils'
-import API_ENDPOINTS from "../apiConfig";
 import { Button, message, Popconfirm } from "antd";
+import { fetchCheckoutData, getUserId } from '../authUtils';
+import API_ENDPOINTS from '../../services/apiConfig';
 
 
 const Checkout = () => {
@@ -57,7 +56,9 @@ const Checkout = () => {
 
       const data = await response.json();
       message.success('Order created successfully!');
-
+      setTimeout(() => {
+        window.location.href = '/UserManagerment/UserOrder';
+      }, 1000);
     } catch (error) {
       message.error('Failed to create order. Please try again.');
     }

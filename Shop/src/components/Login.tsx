@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import API_ENDPOINTS from '../apiConfig';
+import API_ENDPOINTS from '../services/apiConfig';
 import Cookies from 'js-cookie'; // Thêm import cho js-cookie
 import { Button, message, Popconfirm } from "antd";
 

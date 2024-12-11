@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Col, Row, Form, Input, Space, Drawer, message, Select } from 'antd';
-import API_ENDPOINTS from '../../../apiConfig';
+import API_ENDPOINTS from '../../../services/apiConfig';
 import Cookies from 'js-cookie';
 
 

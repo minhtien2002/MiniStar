@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import MakeRequest from "../../../../share/Fetch/MakeRequest";
-import API_ENDPOINTS from "../../../../apiConfig";
+import MakeRequest from "../../../../services/Fetch/MakeRequest";
+import API_ENDPOINTS from "../../../../services/apiConfig";
 import {
   Dropdown,
   Button,
@@ -21,7 +21,7 @@ import {
   UploadProps,
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import CallApi from "../../../../share/Fetch/CallApi";
+import CallApi from "../../../../services/Fetch/CallApi";
 
 const pathUpdateProduct = API_ENDPOINTS.UpdateProduct;
 const pathBrand = API_ENDPOINTS.getAllBrand;

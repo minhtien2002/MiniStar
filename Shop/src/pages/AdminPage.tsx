@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { FloatButton } from "antd";
 import { Switch } from "antd";
-import DashBoard from "./DashBoard";
+import DashBoard from "../components/admin/DashBoard";
 import { BellOutlined, MailOutlined } from "@ant-design/icons";
 
 function AdminPanel() {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
-import API_ENDPOINTS from '../../../apiConfig';
+import API_ENDPOINTS from '../../../services/apiConfig';
 
 const EditUserProfile = () => {
     const [newEmail, setNewEmail] = useState("");
@@ -43,7 +43,7 @@ const EditUserProfile = () => {
                 setMessage("OTP sent to your new email.");
             } else {
                 const error = await response.text();
-                setMessage(`Failed to send OTP: ${error}`);
+                setMessage(`Failed to send OTP`);
             }
         } catch (error) {
             setMessage("An error occurred while sending OTP.");

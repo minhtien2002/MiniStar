@@ -1,7 +1,7 @@
 import { Button, Drawer } from "antd";
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import  API_ENDPOINTS  from '../apiConfig';
+import API_ENDPOINTS from "../../services/apiConfig";
 
 export const Checkorder = () => {
   const [open, setOpen] = useState(false);

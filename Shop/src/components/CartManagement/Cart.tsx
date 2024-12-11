@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
-import CallApi from "../share/CallApi"; 
-import API_ENDPOINTS from "../apiConfig";
-import { getUserId } from './authUtils';
 import Cookies from 'js-cookie';
 import { Button, message, Popconfirm } from "antd";
-
-
-
-
+import { getUserId } from "../authUtils";
+import API_ENDPOINTS from "../../services/apiConfig";
 
 const Cart: React.FC = () => {
    const userId = getUserId();  
@@ -168,7 +163,7 @@ const handleCheckOut = async () => {
             >
               <td className="py-4 px-8 flex items-center">
                 <img
-                  src={item.productImageUrl}
+                  src={"./src/assets/images/" + item.productImage}
                   alt={item.productName}
                   className="w-16 p-1 h-14 mr-4 shadow border border-solid rounded"
                 />

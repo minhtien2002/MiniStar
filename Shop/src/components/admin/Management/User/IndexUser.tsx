@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { message, Spin } from 'antd';
-import API_ENDPOINTS from '../../../../apiConfig';
+import API_ENDPOINTS from '../../../../services/apiConfig';
 import { UserTable } from './UserTable';
 import EditUserDrawer from './EditUserDrawer';
 interface UserSummary {

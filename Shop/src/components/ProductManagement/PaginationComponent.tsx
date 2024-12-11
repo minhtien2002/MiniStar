@@ -1,7 +1,6 @@
 import { Pagination } from 'antd';
 import React, { useState } from 'react';
-import Product from '../share/Product';
-import path from 'path';
+import Product from './Product';
 
 interface ProductData {
     productId: number;
@@ -18,7 +17,6 @@ interface Props {
 const PaginationComponent:React.FC<Props> = ({items}) => {
   // Dữ liệu mẫu (danh sách các mục)
   const data = items;
-
   // Số mục hiển thị trên mỗi trang
   const itemsPerPage = 9;
 
