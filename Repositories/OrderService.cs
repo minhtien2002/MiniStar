@@ -119,7 +119,30 @@ namespace Repositories
                 TotalAmount = totalAmount
             };
         }
+        public async Task<List<OrderSummaryViewModel>> GetAllOrderSummariesAsync()
+        {
+            var orders = await _context.Orders
+                .Include(o => o.User)       // Bao gồm thông tin người mua
+                .Include(o => o.Address)   // Bao gồm thông tin địa chỉ
+                .ToListAsync();
 
+            if (orders == null || !orders.Any()) return new List<OrderSummaryViewModel>();
+
+            var orderSummaries = orders.Select(order => new OrderSummaryViewModel
+            {
+                OrderId = order.OrderId,
+                BuyerName = order.User.FullName,
+                PhoneNumber = order.User.PhoneNumber,
+                DeliveryAddress = $"{order.Address.Street}, {order.Address.City}, {order.Address.State}", // Lấy địa chỉ đầy đủ
+                TotalMoney = _context.OrderItems
+                    .Where(oi => oi.OrderId == order.OrderId)
+                    .Sum(oi => oi.Quantity * oi.Price), // Tính tổng tiền
+                CreatedAt = order.CreatedAt,
+                OrderStatus = order.OrderStatus
+            }).ToList();
+
+            return orderSummaries;
+        }
         public async Task<OrderViewModel> CreateOrderAsync(OrderCreateViewModel model)
         {
             // Kiểm tra xem địa chỉ có tồn tại không
@@ -192,5 +215,27 @@ namespace Repositories
             await _context.SaveChangesAsync();
             return true;
         }
+        public async Task<bool> DeleteOrder(int orderId)
+        {
+            var order = await _context.Orders
+                .Include(o => o.OrderItems)
+                .FirstOrDefaultAsync(o => o.OrderId == orderId);
+
+            if (order == null)
+            {
+                return false;
+            }
+
+            // Remove associated order items
+            _context.OrderItems.RemoveRange(order.OrderItems);
+
+            // Remove the order itself
+            _context.Orders.Remove(order);
+
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
     }
 }

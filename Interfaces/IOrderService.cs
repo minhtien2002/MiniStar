@@ -9,6 +9,7 @@ namespace Interface
         Task<bool> UpdateOrderStatusAsync(int orderId, string status);
         Task<CheckoutViewModel> GetCheckoutByUserIdAsync(int userId);
         Task<OrderDetailsViewModel> GetOrderDetailsByIdAsync(int orderId);
-
+        Task<List<OrderSummaryViewModel>> GetAllOrderSummariesAsync();
+        Task<bool> DeleteOrder(int orderId);
     }
 }

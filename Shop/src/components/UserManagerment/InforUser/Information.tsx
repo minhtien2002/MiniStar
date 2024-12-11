@@ -1,94 +1,56 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import Cookies from 'js-cookie';
+import API_ENDPOINTS from '../../../apiConfig';
 
 export const Information = () => {
-    return (
+    const [user, setUser] = useState(null);
 
-        <div className="w-3/4 bg-white p-6">
-          <h2 className="text-2xl font-bold mb-6">Person Infor</h2>
-          <form className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block mb-2 text-sm font-medium">First Name*</label>
-              <input
-                type="text"
-                className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-green-600"
-                placeholder="First Name"
-              />
+    useEffect(() => {
+        const fetchUser = async () => {
+            const userId = Cookies.get("userId"); 
+            const response = await fetch(API_ENDPOINTS.GetUserById(userId));
+            const data = await response.json();
+            setUser(data);
+        };
+
+        fetchUser();
+    }, []);
+
+    if (!user) {
+        return <div>Loading...</div>; // Hiển thị loading khi chưa có dữ liệu
+    }
+
+    return (
+        <div className="w-3/4 bg-white p-6 rounded shadow-md">
+            <h2 className="text-2xl font-bold mb-6 text-gray-800">Personal Information</h2>
+            <div className="grid grid-cols-2 gap-6">
+                 <div>
+                    <label className="block mb-1 text-sm font-medium text-gray-600">User Name</label>
+                    <p className="text-lg font-semibold text-gray-900">{user.username}</p>
+                </div>
+                <div>
+                    <label className="block mb-1 text-sm font-medium text-gray-600">Full Name</label>
+                    <p className="text-lg font-semibold text-gray-900">{user.fullName}</p>
+                </div>
+                <div>
+                    <label className="block mb-1 text-sm font-medium text-gray-600">Email</label>
+                    <p className="text-lg font-semibold text-gray-900">{user.email}</p>
+                </div>
+                <div>
+                    <label className="block mb-1 text-sm font-medium text-gray-600">Phone Number</label>
+                    <p className="text-lg font-semibold text-gray-900">{user.phoneNumber}</p>
+                </div>
+                <div>
+                    <label className="block mb-1 text-sm font-medium text-gray-600">Gender</label>
+                    <p className="text-lg font-semibold text-gray-900">{user.gender}</p>
+                </div>
+                <div>
+                    <label className="block mb-1 text-sm font-medium text-gray-600">Account Created</label>
+                    <p className="text-lg font-semibold text-gray-900">
+                        {new Date(user.createdAt).toLocaleDateString()}
+                    </p>
+                </div>
             </div>
-            <div>
-              <label className="block mb-2 text-sm font-medium">Last Name*</label>
-              <input
-                type="text"
-                className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-green-600"
-                placeholder="Last Name"
-              />
-            </div>
-            <div>
-              <label className="block mb-2 text-sm font-medium">Email*</label>
-              <input
-                type="email"
-                className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-green-600"
-                placeholder="user@gmail.com"
-              />
-            </div>
-            <div>
-              <label className="block mb-2 text-sm font-medium">Phone*</label>
-              <input
-                type="text"
-                className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-green-600"
-                placeholder="+880388**0899"
-              />
-            </div>
-            <div>
-              <label className="block mb-2 text-sm font-medium">Gender</label>
-              <select
-                className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-green-600"
-              >
-                <option>Choose...</option>
-                <option>Male</option>
-                <option>Female</option>
-              </select>
-            </div>
-            <div>
-              <label className="block mb-2 text-sm font-medium">Address*</label>
-              <input
-                type="text"
-                className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-green-600"
-                placeholder="Enter your Address"
-              />
-            </div>
-            <div>
-              <label className="block mb-2 text-sm font-medium">Town / City*</label>
-              <input
-                type="text"
-                className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-green-600"
-                placeholder="London"
-              />
-            </div>
-            <div>
-              <label className="block mb-2 text-sm font-medium">Postcode / ZIP*</label>
-              <input
-                type="text"
-                className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-green-600"
-                placeholder="0000"
-              />
-            </div>
-            <div className="col-span-2 flex justify-between mt-4">
-              <button
-                type="button"
-                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-              >
-                Update Profile
-              </button>
-            </div>
-          </form>
         </div>
-  
-  
-    )
-}
+    );
+};

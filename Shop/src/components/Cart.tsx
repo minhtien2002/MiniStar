@@ -3,6 +3,8 @@ import CallApi from "../share/CallApi";
 import API_ENDPOINTS from "../apiConfig";
 import { getUserId } from './authUtils';
 import Cookies from 'js-cookie';
+import { Button, message, Popconfirm } from "antd";
+
 
 
 
@@ -33,7 +35,7 @@ useEffect(() => {
             });
 
             if (!response.ok) {
-                console.error('Failed to fetch cart:', await response.text());
+                message.error('Failed to fetch cart:', await response.text());
                 setCart({ cartItems: [] }); // Nếu thất bại, đảm bảo `cartItems` là mảng rỗng
                 return;
             }
@@ -43,11 +45,11 @@ useEffect(() => {
             if (data && Array.isArray(data.cartItems)) {
                 setCart(data);
             } else {
-                console.error('Invalid cart data format:', data);
+                message.error('Invalid cart data format:', data);
                 setCart({ cartItems: [] });
             }
         } catch (error) {
-            console.error('Error fetching cart:', error);
+            message.error('Error fetching cart:', error);
             setCart({ cartItems: [] });
         }
     };
@@ -66,7 +68,7 @@ const updateQuantity = async (cartItemId: number, delta: number) => {
         });
 
         if (!response.ok) {
-            console.error('Failed to update quantity:', await response.text());
+            message.error('Failed to update quantity:', await response.text());
             return;
         }
 
@@ -84,9 +86,9 @@ const updateQuantity = async (cartItemId: number, delta: number) => {
             };
         });
 
-        console.log('Quantity updated successfully');
+        message.success('Quantity updated successfully');
     } catch (error) {
-        console.error('Error updating quantity:', error);
+        message.error('Error updating quantity:', error);
     }
 };
 const removeCartItem = async (cartItemId: number) => {
@@ -101,9 +103,9 @@ const removeCartItem = async (cartItemId: number) => {
         );
 
         if (!response.ok) {
-            console.log('Removing cart item:', { userId, cartItemId });
+            message.info('Removing cart item:', { userId, cartItemId });
 
-            console.error('Failed to remove cart item:', await response.text());
+            message.error('Failed to remove cart item:', await response.text());
             return;
         }
 
@@ -119,9 +121,9 @@ const removeCartItem = async (cartItemId: number) => {
             };
         });
 
-        console.log('Item removed successfully');
+        message.info('Item removed successfully');
     } catch (error) {
-        console.error('Error removing cart item:', error);
+        message.error('Error removing cart item:', error);
     }
 };
 
@@ -134,13 +136,16 @@ const clearCart = async () => {
     if (response.ok) {
       // Cập nhật trạng thái cart trong state sau khi clear
       setCart({ cartItems: [] }); // Hoặc cập nhật theo cấu trúc state của bạn
-      console.log('Cart cleared successfully');
+      message.info('Cart cleared successfully');
     } else {
-      console.error('Failed to clear cart:', await response.text());
+      message.error('Failed to clear cart:', await response.text());
     }
   } catch (error) {
-    console.error('Error clearing cart:', error);
+    message.error('Error clearing cart:', error);
   }
+};
+const handleCheckOut = async () => {
+   message.error('Your cart have nothing');
 };
   return (
   <div className="p-4 m-6">
@@ -227,17 +232,33 @@ const clearCart = async () => {
         </span>
       </span>
     </div>
-
     <div className="flex justify-between items-center mt-4">
+     
+     
+      
+    {cart && cart.cartItems && cart.cartItems.length > 0 ? (
+
       <button onClick={clearCart} className="text-red-500 px-4 py-2 bg-gray-300 rounded font-bold">
         Clear Cart
+      </button> 
+ ) : (
+      <button onClick={handleCheckOut} className="text-red-500 px-4 py-2 bg-gray-300 rounded font-bold">
+        Clear Cart
       </button>
+      
+      )}
+ {cart && cart.cartItems && cart.cartItems.length > 0 ? (
+
       <div className="flex space-x-4">
         <a href="/Checkout" className="px-4 py-2 bg-green-500 text-white rounded">Proceed to Checkout</a>
-
-        
       </div>
+      ) : (
+      <div className="flex space-x-4">
+        <button onClick={handleCheckOut} className="px-4 py-2 bg-green-500 text-white rounded">Proceed to Checkout</button>
+      </div>
+       )}
     </div>
+   
   </div>
 );
 

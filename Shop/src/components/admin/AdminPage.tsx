@@ -52,7 +52,7 @@ function AdminPanel() {
               </li>
             </NavLink>
             
-            <NavLink to="">
+            <NavLink to="/admin/Management/Order/IndexOrder">
               <li
                 className="py-3 px-6 hover:bg-gray-700"
                 onClick={() => onChangeTitle("Quản lý đơn hàng")}
@@ -61,7 +61,7 @@ function AdminPanel() {
               </li>
             </NavLink>
             
-            <NavLink to="">
+            <NavLink to="/admin/Management/User/IndexUser">
               <li
                 className="py-3 px-6 hover:bg-gray-700"
                 onClick={() => onChangeTitle("Quản lý khách hàng")}

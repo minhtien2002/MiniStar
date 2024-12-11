@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import API_ENDPOINTS from '../apiConfig';
 import Cookies from 'js-cookie'; // Thêm import cho js-cookie
+import { Button, message, Popconfirm } from "antd";
+
 
 const Login: React.FC = () => {
     const [identifier, setIdentifier] = useState(''); // Đây có thể là email hoặc username
     const [password, setPassword] = useState('');
     const [loginResult, setLoginResult] = useState(null);
     const [error, setError] = useState(''); // Trạng thái lỗi
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        // Kiểm tra cookie để xác định trạng thái đăng nhập
+        const token = Cookies.get('token');
+        if (token) {
+        message.success('You Are Alrealy Logged');
+            setTimeout(() => {
+            window.location.href = '/'; // Hoặc sử dụng React Router để chuyển hướng
+            }, 500);        }
+    }, []);
 
     // Hàm xử lý form submit
     const handleSubmit = async (e: React.FormEvent) => {
@@ -24,6 +37,7 @@ const Login: React.FC = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(loginData),
+                
             });
 
             if (!response.ok) {
@@ -37,10 +51,12 @@ const Login: React.FC = () => {
             // Lưu token vào cookie
             Cookies.set('token', data.token, { expires: 7, secure: true });
             Cookies.set('userId', data.userId, { expires: 7, secure: true });
-             // Lưu cookie có thời hạn 7 ngày
-
-            // Chuyển hướng về trang chủ sau khi đăng nhập thành công
+            Cookies.set('RoleId', data.roleId, { expires: 7, secure: true });
+            message.success('Login Successfully');
+            setTimeout(() => {
             window.location.href = '/'; // Hoặc sử dụng React Router để chuyển hướng
+            }, 1000);
+            // Chuyển hướng về trang chủ sau khi đăng nhập thành công
 
         } catch (error) {
             if (error instanceof Error) {

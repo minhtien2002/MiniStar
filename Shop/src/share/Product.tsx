@@ -1,6 +1,7 @@
 import React from "react";
 import Cookies from "js-cookie";
 import API_ENDPOINTS from "../apiConfig";
+import { Button, message, Popconfirm } from "antd";
 
 interface ProductProps {
   productId: number;
@@ -30,12 +31,12 @@ const Product: React.FC<ProductProps> = ({
 
       if (!token) {
         // Nếu không có token, yêu cầu người dùng đăng nhập
-        alert("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.");
+        message.error("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.");
         return;
       }
       const userId = getUserId();
       if (!userId) {
-        console.error("User not logged in.");
+        message.error("User not logged in.");
         return;
       }
 
@@ -46,13 +47,13 @@ const Product: React.FC<ProductProps> = ({
       });
 
       if (response.ok) {
-        console.log("Product added to cart successfully");
+        message.success("Product added to cart successfully");
       } else {
         const error = await response.text();
-        console.error("Failed to add product to cart:", error);
+        message.error(`Failed to add product to cart: ${error}`);
       }
     } catch (error) {
-      console.error("Error adding product to cart:", error);
+      message.error(`Error adding product to cart: ${String(error)}`);
     }
   };
   return (
@@ -67,11 +68,12 @@ const Product: React.FC<ProductProps> = ({
             <img
               src={"./src/assets/images/" + productImage}
               alt={productName}
-              className=" w-40 h-40 group-hover/item:scale-110"
+              className=" w-40 h-40  group-hover/item:scale-110"
             />
             <div className=" w-full flex flex-col gap-2 justify-center items-center">
               <div className="flex flex-col items-center">
                 <p className="font-bold text-2xl pt-2">{productName}</p>
+                <span className="font-light text-[13px] ">123</span>
               </div>
               <span className="text-red-500 font-bold text-xl">${price}</span>
               <div className="w-full text-[#34A853] font-medium rounded-lg bg-green-100 hover:bg-[#34A853] flex justify-center gap-1 group hover:text-white">

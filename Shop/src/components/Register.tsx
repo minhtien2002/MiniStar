@@ -11,63 +11,99 @@ export const Register = () => {
     const [retypePassword, setRetypePassword] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [gender, setGender] = useState('male'); // Default value
+    const [otp, setOtp] = useState('');
+    const [isOtpSent, setIsOtpSent] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
-    // Hàm xử lý form submit
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-
-        // Kiểm tra mật khẩu và retype password
-        if (password !== retypePassword) {
-            setError('Passwords do not match');
-            return;
-        }
-
-        // Chuẩn bị dữ liệu đăng ký
-        const registerData = {
-            username,
-            password,
-            fullName,
-            email,
-            phoneNumber,
-            gender
-        };
-
+    // Hàm gửi OTP
+    const sendOtp = async () => {
+        setIsLoading(true);
         try {
-            const response = await fetch(API_ENDPOINTS.register, {
+            const response = await fetch(API_ENDPOINTS.sendOtp2, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(registerData),
+                body: JSON.stringify(email), // Gửi email để nhận OTP
             });
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.message || 'Registration failed');
+                throw new Error(errorData.message || 'Failed to send OTP');
             }
 
-            // Đăng ký thành công
-            setSuccess(true);
-            setError(''); // Xóa thông báo lỗi nếu có
-
-            // Chuyển hướng hoặc lưu token vào cookie nếu cần
-            const data = await response.json();
-            //Cookies.set('token', data.token, { expires: 7, secure: true }); // Ví dụ lưu token vào cookie
-
-            // Chuyển hướng về trang đăng nhập hoặc trang chủ
-            window.location.href = '/login'; // Chuyển hướng tới trang đăng nhập
-
+            setIsOtpSent(true); // Đánh dấu OTP đã được gửi
+            setError('');
         } catch (error) {
             if (error instanceof Error) {
-                setError(error.message); // Hiển thị lỗi
+                setError(error.message); // Hiển thị lỗi nếu có
             } else {
                 setError('An unknown error occurred');
             }
-            setSuccess(false);
+        }
+        setIsLoading(false);
+    };
+
+    // Hàm xử lý form submit
+    const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Kiểm tra mật khẩu và retype password
+    if (password !== retypePassword) {
+        setError('Passwords do not match');
+        return;
+    }
+
+    // Chuẩn bị dữ liệu đăng ký cùng OTP
+    const registerData = {
+        email,  // Email của người dùng
+        otp,    // OTP mà người dùng nhập
+        user: {
+            username,       // Tên đăng nhập
+            password,       // Mật khẩu
+            fullName,       // Họ tên
+            email,          // Email (sử dụng lại email ở trên)
+            phoneNumber,    // Số điện thoại
+            gender,         // Giới tính
         }
     };
+
+    try {
+        const response = await fetch(API_ENDPOINTS.verifyOtp2, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(registerData), // Gửi dữ liệu đăng ký cùng OTP
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Registration failed');
+        }
+
+        // Đăng ký thành công
+        setSuccess(true);
+        setError(''); // Xóa thông báo lỗi nếu có
+
+        // Chuyển hướng hoặc lưu token vào cookie nếu cần
+        const data = await response.text();
+        //Cookies.set('token', data.token, { expires: 7, secure: true }); // Ví dụ lưu token vào cookie
+
+        // Chuyển hướng về trang đăng nhập hoặc trang chủ
+        window.location.href = '/login'; // Chuyển hướng tới trang đăng nhập
+
+    } catch (error) {
+        if (error instanceof Error) {
+            setError(error.message); // Hiển thị lỗi
+        } else {
+            setError('An unknown error occurred');
+        }
+        setSuccess(false);
+    }
+};
 
     return (
         <div className="w-full flex flex-row justify-center gap-32">
@@ -120,6 +156,34 @@ export const Register = () => {
                                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
                             />
                         </div>
+                        {/* Hiển thị nút gửi OTP nếu chưa gửi OTP */}
+                    {!isOtpSent && (
+                        <div className="mt-4">
+                            <button
+                                type="button"
+                                onClick={sendOtp}
+                                className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
+                                disabled={isLoading}
+                            >
+                                {isLoading ? 'Sending OTP...' : 'Send OTP'}
+                            </button>
+                        </div>
+                    )}
+
+                    {/* Chỉ hiển thị khi OTP đã được gửi */}
+                    {isOtpSent && (
+                        <div>
+                            <label className="text-[#797979] mb-1">Enter OTP*</label>
+                            <input
+                                type="text"
+                                value={otp}
+                                onChange={(e) => setOtp(e.target.value)}
+                                placeholder="Enter OTP"
+                                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
+                            />
+                        </div>
+                    )}
+
                         <div>
                             <label className="block text-[#797979] mb-1">Gender*</label>
                             <select
@@ -156,6 +220,7 @@ export const Register = () => {
                         </div>
                     </div>
 
+                    
                     <div className="mt-4 flex items-center">
                         <input
                             type="checkbox"
@@ -163,7 +228,7 @@ export const Register = () => {
                         />
                         <label className="text-[#797979] mb-1">
                             <span>&nbsp; I agree to all terms and conditions in </span>
-                            <span className="font-bold text-green-600">EcoShop</span>.
+                            <span className="font-bold text-green-600">EcoShop</span>.<br />
                         </label>
                     </div>
 
@@ -174,7 +239,7 @@ export const Register = () => {
                         Create an Account
                     </button>
 
-                    {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
+                    {<p className="mt-4 text-red-500 text-center">{error}</p>}
                     {success && <p className="mt-4 text-green-500 text-center">Registration successful!</p>}
 
                     <p className="mt-4 text-center text-sm">

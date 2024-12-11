@@ -34,6 +34,12 @@ namespace BackEndApi.Controllers
                 return NotFound(new { Message = ex.Message });
             }
         }
+        [HttpGet("orders/summary")]
+        public async Task<IActionResult> GetOrderSummaries()
+        {
+            var orderSummaries = await _orderService.GetAllOrderSummariesAsync();
+            return Ok(orderSummaries);
+        }
         [HttpPost]
         public async Task<IActionResult> CreateOrder(OrderCreateViewModel model)
         {
@@ -62,6 +68,13 @@ namespace BackEndApi.Controllers
         {
             var success = await _orderService.UpdateOrderStatusAsync(orderId, status);
             return success ? NoContent() : NotFound();
+        }
+        [HttpDelete("{orderId}")]
+        public async Task<IActionResult> DeleteOrder(int orderId)
+        {
+            var success = await _orderService.DeleteOrder(orderId);
+            return success ? Ok(new { message = "Order deleted successfully." }) :  NotFound(new { message = "Order not found." });
+
         }
     }
 }
