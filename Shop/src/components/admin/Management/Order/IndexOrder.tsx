@@ -214,10 +214,10 @@ export const IndexOrder = () => {
                   {order.deliveryAddress}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {order.totalMoney.toLocaleString()} VND
+                {order.totalMoney.toFixed(3)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  order.PaymentMethod
+                  Cash On Delivery (COD)
                 </td>
 
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium flex justify-center items-center gap-2">

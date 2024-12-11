@@ -8,6 +8,8 @@ import { message } from "antd";
 const MainLayout: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cartItemCount, setCartItemCount] = useState(0);
+          const fullName = Cookies.get('FullName')
+
 
     useEffect(() => {
         // Kiểm tra trạng thái đăng nhập
@@ -58,6 +60,7 @@ const MainLayout: React.FC = () => {
         Cookies.remove('token');
         Cookies.remove('userId');
         Cookies.remove('RoleId');
+        Cookies.remove('FullName');
         setIsLoggedIn(false);
         message.success('Logged out successfully!');
         setTimeout(() => {
@@ -75,12 +78,15 @@ const MainLayout: React.FC = () => {
           <div className="top-header   bg-[#f5faf5]">
             <div className="flex w-10/12 m-auto justify-between">
               <ul className="flex gap-3 p-4 ">
+                
                 <li className="cursor-pointer  hover:text-red-600">
-                  <a href="#">Account</a>
+                  <a href="#">Xin chao: {fullName}</a>
                 </li>
+                <li className="text-inherit">|</li>
                 <li className="cursor-pointer  hover:text-red-600">
-                  <a href="/checkorder">Track Order</a>
+                  <a href="#">Track Order</a>
                 </li>
+                <li className="text-inherit">|</li>
                 <li className="cursor-pointer  hover:text-red-600">
                   <a href="#">Support</a>
                 </li>
@@ -96,7 +102,7 @@ const MainLayout: React.FC = () => {
                   >
                     <path d="M760-480q0-117-81.5-198.5T480-760v-80q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-480h-80Zm-160 0q0-50-35-85t-85-35v-80q83 0 141.5 58.5T680-480h-80Zm198 360q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12ZM241-600l66-66-17-94h-89q5 41 14 81t26 79Zm358 358q39 17 79.5 27t81.5 13v-88l-94-19-67 67ZM241-600Zm358 358Z" />
                   </svg>
-                  <span>+ 0123443223</span>
+                  <span>19008198</span>
                 </li>
                 <li className="text-inherit">|</li>
                 <li className="flex gap-1">
@@ -109,7 +115,7 @@ const MainLayout: React.FC = () => {
                   >
                     <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z" />
                   </svg>{" "}
-                  <span> YourMail@mail.com</span>
+                  <span> MiniStar@gmail.com</span>
                 </li>
               </ul>
             </div>
@@ -211,7 +217,7 @@ const MainLayout: React.FC = () => {
                     className="h-10 w-52 rounded-md px-3 cursor-pointer"
                   >
                     <option value="" disabled hidden selected>
-                      All Categorie
+                      All Categories
                     </option>
                     <option value="">
                       <a href="#">Vegetable</a>
@@ -259,9 +265,7 @@ const MainLayout: React.FC = () => {
                   >
                     Pages+
                     <ul className=" hidden bg-white absolute w-64  shadow-xl rounded-lg p-5 text-black group-focus:block group-hover:block   ">
-                      <li className="pb-4 hover:text-green-500">
-                        <a href="product-detail">Product-details</a>
-                      </li>
+                      
                       <li className="pb-4 hover:text-green-500">
                         <a href="">Privacy Policy</a>
                       </li>
@@ -285,9 +289,7 @@ const MainLayout: React.FC = () => {
                   <a href="Bloger" className="hover:text-gray-200 font-semibold">
                     Blog
                   </a>
-                  <a href="#" className="hover:text-gray-200 font-semibold">
-                    User Dashboard
-                  </a>
+                  
                   <a href="Contact" className="hover:text-gray-200 font-semibold">
                     Contact
                   </a>

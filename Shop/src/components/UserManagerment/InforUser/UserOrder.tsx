@@ -41,7 +41,7 @@ export const UserOrder  = () => {
                 <th className="p-3">ID</th>
                 <th className="p-3">Price</th>
                 <th className="p-3 w-4 float-left">Status</th>
-                <th className="p-3 ">Total</th>
+                <th className="p-3 ">Create At</th>
                 <th className="p-3">Action</th>
               </tr>
             </thead>

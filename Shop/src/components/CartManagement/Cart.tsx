@@ -169,7 +169,7 @@ const handleCheckOut = async () => {
                 />
                 <span className="pl-1 font-semibold">{item.productName}</span>
               </td>
-              <td className="p-3 font-semibold">${item.price.toFixed(2)}</td>
+              <td className="p-3 font-semibold">{item.price.toFixed(3)}</td>
               <td className="p-2">
                 <div className="flex items-center border border-solid rounded float-left">
                   <button
@@ -189,7 +189,7 @@ const handleCheckOut = async () => {
                 </div>
               </td>
               <td className="p-3 font-semibold w-40">
-                ${(item.price * item.quantity).toFixed(2)}
+                {(item.price * item.quantity).toFixed(3)}
               </td>
               <td className="p-6">
                 <button
@@ -223,7 +223,7 @@ const handleCheckOut = async () => {
         Total Quantity: <span className="text-red-500">{cart && cart.cartItems.length}</span> Items
         <br />
         Total Amount: <span className="text-red-500">
-          ${cart && cart.cartItems.reduce((total: number, item: any) => total + item.price * item.quantity, 0).toFixed(2)}
+          {cart && cart.cartItems.reduce((total: number, item: any) => total + item.price * item.quantity, 0).toFixed(2)}
         </span>
       </span>
     </div>

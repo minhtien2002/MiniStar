@@ -168,8 +168,8 @@ namespace UserServices.Implementation
                 PhoneNumber = user.PhoneNumber,
                 Gender = user.Gender,
                 RoleId = user.RoleId,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
             };
         }
 

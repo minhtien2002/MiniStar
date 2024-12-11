@@ -130,13 +130,14 @@ export const Address = () => {
               <p><span className="font-semibold">City:</span> {address.city}</p>
               <p><span className="font-semibold">State:</span> {address.state}</p>
               <p><span className="font-semibold">Type:</span> {address.addressType}</p>
-              <Button
+              {/*<Button
                 type="danger"
                 className="bg-green-500 text-white py-1 px-2 rounded hover:bg-green-600"
                 onClick={() => handleDeleteAddress(address.addressId)}
               >
                 Delete
               </Button>
+              */}
             </div>
           ))}
         </div>

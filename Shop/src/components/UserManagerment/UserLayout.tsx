@@ -26,6 +26,7 @@ export const UserLayout = () => {
         Cookies.remove('token');
         Cookies.remove('userId');
         Cookies.remove('RoleId');
+        Cookies.remove('FullName');
         setIsLoggedIn(false);
         alert('Logged out successfully!');
         window.location.reload();

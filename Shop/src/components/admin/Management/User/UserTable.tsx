@@ -175,7 +175,7 @@ export const UserTable = () => {
     <div className="relative">
       <div className="container mx-auto p-4 overflow-x-hidden">
         <h1 className="text-3xl font-bold mb-4">Danh sách User</h1>
-        <div className="w-full flex justify-between">
+        {/*<div className="w-full flex justify-between">
           <div className="flex w-[25%] rounded-lg ">
             <Form.Item className="cursor-pointer float-right hover:text-blue-600 text-center w-48 m-0 mr-2">
               <Select
@@ -197,7 +197,7 @@ export const UserTable = () => {
               Apply
             </Button>
           </div>
-        </div>
+        </div>*/}
         <table className="w-full mt-4">
           <thead>
             <tr>
@@ -566,3 +566,6 @@ export const UserTable = () => {
 function pathDeleteProduct(data: any): string {
   throw new Error("Function not implemented.");
 }
+
+
+

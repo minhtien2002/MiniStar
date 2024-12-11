@@ -73,9 +73,8 @@ const Product: React.FC<ProductProps> = ({
             <div className=" w-full flex flex-col gap-2 justify-center items-center">
               <div className="flex flex-col items-center">
                 <p className="font-bold text-2xl pt-2">{productName}</p>
-                <span className="font-light text-[13px] ">123</span>
               </div>
-              <span className="text-red-500 font-bold text-xl">${price}</span>
+              <span className="text-red-500 font-bold text-xl">{price.toFixed(3)}</span>
               <div className="w-full text-[#34A853] font-medium rounded-lg bg-green-100 hover:bg-[#34A853] flex justify-center gap-1 group hover:text-white">
                 <img
                   src="./src/assets/images/icon-plus-green.svg"

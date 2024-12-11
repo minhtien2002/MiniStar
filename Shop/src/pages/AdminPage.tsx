@@ -1,19 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import { NavLink, Outlet } from "react-router-dom";
 import { FloatButton } from "antd";
 import { Switch } from "antd";
+import Cookies from 'js-cookie';
 import DashBoard from "../components/admin/DashBoard/DashBoard";
 import { BellOutlined, MailOutlined } from "@ant-design/icons";
+import { message } from "antd";
+
 
 function AdminPanel() {
   const [title, setTitle] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const onChangeTitle = (value: string) => {
     setTitle(value);
   };
   console.log(title);
 
-  
+   useEffect(() => {
+        // Kiểm tra cookie để xác định trạng thái đăng nhập
+        const token = Cookies.get('token');
+        const role = Cookies.get('RoleId');
+        if (!token) {  
+            window.location.href = '/'; // Hoặc sử dụng React Router để chuyển hướng
+            }
+        if (role!=1) {  
+            window.location.href = '/'; // Hoặc sử dụng React Router để chuyển hướng
+            }
+    }, []);
 
+const handleLogout = () => {
+        Cookies.remove('token');
+        Cookies.remove('userId');
+        Cookies.remove('RoleId');
+        Cookies.remove('FullName');
+        setIsLoggedIn(false);
+        message.success('Logged out successfully!');
+        setTimeout(() => {
+          window.location.href="/";
+        }, 700);
+
+    };
   const [mode, setMode] = useState("text-[#26303e] bg-white");
   const handelSetmodeDask = () => {
     setMode("bg-[#26303e] text-white");
@@ -78,12 +104,12 @@ function AdminPanel() {
                 <span className="block">Profile</span>
               </li>
             </NavLink>
-            <NavLink to="/">
+            <NavLink>
               <li
                 className="py-3 px-6 hover:bg-gray-700"
                 // onClick={() => onChangeTitle("Thống kê")}
               >
-                <span className="block">Logout</span>
+                <span type="button" onClick={handleLogout}  className="block">Logout</span>
               </li>
             </NavLink>
           </ul>

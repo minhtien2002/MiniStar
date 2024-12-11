@@ -52,9 +52,18 @@ const Login: React.FC = () => {
             Cookies.set('token', data.token, { expires: 7, secure: true });
             Cookies.set('userId', data.userId, { expires: 7, secure: true });
             Cookies.set('RoleId', data.roleId, { expires: 7, secure: true });
+            Cookies.set('FullName', data.fullName, { expires: 7, secure: true });
+
+            if (data.roleId==1) {
+                message.success('Welcome! Admin');
+                setTimeout(() => {
+                window.location.href = '/admin'; // Hoặc sử dụng React Router để chuyển hướng
+            }, 1000);
+                return;
+            }
             message.success('Login Successfully');
             setTimeout(() => {
-            window.location.href = '/'; // Hoặc sử dụng React Router để chuyển hướng
+                window.location.href = '/'; // Hoặc sử dụng React Router để chuyển hướng
             }, 1000);
             // Chuyển hướng về trang chủ sau khi đăng nhập thành công
 
