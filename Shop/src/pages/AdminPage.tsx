@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { FloatButton } from "antd";
 import { Switch } from "antd";
-import DashBoard from "../components/admin/DashBoard";
+import DashBoard from "../components/admin/DashBoard/DashBoard";
 import { BellOutlined, MailOutlined } from "@ant-design/icons";
 
 function AdminPanel() {
@@ -70,12 +70,20 @@ function AdminPanel() {
               </li>
             </NavLink>
             
-            <NavLink to="/admin">
+            <NavLink to="/admin/profile">
               <li
                 className="py-3 px-6 hover:bg-gray-700"
-                onClick={() => onChangeTitle("Thống kê")}
+                onClick={() => onChangeTitle("Profile")}
               >
-                <span className="block">Thống kê</span>
+                <span className="block">Profile</span>
+              </li>
+            </NavLink>
+            <NavLink to="/">
+              <li
+                className="py-3 px-6 hover:bg-gray-700"
+                // onClick={() => onChangeTitle("Thống kê")}
+              >
+                <span className="block">Logout</span>
               </li>
             </NavLink>
           </ul>

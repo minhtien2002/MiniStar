@@ -133,5 +133,11 @@ namespace BackEndApi.Controllers
             List<ProductViewModel> response = await productService.filterByCategoryOrBrand(a, b);
             return Ok(response);
         }
+        [HttpGet("SearchProductByName={key}")]
+        public async Task<IActionResult> SearchProductByName(string key)
+        {
+            List<ProductViewModel> response = await productService.searchProductByName(key);
+            return Ok(response);
+        }
     }
 }

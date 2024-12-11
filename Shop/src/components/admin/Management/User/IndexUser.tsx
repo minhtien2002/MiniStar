@@ -99,14 +99,14 @@ export const IndexUser = () => {
   }
 
   return (
-    <div>
+    <>
       <UserTable users={users} onDeleteUser={handleDeleteUser} onEditUser={handleEditUser} />
-      <EditUserDrawer
+      {/* <EditUserDrawer
         visible={drawerVisible}
         user={editingUser}
         onClose={() => setDrawerVisible(false)}
         onUpdateUser={handleUpdateUser}
-      />
-    </div>
+      /> */}
+    </>
   );
 };

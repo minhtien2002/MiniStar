@@ -137,5 +137,32 @@ namespace Repositories
             }).ToListAsync();
             return products;
         }
+
+        public async Task<List<ProductViewModel>> searchProductByName(string key)
+        {
+            var query = from p in _appDbContext.Products
+                        join c in _appDbContext.Categories on p.CategoryId equals c.CategoryId
+                        join b in _appDbContext.Brands on p.BrandId equals b.BrandId
+                        select new { p, c, b };
+            if (key != null)
+            {
+                query = query.Where(x=> x.p.ProductName.Contains(key));
+            }
+            List<ProductViewModel> products = await query.Select(x => new ProductViewModel()
+            {
+                ProductId = x.p.ProductId,
+                ProductName = x.p.ProductName,
+                Description = x.p.Description,
+                Price = x.p.Price,
+                Quantity = x.p.Quantity,
+                ProductImage = x.p.ProductImage,
+                CreateAt = x.p.CreateAt,
+                UpdateAt = x.p.UpdateAt,
+                IsDeleted = x.p.IsDeleted,
+                Categories = x.c,
+                Brands = x.b,
+            }).ToListAsync();
+            return products;
+        }
     }
 }

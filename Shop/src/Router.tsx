@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Error from "./components/Error";
-import DashBoard from "./components/admin/DashBoard";
+import DashBoard from "./components/admin/DashBoard/DashBoard";
 import AdminPage from "./pages/AdminPage";
 import Login from "./components/Login";
 import ProductDetail from "./components/ProductManagement/ProductDetail";
