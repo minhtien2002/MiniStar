@@ -17,8 +17,11 @@ import { DashBoardUser } from "./components/UserManagerment/InforUser/DashBoardU
 import { Information } from "./components/UserManagerment/InforUser/Information";
 import { Address } from "./components/UserManagerment/InforUser/Address";
 import ChangePassword from "./components/UserManagerment/InforUser/ChangePassword";
+import EditUserProfile from "./components/UserManagerment/InforUser/EditUserProfile";
 import { UserOrder } from "./components/UserManagerment/InforUser/UserOrder";
 import { Contact } from "./components/Contact";
+import { IndexUser } from "./components/admin/Management/User/IndexUser";
+import { IndexOrder } from "./components/admin/Management/Order/IndexOrder";
 import AboutUs from "./components/AboutUs";
 import Blog from "./components/Blog";
 export function RouteConfig() {
@@ -43,12 +46,16 @@ export function RouteConfig() {
           <Route path="Information" element={<Information />} />
           <Route path="Address" element={<Address />} />
           <Route path="ChangePassword" element={<ChangePassword />} />
+          <Route path="EditUserProfile" element={<EditUserProfile />} />
           <Route path="UserOrder" element={<UserOrder />} />
         </Route>
       </Route>
       <Route path="admin" element={<AdminPage />}>
         <Route index element={<DashBoard />} />
         <Route path="Management/Product/Index" element={<Index />} />
+        <Route path="Management/User/IndexUser" element={<IndexUser />} />
+        <Route path="Management/Order/IndexOrder" element={<IndexOrder />} />
+
       </Route>
     </Routes>
   );

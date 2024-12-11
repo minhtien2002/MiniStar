@@ -1,8 +1,10 @@
-﻿using CartServices.Implementation;
+﻿using BackEndApi.Controllers;
+using CartServices.Implementation;
 using Domain.Entities;
 using Interface;
 using Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Persistence;
 using Repositories;
@@ -24,12 +26,15 @@ namespace BackEndApi
         {
             services.AddCors(o => o.AddPolicy("CorsPolicy", b =>
             {
+                b.WithOrigins("http://localhost:8080");
+
                 b.AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowAnyOrigin();
+
             }));
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection2")));
 
             services.AddScoped<IGenericRepository<Product>, GenericRepository<Product>>();
             services.AddScoped<IGenericRepository<Brand>, GenericRepository<Brand>>();
@@ -40,13 +45,20 @@ namespace BackEndApi
             services.AddScoped<ICartService, CartService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICartItemService, CartItemService>();
+            services.AddSingleton<IOtpService, OtpService>();
+            services.AddTransient<IEmailService, EmailService>();
+            services.AddScoped<IAddressService, AddressService>();
 
+
+            services.AddMemoryCache();  // Đăng ký MemoryCache trong DI container
 
             services.AddHttpContextAccessor();
             services.AddHttpClient();
             services.AddControllers();
             services.AddControllersWithViews();
             services.AddEndpointsApiExplorer();
+            services.AddAuthorization();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger eShop Solution", Version = "v1" });
@@ -66,13 +78,16 @@ namespace BackEndApi
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+           
             app.UseCors("CorsPolicy");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            
             app.UseRouting();
 
+            //app.UseMiddleware<RoleAuthorizationMiddleware>();
             app.UseAuthorization();
+
 
             app.UseSwagger();
 
@@ -80,7 +95,7 @@ namespace BackEndApi
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger eShopSolution V1");
             });
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

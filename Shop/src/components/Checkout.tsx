@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { fetchCheckoutData } from './authUtils';
 import { getUserId } from './authUtils'
 import API_ENDPOINTS from "../apiConfig";
+import { Button, message, Popconfirm } from "antd";
+
 
 const Checkout = () => {
   const [selectedAddressId, setSelectedAddressId] = useState(null);
@@ -17,22 +19,23 @@ const Checkout = () => {
       try {
         const data = await fetchCheckoutData(userId);
         setCheckoutData(data);
+        
       } catch (error) {
-        console.error('Failed to load checkout data:', error);
+        message.error('Failed to load checkout data:', error);
       }
     };
 
     loadCheckoutData();
   }, [userId]);
   const showAlert = () => {
-    alert('Order Success... Press "OK" to return home   ');
+    message.success('Order Success... Press "OK" to return home   ');
   };
  if (!checkoutData) {
     return <div>Loading...</div>;
   }
  const handleCreateOrder = async () => {
     if (!selectedAddressId) {
-      alert('Please select an address for delivery!');
+      message.info('Please select an address for delivery!');
       return;
     }
 
@@ -49,19 +52,14 @@ const Checkout = () => {
       });
 
       if (!response.ok) {
-        console.log(userId);
-        console.log(selectedAddressId);
-        throw new Error('Failed to create order');
+        message.error('Failed to create order');
       }
 
       const data = await response.json();
-      alert('Order created successfully!');
-      console.log('Order details:', data);
+      message.success('Order created successfully!');
 
-      // Optionally, redirect to order confirmation page or reset the cart
     } catch (error) {
-      console.error('Error creating order:', error);
-      alert('Failed to create order. Please try again.');
+      message.error('Failed to create order. Please try again.');
     }
   };
   return (

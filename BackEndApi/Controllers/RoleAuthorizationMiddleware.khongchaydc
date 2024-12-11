@@ -1,0 +1,33 @@
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace BackEndApi.Controllers
+{
+    public class RoleAuthorizationMiddleware
+    {
+        private readonly RequestDelegate _next;
+
+        public RoleAuthorizationMiddleware(RequestDelegate next)
+        {
+            _next = next;
+        }
+
+		public async Task Invoke(HttpContext context)
+		{
+			var roleIdCookie = context.Request.Cookies["RoleId"];
+			Console.WriteLine("Access Granted: RoleId=" + roleIdCookie);
+			Console.WriteLine("Access Granted: RoleId=" + roleIdCookie);
+			if (string.IsNullOrEmpty(roleIdCookie))
+			{
+				Console.WriteLine("Access Denied: Missing or Invalid RoleId. Cookie: " + roleIdCookie);
+				context.Response.StatusCode = StatusCodes.Status403Forbidden;
+				await context.Response.WriteAsync("Access Denied");
+				return;
+			}
+
+			Console.WriteLine("Access Granted: RoleId=" + roleIdCookie);
+			context.Items["RoleId"] = int.Parse(roleIdCookie);
+			await _next(context);
+		}
+	}
+
+}

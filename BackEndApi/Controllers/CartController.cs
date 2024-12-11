@@ -17,16 +17,39 @@ namespace CartAPI.Controllers
         }
 
         [HttpGet("{userId}")]
+
         public async Task<IActionResult> GetCart(int userId)
         {
             var cart = await _cartService.GetCartByUserIdAsync(userId);
             if (cart == null) return NotFound();
             return Ok(cart);
         }
+        [HttpGet("item-count/{userId}")]
+        public async Task<IActionResult> GetCartItemCount(int userId)
+        {
+         
+
+            var cart = await _cartService.GetCartByUserIdAsync(userId);
+
+            if (cart == null)
+            {
+                return Ok(0); 
+            }
+            var totalItemCount = cart.CartItems.Count;
+            // var totalItemCount = cart.CartItems.Sum(item => item.Quantity);
+
+            return Ok(totalItemCount);
+        }
+
 
         [HttpPost("add")]
         public async Task<IActionResult> AddToCart([FromQuery] int userId, [FromQuery] int productId, [FromQuery] int quantity)
         {
+            //var roleId = HttpContext.Items["RoleId"] as int?;
+            //if (roleId != 1) // 1 là admin
+            //{
+            //return Forbid("You are not authorized to access this endpoint.");
+            //}
             var success = await _cartService.AddToCartAsync(userId, productId, quantity);
             if (!success) return BadRequest("Could not add to cart.");
             return Ok("Added to cart.");

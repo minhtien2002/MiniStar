@@ -23,6 +23,22 @@ const API_ENDPOINTS = {
   getOrdersByBuyerId: (buyerId:any) => `${API_BASE_URL}/Order/orders/${buyerId}`,
   getOrderDetails: (orderId:any) => `${API_BASE_URL}/Order/${orderId}`,
   checkout: (userId: number) => `${API_BASE_URL}/Order/checkout/${userId}`,
+  CartItemCount: (userId: number) => `${API_BASE_URL}/Cart/item-count/${userId}`,
+  GetUserById: (userId: number) => `${API_BASE_URL}/User/${userId}`,
+  EditUserById: (userId: number) => `${API_BASE_URL}/User/${userId}`,
+  VerifyOtp: `${API_BASE_URL}/User/verify-otp`,
+  changepass: `${API_BASE_URL}/User/change-password`,
+  SendOtp: `${API_BASE_URL}/User/send-otp`,
+  verifyOtp2: `${API_BASE_URL}/User/verify-otp2`,
+  sendOtp2: `${API_BASE_URL}/User/send-otp2`,
+  sumorder: `${API_BASE_URL}/Order/orders/summary`,
+  getAllUsers: `${API_BASE_URL}/User/users/summary`,
+  getAddresses: (userId) => `${API_BASE_URL}/address/user/${userId}`,
+  addAddress: (userId) => `${API_BASE_URL}/address/user/${userId}`,
+  deleteAddress: (addressId) => `${API_BASE_URL}/address/${addressId}`,
+  deleteOrder: (orderId) => `${API_BASE_URL}/order/${orderId}`,
+  deleteUser: (userId) => `${API_BASE_URL}/User/${userId}`,
+
 
 
 

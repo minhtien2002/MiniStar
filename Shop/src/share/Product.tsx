@@ -1,6 +1,9 @@
 import React from 'react'
 import Cookies from 'js-cookie';
 import API_ENDPOINTS from "../apiConfig";
+import { Button, message, Popconfirm } from "antd";
+
+
 
 
 interface ProductProps {
@@ -11,6 +14,7 @@ interface ProductProps {
 }
 
 const Product: React.FC<ProductProps> = ({ productId, productName, price, productImage }) => {
+  
   const getUserId = (): string | null => {
   const userId = Cookies.get('userId');  // Lấy userId từ cookie
   if (!userId) {
@@ -24,12 +28,12 @@ const Product: React.FC<ProductProps> = ({ productId, productName, price, produc
 
     if (!token) {
       // Nếu không có token, yêu cầu người dùng đăng nhập
-      alert("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.");
+      message.error("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.");
       return;
     }
     const userId = getUserId(); 
     if (!userId) {
-      console.error("User not logged in.");
+      message.error("User not logged in.");
       return;
     }
 
@@ -40,13 +44,13 @@ const Product: React.FC<ProductProps> = ({ productId, productName, price, produc
     });
 
     if (response.ok) {
-      console.log("Product added to cart successfully");
+      message.success("Product added to cart successfully");
     } else {
       const error = await response.text();
-      console.error("Failed to add product to cart:", error);
+      message.error("Failed to add product to cart:", error);
     }
   } catch (error) {
-    console.error("Error adding product to cart:", error);
+    message.error("Error adding product to cart:", error);
   }
 };
   return (
@@ -58,10 +62,10 @@ const Product: React.FC<ProductProps> = ({ productId, productName, price, produc
         <span className='font-light text-[13px] '>123</span>
       </div>
       <span className='text-red-500 font-bold text-xl'>${price}</span>
-      <div className="w-full text-[#34A853] font-medium rounded-lg bg-green-100 hover:bg-[#34A853] flex justify-center gap-1 group hover:text-white">
+      <div onClick={() => addToCart(productId, 1)}  className="w-full text-[#34A853] font-medium rounded-lg bg-green-100 hover:bg-[#34A853] flex justify-center gap-1 group hover:text-white">
         <img src="./src/assets/images/icon-plus-green.svg" alt="" className='group-hover:hidden' />
         <img src="./src/assets/images/icon-plus-white.svg" alt="" className='hidden group-hover:block' />
-        <a onClick={() => addToCart(productId, 1)}  type="button" className='py-2' >Add To Cart</a>
+        <button  className='py-2' >Add To Cart</button>
       </div>
     </div>
   </div></a>
