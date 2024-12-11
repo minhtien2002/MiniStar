@@ -86,7 +86,7 @@ const EditProduct: React.FC<DetailProductProps> = ({ initialProduct }) => {
 
   useEffect(() => {
     setProduct(initialProduct as ProductData);
-    console.log("initialProduct", product);
+    // console.log("initialProduct", product);
   }, [initialProduct]);
 
   const handleApiCategory = (data: any) => {

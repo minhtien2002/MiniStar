@@ -3,6 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { FloatButton } from "antd";
 import { Switch } from "antd";
 import DashBoard from "./DashBoard";
+import { BellOutlined, MailOutlined } from "@ant-design/icons";
 
 function AdminPanel() {
   const [title, setTitle] = useState("");
@@ -69,7 +70,7 @@ function AdminPanel() {
               </li>
             </NavLink>
             
-            <NavLink to="">
+            <NavLink to="/admin">
               <li
                 className="py-3 px-6 hover:bg-gray-700"
                 onClick={() => onChangeTitle("Thống kê")}
@@ -98,9 +99,15 @@ function AdminPanel() {
         <div className="flex justify-between">
           <h2 className="text-2xl font-bold ">{title}</h2>
           <div className="flex justify-end">
-            <div className="p-1">
+            {/* <div className="p-1">
               <label htmlFor="">Thanos Búng Tay </label>
               <Switch defaultChecked onChange={onChange} />
+            </div> */}
+            <div>
+            <BellOutlined />
+            </div>
+            <div>
+            <MailOutlined />
             </div>
             <input
               type="text"

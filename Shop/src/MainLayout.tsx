@@ -203,7 +203,7 @@ const MainLayout: React.FC = () => {
                     Home
                   </a>
                   <a
-                    href="/product-all"
+                    href="/shop"
                     className="hover:text-gray-200 font-semibold relative group"
                   >Shop+</a>
                   <a

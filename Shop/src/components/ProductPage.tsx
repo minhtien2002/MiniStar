@@ -1,20 +1,37 @@
 import Product from "../share/Product";
 import API_ENDPOINTS from "../apiConfig"; // Import API URL từ file cấu hình
 import CallApi from "../share/Fetch/CallApi";
-import React from "react";
-import { Breadcrumb, Pagination, Select, Slider } from "antd";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Breadcrumb,
+  Button,
+  Form,
+  message,
+  Pagination,
+  Select,
+  Slider,
+} from "antd";
+import { CloseOutlined } from "@ant-design/icons";
+import MakeRequest from "../share/Fetch/MakeRequest";
+import PaginationComponent from "./PaginationComponent";
 
 const pathProduct = API_ENDPOINTS.getAllProduct; // Lấy URL API từ file cấu hình
-
 const pathQuantityAllProduct = API_ENDPOINTS.quantityAllProduct;
 const pathCategory = API_ENDPOINTS.getAllCategory;
 const pathBrand = API_ENDPOINTS.getAllBrand;
+const pathProductWithSort = (sort: string) =>
+  API_ENDPOINTS.getProductWithSort(sort);
+const pathProductFilterByCategoryOrBrand =
+  API_ENDPOINTS.productFilterByCategoryOrBrand;
 
 interface ProductData {
   productId: number;
   productName: string;
   price: number;
   productImage: string;
+  isDeleted: boolean;
+  categories: Categories;
+  brands: Brands;
 }
 
 interface Categories {
@@ -37,93 +54,202 @@ const PageProduct: React.FC = () => {
   const [count, setCount] = React.useState(0); // Khởi tạo state count
   const [categories, setCategories] = React.useState([] as Categories[]); // Khởi tạo state categories
   const [brands, setBrands] = React.useState([] as Brands[]); // Khởi tạo state brands
-  const [yourChoice, setYourChoice] = React.useState(null as Array<number> | null);
+  const [yourChoice, setYourChoice] = React.useState([] as Array<string>);
+  const [filterCategory, setFilterCategory] = React.useState(
+    [] as ProductData[]
+  );
+  const [filterBrand, setFilterBrand] = React.useState([] as ProductData[]);
+  const [rangePrice, setRangePrice] = useState<[number, number]>([0, 1000]);
+  const [flag, setFlag] = useState(true);
+  let dataTemple = useRef([] as ProductData[]);
 
-  // Hàm nhận dữ liệu từ component con
-  const handleApiProduct = (data: any) => {
-    setProducts(data);
+  useEffect(() => {
+    handleApiProduct();
+    handleApiCategory();
+    handleApiBand();
+    handleApiCountAllProduct();
+    setFlag(true);
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (yourChoice.length > 0) {
+        MakeRequest(
+          pathProductFilterByCategoryOrBrand,
+          "POST",
+          yourChoice
+        ).then((res) => {
+          setProducts(res);
+        });
+      }
+      if (yourChoice.length === 0) {
+        handleApiProduct();
+      }
+    }, 300);
+  }, [yourChoice, filterBrand, filterCategory]);
+
+  const handleApiProduct = () => {
+    MakeRequest(pathProduct, "GET").then((res) => {
+      setProducts(res);
+    });
   };
 
-  const handleApiCategory = (data: any) => {
-    setCategories(data);
+  const handleApiCategory = () => {
+    MakeRequest(pathCategory, "GET").then((res) => {
+      setCategories(res);
+    });
   };
 
-  const handleApiBand = (data: any) => {
-    setBrands(data);
+  const handleApiBand = () => {
+    MakeRequest(pathBrand, "GET").then((res) => {
+      setBrands(res);
+    });
   };
 
-  const handleApiCountAllProduct = (data: any) => {
-    setCount(data);
+  const handleApiCountAllProduct = () => {
+    MakeRequest(pathQuantityAllProduct, "GET").then((res) => {
+      setCount(res);
+    });
   };
 
-  const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
+  const onSortAscendingOrDecreasing = (value: string) => {
+    try {
+      MakeRequest(pathProductWithSort(value), "GET").then((res) => {
+        setProducts(res);
+      });
+    } catch (error) {
+      message.error(String(error));
+    }
   };
 
-  const selectsCategoryOrBrand = () => {
-    return (
-      <>
-        <div>ashdjh</div>
-      </>
-    );
+  // filter by category or brand
+  const handleCheckbox = (id: string) => {
+    if (yourChoice.length > 0 && yourChoice.includes(id)) {
+      if (id.charAt(0) === "c") {
+        setYourChoice(yourChoice.filter((item) => item !== id));
+        const shouldUpdate = products.some(
+          (item) => item.categories.categoryId === parseInt(id.slice(1))
+        );
 
-  }
+        if (shouldUpdate) {
+          setFilterCategory(
+            filterCategory.filter(
+              (item) => item.categories.categoryId !== parseInt(id.slice(1))
+            )
+          );
+        }
+      }
+      if (id.charAt(0) === "b") {
+        setYourChoice(yourChoice.filter((item) => item !== id));
+        const shouldUpdate = products.some(
+          (item) => item.brands.brandId === parseInt(id.slice(1))
+        );
 
-  const handleCheckbox = (id: number) => {
+        if (shouldUpdate) {
+          setFilterBrand(
+            filterBrand.filter(
+              (item) => item.brands.brandId !== parseInt(id.slice(1))
+            )
+          );
+        }
+      }
+      return;
+    }
     setYourChoice([...(yourChoice || []), id]);
-    // console.log(yourChoice);
+    if (id.charAt(0) === "c") {
+      products.forEach((item) => {
+        if (item.categories.categoryId === parseInt(id.slice(1))) {
+          setFilterCategory([...filterCategory, item]);
+        }
+      });
+    }
+    if (id.charAt(0) === "b") {
+      products.forEach((item) => {
+        if (item.brands.brandId === parseInt(id.slice(1))) {
+          setFilterBrand([...filterBrand, item]);
+        }
+      });
+    }
   };
 
-  console.log(yourChoice);
+  const removeSelectedItems = () => {
+    setYourChoice([]);
+    setTimeout(() => {
+      window.location.reload();
+    }, 300);
+  };
+
+  const handleRangePriceChange = (newRange: [number, number]) => {
+    setRangePrice(newRange);
+  };
+
+  const filterByPrice = () => {
+    if (flag) {
+      dataTemple.current = products;
+      setFlag(false);
+    }
+    const filterPrice = dataTemple.current.filter(
+      (item) => item.price >= rangePrice[0] && item.price <= rangePrice[1]
+    );
+    setProducts(filterPrice);
+  };
 
   return (
     <div className="h-1/2 flex flex-col justify-between">
-      <div className="mb-4">
-        <Breadcrumb
-          separator=">"
-          className="text-gray-500 font-semibold text-lg"
-          items={[
-            {
-              title: "Home",
-            },
-            {
-              title: "Application Center",
-              href: "",
-            },
-            {
-              title: "Application List",
-              href: "",
-            },
-            {
-              title: "An Application",
-            },
-          ]}
-        />
-      </div>
       <div className="flex flex-row justify-between">
         <div className="w-1/4 h-auto mr-5">
           <div className="px-6 py-4 flex gap-5 flex-col border shadow-lg">
-            {yourChoice!=null && selectsCategoryOrBrand()}
-            
+            {yourChoice.length > 0 && (
+              <div>
+                <div className="flex justify-between items-center">
+                  <h3 className="font-bold text-blue-600">SELECTED</h3>
+                  <div className="px-2 rounded-md text-[13px]">
+                    <button
+                      className="hover:text-red-400"
+                      onClick={removeSelectedItems}
+                    >
+                      <span className="pr-1">Remove all</span>
+                    </button>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {filterCategory.map((item: any) => (
+                    <div className="bg-green-500 px-2 rounded-md text-white">
+                      <button className="">
+                        <CloseOutlined className="text-[13px]" />
+                      </button>
+                      <span className="text-lg pl-2">
+                        {item.categories.categoryName}
+                      </span>
+                    </div>
+                  ))}
+                  {filterBrand.map((item: any) => (
+                    <div className="bg-green-500 px-2 rounded-md text-white">
+                      <button className="">
+                        <CloseOutlined className="text-[13px]" />
+                      </button>
+                      <span className="text-lg pl-2">
+                        {item.brands.brandName}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className="flex flex-col gap-2">
               <h3 className="font-bold">CATEGORIES</h3>
-              <div className="">
+              <div className="h-44 overflow-scroll">
                 <ul className="flex flex-col gap-1 text-lg">
-                  <CallApi
-                    onDataReceive={handleApiCategory}
-                    urlOfApi={pathCategory}
-                  />
                   {categories.map((items: any) => (
-                    <li className="flex gap-1" >
+                    <li className="flex gap-1" key={items.categoryId}>
                       <form method="POST">
-                      <input
-                        type="checkbox"
-                        id={"category" + items.categoryId}
-                        name="cate"
-                        className="w-4"
-                        onClick={() => handleCheckbox(items.categoryId)}
-                        // checked={checkbox}
-                      />
+                        <input
+                          type="checkbox"
+                          id={"category" + items.categoryId}
+                          name="cate"
+                          className="w-4"
+                          onClick={() => handleCheckbox("c" + items.categoryId)}
+                        />
                       </form>
                       <label htmlFor={"category" + items.categoryId}>
                         {items.categoryName}
@@ -135,29 +261,45 @@ const PageProduct: React.FC = () => {
             </div>
             <div className="flex flex-col gap-2">
               <h3 className="font-bold">PRICE RANGE</h3>
-              <div className="">
-                <div className="">
-                  <div className="">
-                    <Slider range defaultValue={[0, 100]} />
-                    <span className="">Price: $40</span>
-                    <span>-</span>
-                    <span className="">$346</span>
-                  </div>
+              <Form onFinish={filterByPrice}>
+                <Form.Item>
+                  <Slider
+                    range
+                    max={1000}
+                    min={0}
+                    value={rangePrice}
+                    onChange={handleRangePriceChange}
+                  />
+                  <span className="">
+                    From: {rangePrice[0]} - To: {rangePrice[1]}
+                  </span>
+                </Form.Item>
+                <div className="flex justify-between gap-4">
+                  <Button type="primary" className="w-1/2" htmlType="submit">
+                    Submit
+                  </Button>
+                  <Button type="default" className="w-1/2" onClick={() => {
+                    setTimeout(() => {
+                      window.location.reload();
+                    }, 300);
+                  }}>
+                    Reset
+                  </Button>
                 </div>
-              </div>
+              </Form>
             </div>
             <div className="flex flex-col gap-2">
               <h3 className="font-bold">BRANDS</h3>
-              <div className="">
+              <div className="h-44 overflow-scroll">
                 <ul className="flex flex-col gap-1 text-lg">
-                  <CallApi onDataReceive={handleApiBand} urlOfApi={pathBrand} />
                   {brands.map((items: any) => (
-                    <li className="flex gap-1">
+                    <li className="flex gap-1" key={items.brandId}>
                       <input
                         type="checkbox"
                         id={"brand" + items.brandId}
                         name="brands"
                         className="w-4"
+                        onClick={() => handleCheckbox("b" + items.brandId)}
                       />
                       <label htmlFor={"brand" + items.brandId}>
                         {items.brandName}
@@ -177,52 +319,29 @@ const PageProduct: React.FC = () => {
           </div>
         </div>
         <div className="w-3/4 flex flex-col">
-          <div className="flex flex-row justify-between shadow py-5">
+          <div className="flex flex-row justify-between shadow py-5 px-4">
             <div className="result">
-              <CallApi
-                onDataReceive={handleApiCountAllProduct}
-                urlOfApi={pathQuantityAllProduct}
-              />
               <p>
-                Showing <span>1-12 of {count != 0 && count} results</span>
+                Showing <span>1-9 of {count != 0 && count} results</span>
               </p>
             </div>
             <div className="flex flex-row gap-2 justify-center">
               <span className="">Sort by:</span>
-              <div >
-                  <Select
-                    defaultValue="default"
-                    style={{ width: 110 }}
-                    onChange={handleChange}
-                    options={[
-                      { value: "default", label: "Mặc định" },
-                      { value: "ascending", label: "Tăng dần" },
-                      { value: "decreasing", label: "Giảm dần" },
-                      // { value: "best-seller", label: "Bán chạy" },
-                      // { value: "disabled", label: "Disabled", disabled: true },
-                    ]}
-                  />
+              <div>
+                <Select
+                  defaultValue="default"
+                  style={{ width: 110 }}
+                  onChange={onSortAscendingOrDecreasing}
+                  options={[
+                    { value: null, label: "Mặc định" },
+                    { value: "ascending", label: "Tăng dần" },
+                    { value: "decreasing", label: "Giảm dần" },
+                  ]}
+                />
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-4 mt-8">
-            <CallApi onDataReceive={handleApiProduct} urlOfApi={pathProduct} />
-            {products.map((product: any) => (
-              <Product
-                key={product.productId}
-                productId={product.productId}
-                productName={product.productName}
-                price={product.price}
-                productImage={product.productImage}
-              />
-            ))}
-          </div>
-          <Pagination
-            align="center"
-            defaultCurrent={1}
-            total={50}
-            className="mt-3"
-          />
+          <PaginationComponent items={products} />
         </div>
       </div>
     </div>

@@ -25,7 +25,7 @@ namespace BackEndApi.Controllers
         [HttpGet("GetAll")]
         public ActionResult GetAll() 
         {
-            List<ProductViewModel> result = productService.getProductAllFK();
+            List<ProductViewModel> result = productService.getProductAllFK();   
             //List<Product> result = await unitOfWork.Products.GetAllAsync();
             return Ok(result);
         }
@@ -35,6 +35,13 @@ namespace BackEndApi.Controllers
         {
             Product result = await unitOfWork.Products.GetByIdAsync(id);
             return Ok(result);
+        }
+
+        [HttpGet("ProductBy")]
+        public async Task<ActionResult> GetByCategoryOrBrand(int? categoryId, int? brandId) 
+        {
+            List<ProductViewModel> response = await productService.getProductByCategoryOrBrand(categoryId, brandId);
+            return Ok(response);
         }
 
         [HttpPost("Create")]
@@ -56,7 +63,7 @@ namespace BackEndApi.Controllers
                     ProductImage = product.ProductImage,
                     CreateAt = DateTime.Now,
                     UpdateAt = DateTime.Now,
-                    IsDeleted = true,
+                    IsDeleted = product.IsDeleted,
                     CategoryId = cate.CategoryId,
                     BrandId = b.BrandId,
                 };
@@ -101,6 +108,30 @@ namespace BackEndApi.Controllers
         {
             int result = await unitOfWork.Products.GetCountAsync();
             return Ok(result);
+        }
+        [HttpGet("SortBy")]
+        public async Task<IActionResult> SortByAscendingOrDecreasing(string? sort) 
+        {
+            List<ProductViewModel> result = await productService.sortProductAscendingOrDecreasing(sort);
+            return Ok(result);
+        }
+        [HttpPost("FilterByCategoryOrBrand")]
+        public async Task<IActionResult> FilterByCategoryOrBrand(List<string> filter)
+        {
+            List<int> a = [];
+            List<int> b = [];
+            foreach (var item in filter) {
+                if (item.Contains("c")) {
+                    string[] result = item.Split(new char[] {'c'}, StringSplitOptions.RemoveEmptyEntries);
+                    a.Add(Int32.Parse(result[0]));
+                }
+                if (item.Contains("b")) {
+                    string[] result = item.Split(new char[] { 'b' }, StringSplitOptions.RemoveEmptyEntries);
+                    b.Add(Int32.Parse(result[0]));
+                }
+            }
+            List<ProductViewModel> response = await productService.filterByCategoryOrBrand(a, b);
+            return Ok(response);
         }
     }
 }

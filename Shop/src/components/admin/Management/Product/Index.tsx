@@ -1,26 +1,6 @@
-import React, { FormEvent, useEffect, useState } from "react";
-import {
-  Button,
-  Checkbox,
-  Dropdown,
-  Form,
-  Input,
-  Menu,
-  message,
-  Popconfirm,
-  Select,
-  Space,
-  Switch,
-} from "antd";
-import { Cascader } from "antd";
-import type {
-  CascaderProps,
-  CheckboxProps,
-  GetProp,
-  MenuProps,
-  PopconfirmProps,
-} from "antd";
-import Product from "../../../../share/Product";
+import React, { useEffect, useState } from "react";
+import { Button, Checkbox, Form, message, Popconfirm, Select } from "antd";
+import type { PopconfirmProps } from "antd";
 import { AddProduct } from "./AddProduct";
 import API_ENDPOINTS from "../../../../apiConfig";
 import CallApi from "../../../../share/Fetch/CallApi";
@@ -28,12 +8,14 @@ import DeleteProduct from "./DeleteProduct";
 import MakeRequest from "../../../../share/Fetch/MakeRequest";
 import DetailProduct from "./DetailProduct";
 import EditProduct from "./EditProduct";
-import { DownOutlined } from "@ant-design/icons";
+import { ModalDrawer } from "./ModalDrawer";
 
 const pathProduct = API_ENDPOINTS.getAllProduct;
 const pathUpdateProduct = API_ENDPOINTS.UpdateProduct;
 const pathBrand = API_ENDPOINTS.getAllBrand;
 const pathCategory = API_ENDPOINTS.getAllCategory;
+const pathProductByCategoryOrBrand = (categoryId?: number, brandId?: number) =>
+  API_ENDPOINTS.getProductByCategoryOrBrand(categoryId, brandId);
 
 interface ProductData {
   productId: number;
@@ -65,12 +47,17 @@ interface Brands {
   isDelete: boolean;
 }
 
+interface CategoryOrBrand {
+  categoryId?: number;
+  brandId?: number;
+}
+
 export const Index = () => {
   const [products, setProducts] = useState([] as ProductData[]);
   const [p, setP] = useState<ProductData>();
-  // const [show, setShow] = useState<boolean>(false);
   const [categories, setCategories] = React.useState([] as Categories[]); // Khởi tạo state categories
   const [brands, setBrands] = React.useState([] as Brands[]); // Khởi tạo state brands
+  const [sort, setSort] = useState<CategoryOrBrand>();
 
   // Hàm nhận dữ liệu từ component con
   const handleApiProduct = (data: any) => {
@@ -123,53 +110,74 @@ export const Index = () => {
     setCategories(data);
   };
 
-  const handleApiBand = (data: any) => {
+  const handleApiBrand = (data: any) => {
     setBrands(data);
   };
 
   CallApi({ urlOfApi: pathCategory, onDataReceive: handleApiCategory });
-  CallApi({ urlOfApi: pathBrand, onDataReceive: handleApiBand });
+  CallApi({ urlOfApi: pathBrand, onDataReceive: handleApiBrand });
+
+  const handleApply = async () => {
+    try {
+      var response = await MakeRequest(
+        pathProductByCategoryOrBrand(sort?.categoryId, sort?.brandId),
+        "GET"
+      );
+      setProducts(response);
+    } catch (error) {
+      return message.error("Sort failure from backend");
+    }
+  };
+
+  useEffect(() => {
+    setProducts(products);
+  }, [products]);
 
   //End data
   return (
     <div className="relative">
       <div className="container mx-auto p-4 overflow-x-hidden">
-        <h1 className="text-3xl font-bold mb-4">Danh sách sản phẩm</h1>
+        <div className="flex flex-row justify-between">
+          <h1 className="text-3xl font-bold mb-4">Danh sách sản phẩm</h1>
+          <div className="flex gap-4">
+            <ModalDrawer title="Category" listCategory={categories} />
+            <ModalDrawer title="Brand" listBrand={brands} />
+          </div>
+        </div>
         <div className="w-full flex justify-between">
           <AddProduct />
           <div className="flex justify-between w-1/2 rounded-lg pl-9 items-center">
-            <Form.Item
-              className="cursor-pointer hover:text-blue-600 text-center w-48 m-0 p-0"
-            >
+            <Form.Item className="cursor-pointer hover:text-blue-600 text-center w-48 m-0 p-0">
               <Select
                 placeholder="Please select a Category"
-                // onChange={(e) => {
-                //   setProduct({ ...product, categoryId: e as number });
-                // }}
+                onChange={(e) => {
+                  setSort({ ...sort, categoryId: e as number });
+                }}
               >
-                <Select.Option key="" value="">
-                    --None--
-                  </Select.Option>
+                <Select.Option value={undefined}>
+                  <span className="text-[#969696]">--Categories--</span>
+                </Select.Option>
                 {categories.map((items: any) => (
-                  <Select.Option key={items.categoryId} value={items.categoryId}>
+                  <Select.Option
+                    key={items.categoryId}
+                    value={items.categoryId}
+                  >
                     {items.categoryName}
                   </Select.Option>
                 ))}
               </Select>
             </Form.Item>
             <hr className="border-l-2 border-[#969696] w-[1px] h-[80%]" />
-            <Form.Item
-              className="cursor-pointer hover:text-blue-600 text-center w-48 m-0 p-0"
-            >
+            <Form.Item className="cursor-pointer hover:text-blue-600 text-center w-48 m-0 p-0">
               <Select
                 placeholder="Please select a Brand"
-                // onChange={(e) => {
-                //   setProduct({ ...product, categoryId: e as number });
-                // }}
+                onChange={(e) => {
+                  setSort({ ...sort, brandId: e as number });
+                }}
               >
-                <Select.Option key="" value="">
-                    --None--
-                  </Select.Option>
+                <Select.Option value={undefined}>
+                  <span className="text-[#969696]">--Brands--</span>
+                </Select.Option>
                 {brands.map((items: any) => (
                   <Select.Option key={items.brandId} value={items.brandId}>
                     {items.brandName}
@@ -177,7 +185,7 @@ export const Index = () => {
                 ))}
               </Select>
             </Form.Item>
-            <Button type="primary" className="rounded">
+            <Button type="primary" className="rounded" onClick={handleApply}>
               Apply
             </Button>
           </div>

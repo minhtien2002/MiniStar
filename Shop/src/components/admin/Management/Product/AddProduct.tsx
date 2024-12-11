@@ -40,7 +40,7 @@ interface ProductData {
   price: number;
   quantity: number;
   productImage: string;
-  isDelete: boolean;
+  isDeleted: boolean;
   categoryId: number;
   brandId: number;
 }
@@ -68,7 +68,7 @@ const InitialProduct: ProductData = {
   price: 0,
   quantity: 0,
   productImage: "",
-  isDelete: false,
+  isDeleted: false,
   categoryId: 0,
   brandId: 0,
 };
@@ -114,6 +114,7 @@ export const AddProduct: React.FC = () => {
 
   const addProduct = async () => {
     setProduct({ ...product });
+    console.log(product);
     try {
       await MakeRequest(pathCreateProduct, "POST", product);
     } catch (error) {
@@ -304,7 +305,7 @@ export const AddProduct: React.FC = () => {
               >
                 <Checkbox
                   onChange={(e) => {
-                    setProduct({ ...product, isDelete: e.target.checked });
+                    setProduct({ ...product, isDeleted: e.target.checked });
                   }}
                 >
                   Checkbox

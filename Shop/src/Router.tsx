@@ -27,7 +27,7 @@ export function RouteConfig() {
       <Route path="/" element={<MainLayout />}>
         <Route path="*" element={<Error />} />
         <Route index element={<Home />} />
-        <Route path="product-all" element={<PageProduct />} />
+        <Route path="shop" element={<PageProduct />} />
         <Route path="login" element={<Login />} />
         <Route path="cart" element={<Cart />} />
         <Route path="checkout" element={<Checkout />} />

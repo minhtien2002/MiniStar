@@ -23,10 +23,9 @@ const API_ENDPOINTS = {
   getOrdersByBuyerId: (buyerId:any) => `${API_BASE_URL}/Order/orders/${buyerId}`,
   getOrderDetails: (orderId:any) => `${API_BASE_URL}/Order/${orderId}`,
   checkout: (userId: number) => `${API_BASE_URL}/Order/checkout/${userId}`,
-
-
-
-
+  getProductByCategoryOrBrand: (cate?: number, brand?: number) => `${API_BASE_URL}/Product/ProductBy?` + (cate ? `categoryId=${cate}` : '') + (brand ? `&brandId=${brand}` : ''),
+  getProductWithSort: (sort: string) => `${API_BASE_URL}/Product/SortBy?sort=${sort}`,
+  productFilterByCategoryOrBrand: `${API_BASE_URL}/Product/FilterByCategoryOrBrand`,
 };
 
 export default API_ENDPOINTS;
