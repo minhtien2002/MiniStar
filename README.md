@@ -1,4 +1,7 @@
 # Ministar: E-Commerce Platform
+## License
+Specify the license here (e.g., MIT, Apache 2.0).
+For any further queries, feel free to reach out to the project maintainer.
 
 ## Project Overview
 Ministar is a comprehensive e-commerce platform designed to simulate a fully functional online shopping system. The primary goal is to learn and familiarize with modern technologies, such as ASP.NET Core 7 and React, while implementing essential features required for a shopping website.
@@ -137,9 +140,19 @@ The following schema outlines the database structure:
 ## Contribution
 This project does not currently accept external contributions.
 
-## License
-Specify the license here (e.g., MIT, Apache 2.0).
+### System Interface Screenshots
 
----
-For any further queries, feel free to reach out to the project maintainer.
+## Admin Panel
+Sample screenshots from the admin management interface:
+
+| View 1 | View 2 | View 3 |
+|--------|--------|--------|
+| ![](shop/gitimg/29.png) | ![](shop/gitimg/30.png) | ![](shop/gitimg/35.png) |
+
+## Home Page (User Side)
+Main interfaces visible to customers visiting the website:
+
+| View 1 | View 2 | View 3 |
+|--------|--------|--------|
+| ![](shop/gitimg/38.png) | ![](shop/gitimg/40.png) | ![](shop/gitimg/42.png) |
 
