@@ -147,12 +147,12 @@ Sample screenshots from the admin management interface:
 
 | View 1 | View 2 | View 3 |
 |--------|--------|--------|
-| ![](shop/gitimg/29.png) | ![](shop/gitimg/30.png) | ![](shop/gitimg/35.png) |
+| ![](Shop/gitimg/29.png) | ![](Shop/gitimg/30.png) | ![](Shop/gitimg/35.png) |
 
 ## Home Page (User Side)
 Main interfaces visible to customers visiting the website:
 
 | View 1 | View 2 | View 3 |
 |--------|--------|--------|
-| ![](shop/gitimg/38.png) | ![](shop/gitimg/40.png) | ![](shop/gitimg/42.png) |
+| ![](Shop/gitimg/38.png) | ![](Shop/gitimg/40.png) | ![](Shop/gitimg/42.png) |
 
