@@ -154,5 +154,5 @@ Main interfaces visible to customers visiting the website:
 
 | View 1 | View 2 | View 3 |
 |--------|--------|--------|
-| ![](Shop/gitimg/38.png) | ![](Shop/gitimg/40.png) | ![](Shop/gitimg/42.png) |
+| ![](Shop/gitimg/38.jpg) | ![](Shop/gitimg/40.png) | ![](Shop/gitimg/42.png) |
 
